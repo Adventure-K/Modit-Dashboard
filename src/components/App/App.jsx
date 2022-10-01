@@ -20,6 +20,10 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+import PatientDetailPage from '../PatientDetailPage/PatientDetailPage';
+
+
+
 import './App.css';
 
 function App() {
@@ -111,9 +115,18 @@ function App() {
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
+          <Route exact path="/patientDetail">
+            <PatientDetailPage />
+          </Route>
+          <Route exact path="/patientDetail">
+            <PatientDetailPage />
+          </Route>
+
           <Route>
             <h1>404</h1>
           </Route>
+
+
         </Switch>
         <Footer />
       </div>
