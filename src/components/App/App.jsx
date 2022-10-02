@@ -21,6 +21,9 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import PatientDetailPage from '../PatientDetailPage/PatientDetailPage';
+import AddPatientFormPage from '../AddPatientFormPage/AddPatientFormPage';
+import ResearcherViewDashboard from '../ResearcherViewDashboard/ResearcherViewDashboard';
+import InstitutionViewDashboard from '../InstitutionViewDashboard/InstitutionViewDashboard';
 
 
 
@@ -115,11 +118,17 @@ function App() {
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route exact path="/patientDetail">
+          <Route exact path="/patientDetail/:id">
             <PatientDetailPage />
           </Route>
-          <Route exact path="/patientDetail">
-            <PatientDetailPage />
+          <Route exact path="/addPatientForm">
+            <AddPatientFormPage />
+          </Route>
+          <Route exact path="/researcherViewDashboard">
+            <ResearcherViewDashboard />
+          </Route>
+          <Route exact path="/institutionViewDashboard">
+            <InstitutionViewDashboard />
           </Route>
 
           <Route>
