@@ -24,6 +24,10 @@ import PatientDetailPage from '../PatientDetailPage/PatientDetailPage';
 import AddPatientFormPage from '../AddPatientFormPage/AddPatientFormPage';
 import ResearcherViewDashboard from '../ResearcherViewDashboard/ResearcherViewDashboard';
 import InstitutionViewDashboard from '../InstitutionViewDashboard/InstitutionViewDashboard';
+import InstitutionManageAccountsPage from '../InstitutionManageAccountsPage/InstitutionManageAccountsPage';
+import InstitutionViewUserDetails from '../InstitutionViewUserDetails/InstitutionViewUserDetails';
+import AdminInstitutionListPage from '../AdminInstitutionListPage/AdminInstitutionListPage';
+import AdminNewInstitutionForm from '../AdminNewInstitutionForm/AdminNewInstitutionForm';
 
 
 
@@ -130,6 +134,20 @@ function App() {
           <Route exact path="/institutionViewDashboard">
             <InstitutionViewDashboard />
           </Route>
+          <Route exact path="/manageAccounts">
+            <InstitutionManageAccountsPage />
+          </Route>
+          <Route exact path="/userDetails/:id">
+            <InstitutionViewUserDetails />
+          </Route>
+          <Route exact path="/adminInstitutionList">
+            <AdminInstitutionListPage />
+          </Route>
+          <Route exact path="/adminNewInstitutionForm">
+            <AdminNewInstitutionForm />
+          </Route>
+
+
 
           <Route>
             <h1>404</h1>
