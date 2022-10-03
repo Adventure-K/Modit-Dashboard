@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import './AdditionalInfoRegistration.css'
 function AdditionalInfoRegistration () {
-    const credentials = useSelector((store) => store.user.registrationReducer)
-    const institutions = useSelector((store) => store.user.institutionReducer)
+
+    const credentials = useSelector((store) => store.user.registrationReducer)// user registration credentials from previous page
+    const institutions = useSelector((store) => store.user.institutionReducer)// institutions retrieved from the DB
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const dispatch = useDispatch()
     // console.log(institutions);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_INSTITUTIONS' });
+        dispatch({ type: 'FETCH_INSTITUTIONS' });// retrieves institution names from DB
       }, [dispatch]);
 
     return (
@@ -27,12 +28,13 @@ function AdditionalInfoRegistration () {
             
             <select name="institution" id="institutionSelect">
                 <option value="initial">Select an institution</option>
-                {institutions.map(institution => {
+                {institutions.map(institution => {// loops over all the institutions and displays them as options
                     return (
                         <option key={institution.name} value={institution.name}>{institution.name}</option>
                     )
                 })}
             </select>
+            <button>Submit</button>
         </div>
         </>
     )
