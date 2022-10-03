@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 function PatientDetail() {
 
+  const dispatch = useDispatch();
+
 
   const store = useSelector((store) => store);
   const [heading, setHeading] = useState('Functional Component');
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_PATIENTS' });
+  }, [dispatch]);
 
   return (
     <div>
