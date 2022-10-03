@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 
 
 function PatientDetail() {
 
   const dispatch = useDispatch();
+
 
 
   const store = useSelector((store) => store);

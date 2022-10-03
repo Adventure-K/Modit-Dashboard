@@ -10,8 +10,19 @@ function* addPatient(action) {
     }
 }
 
+function* getPatients() {
+    console.log('in getPatients');
+    try {
+        const patients = yield axios.get('/api/patient');
+        yield put({ type: 'SET_PATIENTS', payload: patients.data })
+    } catch {
+        console.log('SET_PATIENTS ERROR');
+    }
+}
+
 function* patientSaga() {
     yield takeLatest('REGISTER_PATIENT', addPatient)
+    yield takeLatest('FETCH_PATIENTS', getPatients)
 }
 
 export default patientSaga;
