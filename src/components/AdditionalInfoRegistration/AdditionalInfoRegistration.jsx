@@ -1,18 +1,41 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import './AdditionalInfoRegistration.css'
 function AdditionalInfoRegistration () {
 
     const credentials = useSelector((store) => store.user.registrationReducer)// user registration credentials from previous page
     const institutions = useSelector((store) => store.user.institutionReducer)// institutions retrieved from the DB
+    const [selectedInstitution, setSelectedInstitution] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const dispatch = useDispatch()
+    const history = useHistory()
     // console.log(institutions);
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_INSTITUTIONS' });// retrieves institution names from DB
+        dispatch({ type: 'FETCH_INSTITUTIONS_FOR_REGISTRATION' });// retrieves institution names from DB
       }, [dispatch]);
+
+      const submitRegistration = () => {
+        dispatch ({
+            type: 'REGISTER',
+            payload: ({
+                credentials,
+                firstName, 
+                lastName,
+                selectedInstitution
+            })
+            
+        })
+        
+        history.push('/researcherViewDashboard')
+      }
+
+      const dropDownChange = (e) => {
+        setSelectedInstitution(e.target.value)
+    
+    }
 
     return (
         <>
@@ -26,7 +49,7 @@ function AdditionalInfoRegistration () {
             
             <br />
             
-            <select name="institution" id="institutionSelect">
+            <select name="institution" id="institutionSelect" value={selectedInstitution} onChange={dropDownChange}>
                 <option value="initial">Select an institution</option>
                 {institutions.map(institution => {// loops over all the institutions and displays them as options
                     return (
@@ -34,7 +57,9 @@ function AdditionalInfoRegistration () {
                     )
                 })}
             </select>
-            <button>Submit</button>
+            <br />
+            <br />
+            <button onClick={()=> submitRegistration()}>Submit</button>
         </div>
         </>
     )
