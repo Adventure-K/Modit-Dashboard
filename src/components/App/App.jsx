@@ -28,6 +28,7 @@ import InstitutionManageAccountsPage from '../InstitutionManageAccountsPage/Inst
 import InstitutionViewUserDetails from '../InstitutionViewUserDetails/InstitutionViewUserDetails';
 import AdminInstitutionListPage from '../AdminInstitutionListPage/AdminInstitutionListPage';
 import AdminNewInstitutionForm from '../AdminNewInstitutionForm/AdminNewInstitutionForm';
+import AdditionalInfoRegistration from '../AdditionalInfoRegistration/AdditionalInfoRegistration';
 
 
 
@@ -145,6 +146,9 @@ function App() {
           </Route>
           <Route exact path="/adminNewInstitutionForm">
             <AdminNewInstitutionForm />
+          </Route>
+          <Route exact path="/additionalInfoRegistration">
+            <AdditionalInfoRegistration />
           </Route>
 
 
