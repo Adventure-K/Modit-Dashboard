@@ -14,6 +14,7 @@ function AddPatient() {
   const [patientId, setPatientId] = useState('');
 
   const registerPatient = (event) => {
+    event.preventDefault();
     console.log(firstName, lastName, email, patientId)
     dispatch({
       type: "REGISTER_PATIENT",
@@ -24,16 +25,20 @@ function AddPatient() {
         patientId: patientId
       }
     })
+    setFirstName('');
+    setLastName('')
+    setEmail('')
+    setPatientId('')
   }
 
   return (
     <div>
       <h2>Add New Patient</h2>
       <form onSubmit={registerPatient}>
-        <input onChange={(event) => setFirstName(event.target.value)} placeholder="First Name" />
-        <input onChange={(event) => setLastName(event.target.value)} placeholder="Last Name" />
-        <input onChange={(event) => setEmail(event.target.value)} placeholder="Email (Optional)" />
-        <input onChange={(event) => setPatientId(event.target.value)} placeholder="Patient ID" />
+        <input onChange={(event) => setFirstName(event.target.value)} value={firstName} placeholder="First Name" />
+        <input onChange={(event) => setLastName(event.target.value)} value={lastName} placeholder="Last Name" />
+        <input onChange={(event) => setEmail(event.target.value)} value={email} placeholder="Email (Optional)" />
+        <input onChange={(event) => setPatientId(event.target.value)} value={patientId} placeholder="Patient Modit ID" />
         <button type="submit">Register</button>
       </form>
     </div>
