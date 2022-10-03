@@ -4,7 +4,7 @@ import axios from 'axios';
 function* addPatient(action) {
     console.log("in addPatient")
     try {
-        yield axios.post('/patient', action.payload)
+        yield axios.post('/api/patient', action.payload)
     } catch (err) {
         console.error('ERROR IN PATIENT REGISTRATION', err)
     }

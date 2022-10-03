@@ -15,9 +15,9 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   //TODO - need to get req.user.id!!!!
   console.log("in patient router", req.body, req.user);
-  const query = `INSERT INTO "patient" ("first_name", "last_name", "email", "id", "clinician_id")
+  const query = `INSERT INTO "patient" ("first_name", "last_name", "email", "id")
   VALUES ($1, $2, $3, $4);`;
-  pool.query(query, [req.body.firstName, req.body.lastName, req.body.email, req.body.patientId, req.user.id])
+  pool.query(query, [req.body.firstName, req.body.lastName, req.body.email, req.body.patientId])
     .then(response => {
       res.sendStatus(200);
     }).catch(err => {
