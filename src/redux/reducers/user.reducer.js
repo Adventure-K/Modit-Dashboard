@@ -20,9 +20,20 @@ const registrationReducer = (state = {}, action) => {
   }
 }
 
+const institutionReducer = (state = [], action) => {
+  switch(action.type) {
+    case 'STORE_INSTITUTIONS':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+
 // user will be on the redux state at:
 // state.user
 export default combineReducers({
   userReducer,
-  registrationReducer
+  registrationReducer,
+  institutionReducer
 });
