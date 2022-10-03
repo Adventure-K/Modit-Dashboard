@@ -13,7 +13,7 @@ CREATE TABLE "institution" (
 	"street_address" VARCHAR(255),
 	"city" VARCHAR(255),
 	"state" VARCHAR(2),
-	"zip" INT;
+	"zip" INT
 );
 
 CREATE TABLE "user" (
@@ -23,7 +23,8 @@ CREATE TABLE "user" (
 	"first_name" VARCHAR(255) NOT NULL,
 	"last_name" VARCHAR(255) NOT NULL,
 	"inst_id" INT REFERENCES "institution",
-	"user_level" INT
+	"user_level" INT,
+    "is_approved" BOOLEAN DEFAULT false
 );
 
 CREATE TABLE "patient" (
