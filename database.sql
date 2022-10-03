@@ -3,6 +3,19 @@
 -- ex. SELECT * FROM "user";
 -- Otherwise you will have errors!
 
+CREATE DATABASE "neurotype_modit_dashboard";
+
+-- CREATE TABLES IN THIS ORDER --
+
+CREATE TABLE "institution" (
+	"id" SERIAL PRIMARY KEY,
+	"name" VARCHAR(255) NOT NULL,
+	"street_address" VARCHAR(255),
+	"city" VARCHAR(255),
+	"state" VARCHAR(2),
+	"zip" INT;
+);
+
 CREATE TABLE "user" (
 	"id" SERIAL PRIMARY KEY,
 	"username" VARCHAR(255) NOT NULL,
@@ -37,15 +50,6 @@ CREATE TABLE "session_data" (
 	"proportionOfGazeTimeOnBack" INT NOT NULL,
 	"proportionOfGazeTimeOnDrugsNoBack" INT NOT NULL,
 	"proportionOfGazeTimeOnNonDrugsNoBack" INT NOT NULL
-);
-
-CREATE TABLE "institution" (
-	"id" SERIAL PRIMARY KEY,
-	"name" VARCHAR(255) NOT NULL,
-	"street_address" VARCHAR(255),
-	"city" VARCHAR(255),
-	"state" VARCHAR(2),
-	"zip" INT;
 );
 
 INSERT INTO "institution" ("name", "street_address", "city", "state", "zip")
