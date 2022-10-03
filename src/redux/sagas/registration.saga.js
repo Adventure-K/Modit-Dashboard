@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 // worker Saga: will be fired on "REGISTER" actions
@@ -22,8 +22,19 @@ function* registerUser(action) {
   }
 }
 
+function* fetchInstitutions() {
+  try{
+    let response = yield axios.get('/api/user/institutions')
+    yield put({type: 'STORE_INSTITUTIONS', payload: response.data})
+  }
+  catch {
+    console.log('REGISTRATION SAGA: error in retrieving institutions');
+  }
+}
+
 function* registrationSaga() {
   yield takeLatest('REGISTER', registerUser);
+  yield takeEvery('FETCH_INSTITUTIONS', fetchInstitutions);
 }
 
 export default registrationSaga;

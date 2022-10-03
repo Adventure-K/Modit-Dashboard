@@ -47,4 +47,21 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+router.get('/institutions', (req, res) => {
+  let queryText = `
+  SELECT "name" FROM "institution"
+  ORDER BY "name" ASC;
+  `
+
+  pool.query(queryText)
+  .then(response => {
+    // console.log(response.rows);
+    res.send(response.rows)
+  })
+  .catch(err => {
+    console.log(err);
+  res.send(500);
+  })
+})
+
 module.exports = router;
