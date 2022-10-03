@@ -55,8 +55,8 @@ CREATE TABLE "session_data" (
 INSERT INTO "institution" ("name", "street_address", "city", "state", "zip")
 VALUES 	('Hazelden Betty Ford Foundation', '15251 Pleasant Valley Road', 'Center City', 'MN', '55102'),
 		('Minnesota Adult & Teen Challenge', '740 E 24th St', 'Minneapolis', 'MN', '55404'),
-		('Neurotype');
-
+        ('Neurotype', '1234 Main St', 'Minneapolis', 'MN', '55404')
+;
 
 INSERT INTO "user" ("username", "first_name", "last_name", "inst_id", "user_level")
 VALUES 	('loblaw@loblaw.law', 'Bob', 'Loblaw', '1', '1'),
