@@ -13,7 +13,7 @@ function RegisterForm() {
   const registerUser = (event) => {
     event.preventDefault();
 
-    dispatch({
+    dispatch({// stores register info in reducer to be retrieved on the next page
       type: 'STORE_USER_REGISTRATION_INFO',
       payload: {
         username: username,
