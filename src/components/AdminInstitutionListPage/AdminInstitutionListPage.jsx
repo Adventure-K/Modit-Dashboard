@@ -18,14 +18,15 @@ function AdminInstitutionListPage(props) {
 
   const institutions = useSelector((store) => store.institutions);
   const [heading, setHeading] = useState('Research Institutions');
+  console.log('Institutions from store:', institutions)
 
-  const handleClick = () => {
-    history.push(`/institutionViewDashboard/${i.id}`)
-    dispatch({
-      type: 'ACTIVE_INSTITUTION',
-      payload: i
-    });
-  }
+  // const handleClick = () => {
+  //   history.push(`/institutionViewDashboard/${i.id}`)
+  //   dispatch({
+  //     type: 'ACTIVE_INSTITUTION',
+  //     payload: i
+  //   });
+  // }
 
   return (
     <div>
