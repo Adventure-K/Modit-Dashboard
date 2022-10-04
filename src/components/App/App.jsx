@@ -37,7 +37,7 @@ import './App.css';
 function App() {
   const dispatch = useDispatch();
 
-  const user = useSelector(store => store.user);
+  const user = useSelector(store => store.user.userReducer);
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
