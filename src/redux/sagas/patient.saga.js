@@ -37,6 +37,7 @@ function* deactivatePatient(action) {
     try {
         yield axios.put(`/api/patient/${action.payload}`)
         yield put({ type: 'FETCH_PATIENTS' })
+        // yield put({ try: 'FETCH_PATIENT_DATA' })
     } catch (err) {
         console.error('ERROR IN DELETE', err)
     }

@@ -56,6 +56,10 @@ router.put('/:id', (req, res) => {
   pool.query(query, [req.params.id])
     .then(response => {
       console.log('deleted');
+      res.sendStatus(200);
+    }).catch(err => {
+      console.log(err);
+      res.sendStatus(500);
     })
 })
 

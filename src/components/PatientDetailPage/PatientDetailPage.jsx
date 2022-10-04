@@ -33,7 +33,14 @@ function PatientDetail() {
       type: 'DELETE_PATIENT',
       payload: patientData.id
     })
+    getPatientData();
   }
+
+  // const conditionalData = () => {
+  //   if (patientData.is_active === true) {
+  //     return 1;
+  //   }
+  // }
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PATIENTS' });
@@ -65,7 +72,8 @@ function PatientDetail() {
       <button>Export</button>
       {/* {JSON.stringify(patients)} */}
       <div>
-        {JSON.stringify(patientData)}
+        {/* {conditionalData} */}
+        {patientData.is_active === true && JSON.stringify(patientData)}
       </div>
     </div >
   );
