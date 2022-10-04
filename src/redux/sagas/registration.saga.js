@@ -34,7 +34,7 @@ function* fetchInstitutions() {
 
 function* registrationSaga() {
   yield takeLatest('REGISTER', registerUser);
-  yield takeEvery('FETCH_INSTITUTIONS', fetchInstitutions);
+  yield takeEvery('FETCH_INSTITUTIONS_FOR_REGISTRATION', fetchInstitutions);
 }
 
 export default registrationSaga;
