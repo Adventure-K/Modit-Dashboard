@@ -7,6 +7,16 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   console.log("in get router")
+  const query = `SELECT * FROM "patient";`;
+
+  pool.query(query)
+    .then(response => {
+      // console.log(response.rows);
+      res.send(response.rows);
+    }).catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
   // GET route code here
 });
 

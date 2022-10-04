@@ -9,7 +9,7 @@ function PatientDetail() {
 
 
 
-  const store = useSelector((store) => store);
+  const patients = useSelector((store) => store.patients);
   const [heading, setHeading] = useState('Functional Component');
 
   useEffect(() => {
@@ -29,6 +29,7 @@ function PatientDetail() {
       <button>New Patient</button>
       <button>Delete Patient</button>
       <button>Export</button>
+      {JSON.stringify(patients)}
     </div>
   );
 }

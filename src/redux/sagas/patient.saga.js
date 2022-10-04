@@ -11,9 +11,10 @@ function* addPatient(action) {
 }
 
 function* getPatients() {
-    console.log('in getPatients');
+    // console.log('in getPatients');
     try {
         const patients = yield axios.get('/api/patient');
+        console.log("patients =", patients.data)
         yield put({ type: 'SET_PATIENTS', payload: patients.data })
     } catch {
         console.log('SET_PATIENTS ERROR');
