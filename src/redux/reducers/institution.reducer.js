@@ -1,10 +1,11 @@
-// const institutionReducer = (state = {}, action) => {
-//     // switch (action.type) {
-//     //     case 'FETCH_'
-//     // }
-//   };
-  
-  // user will be on the redux state at:
-  // state.user
-  // export default institutionReducer;
+const institutionReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_INSTITUTIONS':
+            return action.payload;
+        default:
+            return state;
+    }
+  }
+
+  export default institutionReducer;
   
