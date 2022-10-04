@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 
 function PatientDetail() {
 
   const dispatch = useDispatch();
-
+  const history = useHistory();
 
 
   const patients = useSelector((store) => store.patients);
@@ -20,6 +21,10 @@ function PatientDetail() {
       type: 'FETCH_PATIENT_DATA',
       payload: patientId
     })
+  }
+
+  const toAddPatientForm = () => {
+    history.push('/addPatientForm')
   }
 
   useEffect(() => {
@@ -43,7 +48,7 @@ function PatientDetail() {
 
 
 
-      <button>New Patient</button>
+      <button onClick={toAddPatientForm}>New Patient</button>
       <button>Delete Patient</button>
       <button>Export</button>
       {/* {JSON.stringify(patients)} */}
