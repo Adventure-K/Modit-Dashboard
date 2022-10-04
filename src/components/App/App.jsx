@@ -132,7 +132,7 @@ function App() {
           <Route exact path="/researcherViewDashboard">
             <ResearcherViewDashboard />
           </Route>
-          <Route exact path="/institutionViewDashboard">
+          <Route exact path="/institutionViewDashboard/:id">
             <InstitutionViewDashboard />
           </Route>
           <Route exact path="/manageAccounts">
