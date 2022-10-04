@@ -29,7 +29,7 @@ function AdditionalInfoRegistration () {
             
         })
         
-        history.push('/researcherViewDashboard')
+        // history.push('/researcherViewDashboard')
       }
 
       const dropDownChange = (e) => {
