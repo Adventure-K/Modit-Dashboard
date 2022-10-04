@@ -34,7 +34,8 @@ CREATE TABLE "patient" (
 	"clinician_id" INT REFERENCES "user",
 	"first_name" VARCHAR(255),
 	"last_name" VARCHAR(255),
-	"email" VARCHAR(255)
+	"email" VARCHAR(255),
+	"is_active" BOOLEAN DEFAULT true
 );
 
 CREATE TABLE "session" (
