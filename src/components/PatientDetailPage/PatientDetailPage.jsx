@@ -45,11 +45,15 @@ function PatientDetail() {
       <form onSubmit={getPatientData}>
         <select onChange={(event) => setPatientId(event.target.value)} name="patient" id="patientSelect">
           <option value="initial">Select A Patient</option>
+
           {patients.map(patient => {// loops over all the institutions and displays them as options
-            return (
-              <option key={patient.id} value={patient.id}>{patient.first_name} {patient.last_name}</option>
-            )
+            if (patient.is_active === true) {
+              return (
+                <option key={patient.id} value={patient.id}>{patient.first_name} {patient.last_name}</option>
+              )
+            }
           })}
+
         </select>
         <button type="submit">Get Data</button>
       </form>

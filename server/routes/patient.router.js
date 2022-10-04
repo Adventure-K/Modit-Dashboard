@@ -51,7 +51,12 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   console.log('in put router', req.params.id)
-  const query = `DELETE `
+  const query = `UPDATE "patient" SET is_active = 'false'
+                 WHERE id = $1;`;
+  pool.query(query, [req.params.id])
+    .then(response => {
+      console.log('deleted');
+    })
 })
 
 module.exports = router;
