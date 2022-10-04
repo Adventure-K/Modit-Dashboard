@@ -19,9 +19,13 @@ function PatientDetail() {
   return (
     <div>
       <h2>{heading}</h2>
-      <label for="patients">Select Patient</label>
-      <select name="patients">
-
+      <select name="patient" id="patientSelect">
+        <option value="initial">Select A Patient</option>
+        {patients.map(patient => {// loops over all the institutions and displays them as options
+          return (
+            <option key={patient.id} value={patient.id}>{patient.first_name} {patient.last_name}</option>
+          )
+        })}
       </select>
 
 
