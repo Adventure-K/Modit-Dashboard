@@ -21,9 +21,22 @@ function* getPatients() {
     }
 }
 
+function* getPatientData(action) {
+    // console.log("in getPatientData")
+    try {
+        const patientData = yield axios.get(`/api/patient/${action.payload}`)
+        console.log('patientData', patientData.data[0])
+        yield put({ type: 'SET_PATIENT_DATA', payload: patientData.data[0] })
+    } catch {
+        console.log('SET_PATIENT_DATA ERROR');
+
+    }
+}
+
 function* patientSaga() {
     yield takeLatest('REGISTER_PATIENT', addPatient)
     yield takeLatest('FETCH_PATIENTS', getPatients)
+    yield takeLatest('FETCH_PATIENT_DATA', getPatientData)
 }
 
 export default patientSaga;
