@@ -33,10 +33,20 @@ function* getPatientData(action) {
     }
 }
 
+function* deactivatePatient(action) {
+    try {
+        yield axios.put(`/api/patient/${action.payload}`)
+        yield put({ type: 'FETCH_PATIENTS' })
+    } catch (err) {
+        console.error('ERROR IN DELETE', err)
+    }
+}
+
 function* patientSaga() {
     yield takeLatest('REGISTER_PATIENT', addPatient)
     yield takeLatest('FETCH_PATIENTS', getPatients)
     yield takeLatest('FETCH_PATIENT_DATA', getPatientData)
+    yield takeLatest('DELETE_PATIENT', deactivatePatient)
 }
 
 export default patientSaga;

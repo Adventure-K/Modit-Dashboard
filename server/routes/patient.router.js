@@ -49,4 +49,9 @@ router.post('/', (req, res) => {
     })
 });
 
+router.put('/:id', (req, res) => {
+  console.log('in put router', req.params.id)
+  const query = `DELETE `
+})
+
 module.exports = router;

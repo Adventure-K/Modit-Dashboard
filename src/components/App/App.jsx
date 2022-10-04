@@ -123,7 +123,7 @@ function App() {
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
-          <Route exact path="/patientDetail/:id">
+          <Route exact path="/patientDetail">
             <PatientDetailPage />
           </Route>
           <Route exact path="/addPatientForm">

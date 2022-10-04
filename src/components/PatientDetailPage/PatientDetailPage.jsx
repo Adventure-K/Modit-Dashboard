@@ -27,6 +27,14 @@ function PatientDetail() {
     history.push('/addPatientForm')
   }
 
+  const deletePatient = () => {
+    console.log('patient id', patientData.id)
+    dispatch({
+      type: 'DELETE_PATIENT',
+      payload: patientData.id
+    })
+  }
+
   useEffect(() => {
     dispatch({ type: 'FETCH_PATIENTS' });
   }, []);
@@ -49,10 +57,12 @@ function PatientDetail() {
 
 
       <button onClick={toAddPatientForm}>New Patient</button>
-      <button>Delete Patient</button>
+      <button onClick={deletePatient}>Delete Patient</button>
       <button>Export</button>
       {/* {JSON.stringify(patients)} */}
-      {JSON.stringify(patientData)}
+      <div>
+        {JSON.stringify(patientData)}
+      </div>
     </div >
   );
 }
