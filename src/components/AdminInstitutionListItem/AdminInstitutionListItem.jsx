@@ -18,7 +18,7 @@ function AdminInstitutionListItem({ i }) {
             <tr key={i.id} onClick={() => { goDetail(i) }}>
                 <td>{i.name}</td>
                 <td>{i.street_address}, {i.city}, {i.state} {i.zip}</td>
-                <td></td>
+                <td>{i.first_name} {i.last_name}</td>
             </tr>
         </>
     )
