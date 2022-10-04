@@ -38,7 +38,7 @@ function App() {
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user.userReducer);
-
+  console.log(user);
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
@@ -148,7 +148,7 @@ function App() {
             <AdminNewInstitutionForm />
           </Route>
           <Route exact path="/additionalInfoRegistration">
-            <AdditionalInfoRegistration />
+            {user.id ? <Redirect to="/user" /> :<AdditionalInfoRegistration />}
           </Route>
 
 

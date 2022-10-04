@@ -33,7 +33,6 @@ passport.deserializeUser((id, done) => {
       done(error, null);
     });
 });
-
 // Does actual work of logging in
 passport.use(
   'local',
