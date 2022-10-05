@@ -21,6 +21,14 @@ function InstitutionManageAccountsPage() {
     })
   }
 
+  const approveRequest = (id) => {
+    console.log("in approveRequest", id)
+    dispatch({
+      type: 'APPROVE_REQUEST',
+      payload: id
+    })
+  }
+
   return (
     <div>
 
@@ -29,7 +37,7 @@ function InstitutionManageAccountsPage() {
         if (user.is_approved === false) {
           return (
             <div>
-              <p><span><button onClick={() => (deleteRequest(user.id))}>Delete</button></span><span><button>Approve</button></span>{user.first_name} {user.last_name}</p>
+              <p><span><button onClick={() => (deleteRequest(user.id))}>Delete</button></span><span><button onClick={() => (approveRequest(user.id))}>Approve</button></span>{user.first_name} {user.last_name}</p>
             </div>
           )
         }

@@ -11,8 +11,18 @@ function* deleteRequest(action) {
     }
 }
 
+function* approveRequest(action) {
+    try {
+        yield axios.put(`./api/approveUsers/${action.payload}`);
+        yield put({ type: 'GET_USERS' });
+    } catch (err) {
+        console.error('ERROR IN MANAGE ACCOUNTS PUT', err)
+    }
+}
+
 function* approveUsersSaga() {
-    yield takeLatest('DELETE_REQUEST', deleteRequest)
+    yield takeLatest('DELETE_REQUEST', deleteRequest);
+    yield takeLatest('APPROVE_REQUEST', approveRequest);
 }
 
 

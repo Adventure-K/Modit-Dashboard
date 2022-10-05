@@ -12,8 +12,17 @@ router.get('/', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
-  // POST route code here
+router.put('/:id', (req, res) => {
+  console.log('in router put', req.params);
+  const query = `UPDATE "user" SET is_approved = true WHERE id = $1;`;
+
+  pool.query(query, [req.params.id])
+    .then(response => {
+      res.sendStatus(200);
+    }).catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
 });
 
 router.delete('/:id', (req, res) => {
