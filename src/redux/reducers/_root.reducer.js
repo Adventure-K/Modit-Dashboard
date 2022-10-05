@@ -4,9 +4,7 @@ import user from './user.reducer';
 import institution from './institution.reducer';
 import patients from './patients.reducer';
 import patientData from './patient_data.reducer'
-
-// import institution from './institution.reducer';
-
+import selectedUser from './selectedUser.reducer';
 import institutions from './institution.reducer';
 import activeInstitution from './activeInstitution.reducer';
 
@@ -25,6 +23,7 @@ const rootReducer = combineReducers({
   patientData,
   institutions,
   activeInstitution,
+  selectedUser,
 });
 
 export default rootReducer;

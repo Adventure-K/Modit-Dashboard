@@ -3,10 +3,9 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import patientSaga from './patient.saga';
-// import institutionSaga from './institution.saga';
-
-// import institutionSaga from './institution.saga';
 import institutionSaga from './institution.saga';
+import selectedUserSaga from './selectedUser.saga';
+import passUpdateSaga from './passUpdate.saga';
 
 
 
@@ -24,5 +23,7 @@ export default function* rootSaga() {
     userSaga(),
     patientSaga(),
     institutionSaga(),
+    selectedUserSaga(),
+    passUpdateSaga(),
   ]);
 }

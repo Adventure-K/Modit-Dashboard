@@ -109,4 +109,20 @@ router.get('/institutions', (req, res) => {
   })
 })
 
+router.put('/updatePass', (req, res) => {
+  const p = encryptLib.encryptPassword(req.body.newPass);
+  const id = req.body.userId;
+  const query = `
+    UPDATE "user" SET password = $1
+    WHERE id = $2;`;
+  const values = [p, id]
+  pool.query(query, values)
+  .then(result => {
+    res.sendStatus(200)
+  }).catch(err => {
+    console.log('password PUT', err);
+    res.sendStatus(500);
+  })
+})
+
 module.exports = router;
