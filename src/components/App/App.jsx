@@ -29,6 +29,7 @@ import InstitutionViewUserDetails from '../InstitutionViewUserDetails/Institutio
 import AdminInstitutionListPage from '../AdminInstitutionListPage/AdminInstitutionListPage';
 import AdminNewInstitutionForm from '../AdminNewInstitutionForm/AdminNewInstitutionForm';
 import AdditionalInfoRegistration from '../AdditionalInfoRegistration/AdditionalInfoRegistration';
+import ResearcherTeamView from '../ResearcherTeamView/ResearcherTeamView'
 
 
 
@@ -132,6 +133,9 @@ function App() {
           <Route exact path="/researcherViewDashboard">
             <ResearcherViewDashboard />
           </Route>
+          <Route exact path="/researcherTeamView/:id">
+            <ResearcherTeamView />
+          </Route>
           <Route exact path="/institutionViewDashboard/:id">
             <InstitutionViewDashboard />
           </Route>
@@ -148,7 +152,7 @@ function App() {
             <AdminNewInstitutionForm />
           </Route>
           <Route exact path="/additionalInfoRegistration">
-            {user.id ? <Redirect to="/user" /> :<AdditionalInfoRegistration />}
+            {user.id ? <Redirect to="/user" /> : <AdditionalInfoRegistration />}
           </Route>
 
 

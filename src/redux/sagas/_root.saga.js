@@ -6,8 +6,9 @@ import patientSaga from './patient.saga';
 import institutionSaga from './institution.saga';
 import selectedUserSaga from './selectedUser.saga';
 import passUpdateSaga from './passUpdate.saga';
-
-
+import manageUsersSaga from './manage_users.saga';
+import approveUsersSaga from './approve_users.saga';
+import researcherSaga from './researcher.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -25,5 +26,8 @@ export default function* rootSaga() {
     institutionSaga(),
     selectedUserSaga(),
     passUpdateSaga(),
+    manageUsersSaga(),
+    approveUsersSaga(),
+    researcherSaga(),
   ]);
 }
