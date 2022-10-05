@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function* fetchPatientData(action) {
     try {
+        console.log('test');
         let response = yield axios.get(`/api/data/${action.payload}`)
         console.log(response.data);
         yield put({type: 'STORE_JSON_DATA', payload: response.data})

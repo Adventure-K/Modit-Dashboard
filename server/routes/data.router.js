@@ -5,6 +5,7 @@ const router = express.Router();
 router.get('/:id', (req, res) => {
     // console.log(req.params);
     let patientId = Number(req.params.id)
+    // console.log('yh', patientId);
     const queryText = `
     SELECT "apertureData" FROM "session"
     WHERE "modit_id" = $1;

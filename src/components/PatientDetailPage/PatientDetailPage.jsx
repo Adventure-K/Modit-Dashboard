@@ -12,6 +12,8 @@ function PatientDetail() {
   const patients = useSelector((store) => store.patients);
   const patientData = useSelector((store) => store.patientData.patientData)
   const jsonData = useSelector((store) => store.patientData.jsonData)
+  console.log(jsonData);
+  console.log(patientData);
 
   const [patientId, setPatientId] = useState(' ');
 
@@ -24,7 +26,7 @@ function PatientDetail() {
 
   const getPatientData = () => {
     event.preventDefault();
-    console.log("getPatientData", patientId);
+    // console.log("getPatientData", patientId);
     dispatch({
       type: 'FETCH_PATIENT_DATA',
       payload: patientId
@@ -86,7 +88,7 @@ function PatientDetail() {
       {/* {JSON.stringify(patients)} */}
       <div>
         {/* {conditionalData} */}
-        {patientData.is_active === true && JSON.stringify(patientData)}
+        {patientData && patientData.is_active === true && JSON.stringify(patientData)}
       </div>
     </div >
   );
