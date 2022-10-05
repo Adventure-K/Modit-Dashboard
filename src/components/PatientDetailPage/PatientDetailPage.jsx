@@ -19,9 +19,9 @@ function PatientDetail() {
 
   const dataToConvert = {
     data: jsonData,
-    filename: 'raw_json_data',
+    filename: 'calculated_data',
     delimiter: ',',
-    headers: ['DATA']
+    headers: ['ID', 'Session ID', '% time on drugs', '% time on controlled', '% time on neither', '% time on drugs no back', '% time non drugs no back']
   }
 
   const getPatientData = () => {
@@ -31,7 +31,7 @@ function PatientDetail() {
       type: 'FETCH_PATIENT_DATA',
       payload: patientId
     })
-    dispatch({ type: 'FETCH_JSON_DATA', payload: patientId})
+    dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId})
   }
 
   const toAddPatientForm = () => {

@@ -7,8 +7,10 @@ router.get('/:id', (req, res) => {
     let patientId = Number(req.params.id)
     // console.log('yh', patientId);
     const queryText = `
-    SELECT "apertureData" FROM "session"
-    WHERE "modit_id" = $1;
+    SELECT "session_data".* FROM "session_data"
+    JOIN "session"
+    ON "session_data".session_id = "session".id
+    WHERE "session_data".id = $1;
     `;
 
     pool.query(queryText, [patientId])

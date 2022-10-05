@@ -10,7 +10,7 @@ const patientData = (state = {}, action) => {
 
 const jsonData = (state = {}, action) => {
     switch (action.type) {
-        case 'STORE_JSON_DATA':
+        case 'STORE_PROCESSED_DATA':
             return action.payload;
         default:
             return state;
