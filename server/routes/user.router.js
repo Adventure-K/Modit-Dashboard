@@ -109,17 +109,5 @@ router.get('/institutions', (req, res) => {
   })
 })
 
-// this GET route is to get all clinicians associated with a researcher and institution
-router.get('/clinicians', (req, res) => {
-  const query = 'SELECT * FROM "user" ORDER BY "first_name" ASC';
-  pool.query(query)
-    .then(result => {
-      res.send(result.rows);
-    })
-    .catch(err => {
-      console.log('Error in getting clinician list for researcher', err);
-      res.sendStatus(500)
-    })
-});
 
 module.exports = router;

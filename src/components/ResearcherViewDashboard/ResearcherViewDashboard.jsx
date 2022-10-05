@@ -27,6 +27,9 @@ function ResearcherView(props) {
     dispatch({ type: 'FETCH_CLINICIANS' });
   }, []);
 
+  useEffect(() => {
+    dispatch({ type: 'FETCH_TEAM_DATA' });
+  }, []);
 
   // calls the researcher saga to run through the GET for the researcher's institution
   useEffect(() => {

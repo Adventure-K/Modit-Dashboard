@@ -33,23 +33,6 @@ router.get('/', (req, res) => {
 });
 
 /**
- * GET route for researcher team clinicians
- */
- router.get('/researcherTeam/:id', (req, res) => {
-  console.log("in get router")
-  const query = `SELECT * FROM "patient" WHERE clinician_id = $1;`;
-
-  pool.query(query, [req.params.id])
-    .then(response => {
-      console.log(response.rows);
-      res.send(response.rows);
-    }).catch(err => {
-      console.log(err);
-      res.sendStatus(500);
-    })
-});
-
-/**
  * POST route template
  */
 router.post('/', (req, res) => {

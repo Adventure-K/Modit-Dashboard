@@ -4,7 +4,7 @@ import axios from "axios";
 function* fetchClinicians() {
     // get clinicians from the DB
     try {
-        const clinicians = yield axios.get('/api/user/clinicians');
+        const clinicians = yield axios.get('/api/researcher/clinicians');
         console.log('get clinicians for researcher view:', clinicians.data);
         yield put({ type: 'SET_CLINICIANS', payload: clinicians.data });
     } catch {
@@ -16,7 +16,7 @@ function* fetchClinicians() {
 function* fetchResearcherInst() {
     // get institution associated with researcher from the DB
     try {
-        const institution = yield axios.get('/api/institutions/researchInst');
+        const institution = yield axios.get('/api/researcher/researchInst');
         console.log('get institution for researcher view:', institution.data);
         yield put({ type: 'SET_RESEARCHERINST', payload: institution.data[0] });
     } catch {
@@ -28,12 +28,24 @@ function* fetchResearcherInst() {
 function* getTeamPatients(action) {
     console.log('in getTeamPatients', action.payload);
     try {
-        const patients = yield axios.get(`/api/patient/researcherTeam/${action.payload}`);
+        const patients = yield axios.get(`/api/researcher/researcherTeam/${action.payload}`);
         console.log("patients =", patients.data)
         yield put({ type: 'SET_PATIENTS', payload: patients.data })
     } catch {
         console.log('SET_PATIENTS ERROR');
     }
+}
+
+function* getTeamData() {
+    // get aggregate data for research team from the DB and stores in patient reducer redux state
+    try {
+        const teamData = yield axios.get('/api/researcher/teamData');
+        console.log('get aggregate data for researcher view:', teamData.data);
+        yield put({ type: 'SET_PATIENTS', payload: teamData.data });
+    } catch {
+        console.log('fetch researcher team data saga error');
+    }
+
 }
 
 // function* approve(action) {
@@ -52,7 +64,8 @@ function* getTeamPatients(action) {
 function* researcherSaga() {
     yield takeEvery('FETCH_CLINICIANS', fetchClinicians),
     yield takeEvery('FETCH_RESEARCHERINST', fetchResearcherInst),
-    yield takeEvery('FETCH_TEAMPATIENTS', getTeamPatients)
+    yield takeEvery('FETCH_TEAMPATIENTS', getTeamPatients),
+    yield takeEvery('FETCH_TEAM_DATA', getTeamData)
     // yield takeEvery('APPROVE', approve)
 }
 
