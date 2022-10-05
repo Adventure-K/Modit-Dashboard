@@ -8,13 +8,15 @@ function InstitutionManageAccountsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  //this variable contains an array of all users within the organization of the logged-in user
   const users = useSelector((store) => store.usersToManage);
-  const [heading, setHeading] = useState('Functional Component');
 
+  //On page load, "GET_USERS" triggers the getUsers() function in the manage_users.saga file. It ultimately stores all users attached to the institution of the logged in user in the "users" variable (above)
   useEffect(() => {
     dispatch({ type: 'GET_USERS' });
   }, []);
 
+  //when the user clicks the "Delete" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the deleted clinician or researcher to the deleteRequest function in the approve_users.saga file.
   const deleteRequest = (id) => {
     console.log("in deleteRequest", id)
     dispatch({
@@ -23,6 +25,7 @@ function InstitutionManageAccountsPage() {
     })
   }
 
+  //when the user clicks the "Approve" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the approved clinician or researcher to the approveRequest function in the approve_users.saga file.
   const approveRequest = (id) => {
     console.log("in approveRequest", id)
     dispatch({
@@ -31,8 +34,8 @@ function InstitutionManageAccountsPage() {
     })
   }
 
+  //when the name of an approved clinician or researcher is clicked on, this function is called and it pushes the user that that user's detail page
   const toUserDetails = (id) => {
-    console.log('in user details', id)
     history.push(`/userDetails/${id}`)
   }
 

@@ -48,7 +48,6 @@ function PatientDetail() {
 
   return (
     <div>
-      {/* <h2>{heading}</h2> */}
       <form onSubmit={getPatientData}>
         <select onChange={(event) => setPatientId(event.target.value)} name="patient" id="patientSelect">
           <option value="initial">Select A Patient</option>
