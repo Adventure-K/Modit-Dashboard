@@ -36,12 +36,9 @@ function PatientDetail() {
     getPatientData();
   }
 
-  // const conditionalData = () => {
-  //   if (patientData.is_active === true) {
-  //     return 1;
-  //   }
-  // }
 
+
+  //on page load, FETCH_PATIENTS is dispatched to get patients to populate dropdown menu
   useEffect(() => {
     dispatch({ type: 'FETCH_PATIENTS' });
   }, []);

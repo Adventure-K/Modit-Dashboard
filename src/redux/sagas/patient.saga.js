@@ -1,6 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+//addPatient() gets called when registerPatient() dispatches 'REGISTER_PATIENT' in the AddPatientFormPage file. It sends the new patient's data to the post route in the patient.router file to be posted to the database.
 function* addPatient(action) {
     console.log("in addPatient")
     try {
@@ -10,22 +11,20 @@ function* addPatient(action) {
     }
 }
 
+//getPatients makes a get request to the server for patient data of all patients attached to the logged in clinician user, it then sends that data to the patients.reducer 
 function* getPatients() {
-    console.log('in getPatients');
     try {
         const patients = yield axios.get('/api/patient');
-        console.log("patients =", patients.data)
         yield put({ type: 'SET_PATIENTS', payload: patients.data })
     } catch {
         console.log('SET_PATIENTS ERROR');
     }
 }
 
+//getPatientData makes a request to the server for the data of the individual patient that the clinician selected in the dropdown menu. Dispatch to this function is made by getPatientData() in the PatientDetailPage file. Returned data is send to the patientData reducer in the patient_data.reducer file.
 function* getPatientData(action) {
-    // console.log("in getPatientData")
     try {
         const patientData = yield axios.get(`/api/patient/${action.payload}`)
-        console.log('patientData', patientData.data[0])
         yield put({ type: 'SET_PATIENT_DATA', payload: patientData.data[0] })
     } catch {
         console.log('SET_PATIENT_DATA ERROR');
@@ -33,6 +32,7 @@ function* getPatientData(action) {
     }
 }
 
+//deactivatePatient sends the id of the deleted patient to the patient.router file so that the specified patient can be deactivated. Dispatch to this function is made by deletePatient() in the PatientDetailPage file. getPatients() (in this file) is called when 'FETCH_PATIENTS' is dispatched to refresh the dropdown menu after a patient is deactivated.
 function* deactivatePatient(action) {
     try {
         yield axios.put(`/api/patient/${action.payload}`)
