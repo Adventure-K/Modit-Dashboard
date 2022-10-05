@@ -14,6 +14,8 @@ function ResearcherView(props) {
   // a default value of 'Functional Component'
   const clinicians = useSelector((store) => store.researcher.researcherReducer);
   const institution = useSelector((store) => store.researcher.researcherInstReducer);
+  const teamData = useSelector((store) => store.patientData);
+
 
   const [heading, setHeading] = useState('Researcher Dashboard');
   const dispatch = useDispatch();
@@ -51,7 +53,9 @@ const clinicianDetails = (clinician) => {
           <p key={clinician.id} onClick={ () => clinicianDetails(clinician)}>{clinician.first_name} {clinician.last_name}</p>
         )
       })}
+      {JSON.stringify(teamData)}
     </div>
+    
   );
 }
 

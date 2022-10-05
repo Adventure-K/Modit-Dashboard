@@ -41,7 +41,7 @@ function* getTeamData() {
     try {
         const teamData = yield axios.get('/api/researcher/teamData');
         console.log('get aggregate data for researcher view:', teamData.data);
-        yield put({ type: 'SET_PATIENTS', payload: teamData.data });
+        yield put({ type: 'SET_PATIENT_DATA', payload: teamData.data });
     } catch {
         console.log('fetch researcher team data saga error');
     }
