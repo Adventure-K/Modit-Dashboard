@@ -15,7 +15,10 @@ function InstitutionManageAccountsPage() {
 
   return (
     <div>
-      <h2>{heading}</h2>
+
+      <h3>Waiting for Approval</h3>
+      <h3>Researchers</h3>
+      <h3>Clinicians</h3>
       {JSON.stringify(users)}
     </div>
   );
