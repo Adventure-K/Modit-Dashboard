@@ -13,6 +13,14 @@ function InstitutionManageAccountsPage() {
     dispatch({ type: 'GET_USERS' });
   }, []);
 
+  const deleteRequest = (id) => {
+    console.log("in deleteRequest", id)
+    dispatch({
+      type: 'DELETE_REQUEST',
+      payload: id
+    })
+  }
+
   return (
     <div>
 
@@ -20,7 +28,9 @@ function InstitutionManageAccountsPage() {
       {users.map(user => {
         if (user.is_approved === false) {
           return (
-            <p>{user.first_name} {user.last_name}</p>
+            <div>
+              <p><span><button onClick={() => (deleteRequest(user.id))}>Delete</button></span><span><button>Approve</button></span>{user.first_name} {user.last_name}</p>
+            </div>
           )
         }
       })}
