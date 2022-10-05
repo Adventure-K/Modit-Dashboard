@@ -9,6 +9,8 @@ import patientSaga from './patient.saga';
 import institutionSaga from './institution.saga';
 import manageUsersSaga from './manage_users.saga';
 import approveUsersSaga from './approve_users.saga';
+import researcherSaga from './researcher.saga';
+
 
 
 
@@ -26,7 +28,10 @@ export default function* rootSaga() {
     userSaga(),
     patientSaga(),
     institutionSaga(),
+
     manageUsersSaga(),
-    approveUsersSaga()
+    approveUsersSaga(),
+    researcherSaga(),
+
   ]);
 }
