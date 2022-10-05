@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 function InstitutionManageAccountsPage() {
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const users = useSelector((store) => store.usersToManage);
   const [heading, setHeading] = useState('Functional Component');
@@ -29,6 +31,11 @@ function InstitutionManageAccountsPage() {
     })
   }
 
+  const toUserDetails = (id) => {
+    console.log('in user details', id)
+    history.push(`/userDetails/${id}`)
+  }
+
   return (
     <div>
 
@@ -46,7 +53,9 @@ function InstitutionManageAccountsPage() {
       {users.map(user => {
         if (user.is_approved === true && user.user_level === 1) {
           return (
-            <p>{user.first_name} {user.last_name}</p>
+            <div onClick={() => (toUserDetails(user.id))}>
+              <p>{user.first_name} {user.last_name}</p>
+            </div>
           )
         }
       })}
@@ -54,7 +63,9 @@ function InstitutionManageAccountsPage() {
       {users.map(user => {
         if (user.is_approved === true && user.user_level === 0) {
           return (
-            <p>{user.first_name} {user.last_name}</p>
+            <div onClick={() => (toUserDetails(user.id))}>
+              <p>{user.first_name} {user.last_name}</p>
+            </div>
           )
         }
       })}
