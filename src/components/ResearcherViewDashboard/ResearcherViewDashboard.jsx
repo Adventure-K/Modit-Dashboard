@@ -36,7 +36,7 @@ console.log(institution);
 
 const clinicianDetails = (clinician) => {
   console.log('clicking on clinician for details', clinician.id);
-  history.push(`/patientDetail/${clinician.id}`)
+  history.push(`/researcherTeamView/${clinician.id}`)
 }
   return (
     <div>

@@ -25,6 +25,17 @@ function* fetchResearcherInst() {
 
 }
 
+function* getTeamPatients() {
+    console.log('in getTeamPatients');
+    try {
+        const patients = yield axios.get('/api/patient');
+        console.log("patients =", patients.data)
+        yield put({ type: 'SET_PATIENTS', payload: patients.data })
+    } catch {
+        console.log('SET_PATIENTS ERROR');
+    }
+}
+
 // function* approve(action) {
 //     // Approve user
 //     try {
@@ -40,7 +51,8 @@ function* fetchResearcherInst() {
 
 function* researcherSaga() {
     yield takeEvery('FETCH_CLINICIANS', fetchClinicians),
-    yield takeEvery('FETCH_RESEARCHERINST', fetchResearcherInst)
+    yield takeEvery('FETCH_RESEARCHERINST', fetchResearcherInst),
+    yield takeEvery('FETCH_TEAMPATIENTS', getTeamPatients)
     // yield takeEvery('APPROVE', approve)
 }
 
