@@ -152,7 +152,7 @@ function App() {
             <AdminNewInstitutionForm />
           </Route>
           <Route exact path="/additionalInfoRegistration">
-            {user.id ? <Redirect to="/user" /> :<AdditionalInfoRegistration />}
+            {user.id ? <Redirect to="/user" /> : <AdditionalInfoRegistration />}
           </Route>
 
 
