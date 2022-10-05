@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 
   pool.query(query, [req.user.id])
     .then(response => {
-      // console.log(response.rows);
+      console.log(response.rows);
       res.send(response.rows);
     }).catch(err => {
       console.log(err);
