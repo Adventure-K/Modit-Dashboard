@@ -25,10 +25,10 @@ function* fetchResearcherInst() {
 
 }
 
-function* getTeamPatients() {
-    console.log('in getTeamPatients');
+function* getTeamPatients(action) {
+    console.log('in getTeamPatients', action.payload);
     try {
-        const patients = yield axios.get('/api/patient');
+        const patients = yield axios.get(`/api/patient/researcherTeam/${action.payload}`);
         console.log("patients =", patients.data)
         yield put({ type: 'SET_PATIENTS', payload: patients.data })
     } catch {
