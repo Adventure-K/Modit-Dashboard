@@ -9,6 +9,7 @@ import patientData from './patient_data.reducer'
 
 import institutions from './institution.reducer';
 import activeInstitution from './activeInstitution.reducer';
+import researcher from './researcher.reducer'
 
 
 // rootReducer is the primary reducer for our entire project
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   patientData,
   institutions,
   activeInstitution,
+  researcher,
 });
 
 export default rootReducer;
