@@ -54,6 +54,7 @@ const clinicianDetails = (clinician) => {
         )
       })}
       {JSON.stringify(teamData)}
+      <button>Export</button>
     </div>
     
   );
