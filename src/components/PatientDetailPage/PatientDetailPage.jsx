@@ -9,26 +9,29 @@ function PatientDetail() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-
+  // contains array of patients displayed in dropdown menu
   const patients = useSelector((store) => store.patients);
+  // contains data for individual patient selected in dropdown menu
   const patientData = useSelector((store) => store.patientData)
+  //contains the id of the patient selected in the dropdown menu
   const [patientId, setPatientId] = useState(' ');
 
+  // this function dispatches the id of the patient selected in the dropdown menu to the getPatientData() function in the patient.saga file
   const getPatientData = () => {
     event.preventDefault();
-    console.log("getPatientData", patientId);
     dispatch({
       type: 'FETCH_PATIENT_DATA',
       payload: patientId
     })
   }
 
+  //this function is called when a user clicks the "Add Patient" button. It directs the user to the AddPatientFormPage.
   const toAddPatientForm = () => {
     history.push('/addPatientForm')
   }
 
+  //this function sends the id of the selected user to be deleted to the deactivatePatient() function in the patient.saga file. It then calls getPatientData() which will clear the display until a new patient is selected.
   const deletePatient = () => {
-    console.log('patient id', patientData.id)
     dispatch({
       type: 'DELETE_PATIENT',
       payload: patientData.id
@@ -67,9 +70,9 @@ function PatientDetail() {
       <button onClick={toAddPatientForm}>New Patient</button>
       <button onClick={deletePatient}>Delete Patient</button>
       <button>Export</button>
-      {/* {JSON.stringify(patients)} */}
+
       <div>
-        {/* {conditionalData} */}
+
         {patientData.is_active === true && JSON.stringify(patientData)}
       </div>
     </div >
