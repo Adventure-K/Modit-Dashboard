@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import csvDownload from 'json-to-csv-export'
 
 
 
 function PatientDetail() {
-
+  
   const dispatch = useDispatch();
   const history = useHistory();
-
-
   const patients = useSelector((store) => store.patients);
-  const patientData = useSelector((store) => store.patientData)
+  const patientData = useSelector((store) => store.patientData.patientData)
+  const jsonData = useSelector((store) => store.patientData.jsonData)
+
   const [patientId, setPatientId] = useState(' ');
+
+  const dataToConvert = {
+    data: jsonData,
+    filename: 'raw_json_data',
+    delimiter: ',',
+    headers: ['DATA']
+  }
 
   const getPatientData = () => {
     event.preventDefault();
@@ -21,6 +29,7 @@ function PatientDetail() {
       type: 'FETCH_PATIENT_DATA',
       payload: patientId
     })
+    dispatch({ type: 'FETCH_JSON_DATA', payload: patientId})
   }
 
   const toAddPatientForm = () => {
@@ -34,6 +43,10 @@ function PatientDetail() {
       payload: patientData.id
     })
     getPatientData();
+  }
+
+  const exportJsonData = () => {
+    csvDownload(dataToConvert)
   }
 
   // const conditionalData = () => {
@@ -69,7 +82,7 @@ function PatientDetail() {
 
       <button onClick={toAddPatientForm}>New Patient</button>
       <button onClick={deletePatient}>Delete Patient</button>
-      <button>Export</button>
+      <button onClick={() => exportJsonData()}>Export</button>
       {/* {JSON.stringify(patients)} */}
       <div>
         {/* {conditionalData} */}

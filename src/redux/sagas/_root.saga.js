@@ -7,6 +7,7 @@ import patientSaga from './patient.saga';
 
 // import institutionSaga from './institution.saga';
 import institutionSaga from './institution.saga';
+import dataSaga from './data.saga';
 
 
 
@@ -24,5 +25,6 @@ export default function* rootSaga() {
     userSaga(),
     patientSaga(),
     institutionSaga(),
+    dataSaga(),
   ]);
 }
