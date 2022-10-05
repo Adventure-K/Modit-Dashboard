@@ -17,9 +17,30 @@ function InstitutionManageAccountsPage() {
     <div>
 
       <h3>Waiting for Approval</h3>
+      {users.map(user => {
+        if (user.is_approved === false) {
+          return (
+            <p>{user.first_name} {user.last_name}</p>
+          )
+        }
+      })}
       <h3>Researchers</h3>
+      {users.map(user => {
+        if (user.is_approved === true && user.user_level === 1) {
+          return (
+            <p>{user.first_name} {user.last_name}</p>
+          )
+        }
+      })}
       <h3>Clinicians</h3>
-      {JSON.stringify(users)}
+      {users.map(user => {
+        if (user.is_approved === true && user.user_level === 0) {
+          return (
+            <p>{user.first_name} {user.last_name}</p>
+          )
+        }
+      })}
+      {/* {JSON.stringify(users)} */}
     </div>
   );
 }
