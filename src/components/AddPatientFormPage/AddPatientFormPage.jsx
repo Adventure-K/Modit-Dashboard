@@ -4,15 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function AddPatient() {
 
-  // const store = useSelector((store) => store);
 
   const dispatch = useDispatch();
 
+  //these variables are set when values are entered into their respective input fields 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [patientId, setPatientId] = useState('');
 
+
+  //this function dispatches the above variables to the addPatient() function in the patient.saga file. It then resets the input fields
   const registerPatient = (event) => {
     event.preventDefault();
     console.log(firstName, lastName, email, patientId)
