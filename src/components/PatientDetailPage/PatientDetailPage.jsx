@@ -11,7 +11,7 @@ function PatientDetail() {
   const history = useHistory();
   const patients = useSelector((store) => store.patients);
   const patientData = useSelector((store) => store.patientData.patientData)
-  const jsonData = useSelector((store) => store.patientData.jsonData)
+  const jsonData = useSelector((store) => store.patientData.processedData)
   console.log(jsonData);
   console.log(patientData);
 

@@ -8,7 +8,7 @@ const patientData = (state = {}, action) => {
     }
 }
 
-const jsonData = (state = {}, action) => {
+const processedData = (state = {}, action) => {
     switch (action.type) {
         case 'STORE_PROCESSED_DATA':
             return action.payload;
@@ -19,5 +19,5 @@ const jsonData = (state = {}, action) => {
 
 export default combineReducers({
     patientData,
-    jsonData
+    processedData
 });
