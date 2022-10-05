@@ -21,11 +21,11 @@ router.get('/clinicians', (req, res) => {
   // this GET route is to get all clinicians associated with a researcher and institution
 router.get('/teamData', (req, res) => {
     const query = `
-    SELECT "patient".username, "patient".clinician_id, "patient".first_name, "patient".last_name, "session_data".*, "session".* FROM "session_data"
+    SELECT "patient".modit_id, "patient".clinician_id, "patient".first_name, "patient".last_name, "session_data".*, "session".* FROM "session_data"
     JOIN "session"
     ON "session_data".session_id = "session".id
     JOIN "patient"
-    ON "session".patient_id = "patient".id
+    ON "session".modit_id = "patient".id
     JOIN "user"
     ON "patient".clinician_id = "user".id
     WHERE "researcher_id" = $1;`;
