@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
+import csvDownload from 'json-to-csv-export'
+
 
 function PatientDetail() {
   const dispatch = useDispatch()
@@ -8,8 +10,19 @@ function PatientDetail() {
 
   const params = useParams()
   const patients = useSelector((store) => store.patients)
-  const patientData = useSelector((store) => store.patientData)
+  const patientData = useSelector((store) => store.patientData.patientData)
+  const jsonData = useSelector((store) => store.patientData.processedData)
+  console.log(jsonData);
+  console.log(patientData);
+  
   const [patientId, setPatientId] = useState(' ')
+
+  const dataToConvert = {
+    data: jsonData,
+    filename: 'calculated_data',
+    delimiter: ',',
+    headers: ['ID', 'Session ID', '% time on drugs', '% time on controlled', '% time on neither', '% time on drugs no back', '% time non drugs no back']
+  }
 
   const getPatientData = () => {
     event.preventDefault()
@@ -18,6 +31,7 @@ function PatientDetail() {
       type: 'FETCH_PATIENT_DATA',
       payload: patientId,
     })
+    dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId})
   }
 
   const toAddPatientForm = () => {
@@ -33,6 +47,10 @@ function PatientDetail() {
     getPatientData()
   }
 
+  const exportJsonData = () => {
+    csvDownload(dataToConvert)
+  }
+
   // const conditionalData = () => {
   //   if (patientData.is_active === true) {
   //     return 1;
@@ -41,7 +59,7 @@ function PatientDetail() {
 
   useEffect(() => {
     dispatch({
-      type: 'FETCH_TEAMPATIENTS',
+      type: 'FETCH_TEAM_PATIENTS',
       payload: params.id,
     })
   }, [])
@@ -73,7 +91,7 @@ function PatientDetail() {
 
       <button onClick={toAddPatientForm}>New Patient</button>
       <button onClick={deletePatient}>Delete Patient</button>
-      <button>Export</button>
+      <button onClick={() => exportJsonData()}>Export</button>      
       {/* {JSON.stringify(patients)} */}
       <div>
         {/* {conditionalData} */}
