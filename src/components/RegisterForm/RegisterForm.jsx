@@ -12,23 +12,28 @@ function RegisterForm() {
 
   const registerUser = (event) => {
     event.preventDefault();
+    if (role === '') {
+      alert('Please select a role.')
+    }
+    else {
+      dispatch({// stores register info in reducer to be retrieved on the next page
+        type: 'STORE_USER_REGISTRATION_INFO',
+        payload: {
+          username: username,
+          password: password,
+          role: role
+        },
+      });
 
-    dispatch({// stores register info in reducer to be retrieved on the next page
-      type: 'STORE_USER_REGISTRATION_INFO',
-      payload: {
-        username: username,
-        password: password,
-        role: role
-      },
-    });
+      history.push('/additionalInfoRegistration')
+    }
 
-    history.push('/additionalInfoRegistration')
   }; // end registerUser
 
   const dropDownChange = (e) => {
     setRole(e.target.value)
 
-}
+  }
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
