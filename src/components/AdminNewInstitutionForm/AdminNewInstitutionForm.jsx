@@ -17,7 +17,7 @@ function AdminNewInstitutionForm() {
       return;
     }
     dispatch({type: 'ADD_INSTITUTION', payload: newInstitution})
-    history.push('/adminInstitutionListPage');
+    history.push('/adminInstitutionList');
   }
 
   const handleValUpdate = (event, key) => {
