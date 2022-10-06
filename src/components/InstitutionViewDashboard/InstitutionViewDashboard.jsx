@@ -13,7 +13,7 @@ function InstitutionViewDashboard(props) {
 
   return (
     <div>
-      <button onClick={() => {history.push('/institutionViewManageAccounts')}}>Manage Users</button>
+      <button onClick={() => {history.push('/manageAccounts')}}>Manage Users</button>
       <button>Export</button>
       <h2>{heading}</h2>
       <h3><span>{i.name}<br/>
