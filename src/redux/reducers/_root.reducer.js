@@ -4,9 +4,7 @@ import user from './user.reducer';
 import institution from './institution.reducer';
 import patients from './patients.reducer';
 import patientData from './patient_data.reducer'
-
-// import institution from './institution.reducer';
-
+import selectedUser from './selectedUser.reducer';
 import institutions from './institution.reducer';
 import activeInstitution from './activeInstitution.reducer';
 import usersToManage from './manage_users.reducer.js';
@@ -28,9 +26,9 @@ const rootReducer = combineReducers({
   patientData,
   institutions,
   activeInstitution,
+  selectedUser,
   usersToManage,
   researcher,
-
 });
 
 export default rootReducer;
