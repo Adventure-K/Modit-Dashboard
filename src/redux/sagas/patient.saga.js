@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, take, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 //addPatient() gets called when registerPatient() dispatches 'REGISTER_PATIENT' in the AddPatientFormPage file. It sends the new patient's data to the post route in the patient.router file to be posted to the database.
