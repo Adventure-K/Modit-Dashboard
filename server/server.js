@@ -12,6 +12,9 @@ const userRouter = require('./routes/user.router');
 const patientRouter = require('./routes/patient.router');
 const institutionsRouter = require('./routes/institutions.router');
 const dataRouter = require('./routes/data.router')
+const selectedUserRouter = require('./routes/selectedUser.router');
+const manageAccountsRouter = require('./routes/manage_accounts.router');
+const approveUsersRouter = require('./routes/approve_users.router');
 const researcherRouter = require('./routes/researcher.router')
 
 
@@ -31,8 +34,10 @@ app.use('/api/user', userRouter);
 app.use('/api/patient', patientRouter);
 app.use('/api/institutions', institutionsRouter);
 app.use('/api/data', dataRouter);
+app.use('/api/selectedUser', selectedUserRouter);
+app.use('/api/manageAccounts', manageAccountsRouter);
+app.use('/api/approveUsers', approveUsersRouter);
 app.use('/api/researcher', researcherRouter);
-
 
 // Serve static files
 app.use(express.static('build'));
