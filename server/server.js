@@ -11,10 +11,12 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const patientRouter = require('./routes/patient.router');
 const institutionsRouter = require('./routes/institutions.router');
+const dataRouter = require('./routes/data.router')
 const selectedUserRouter = require('./routes/selectedUser.router');
 const manageAccountsRouter = require('./routes/manage_accounts.router');
 const approveUsersRouter = require('./routes/approve_users.router');
 const researcherRouter = require('./routes/researcher.router')
+
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +33,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/patient', patientRouter);
 app.use('/api/institutions', institutionsRouter);
+app.use('/api/data', dataRouter);
 app.use('/api/selectedUser', selectedUserRouter);
 app.use('/api/manageAccounts', manageAccountsRouter);
 app.use('/api/approveUsers', approveUsersRouter);
