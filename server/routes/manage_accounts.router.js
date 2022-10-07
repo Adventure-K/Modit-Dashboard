@@ -2,9 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+// receives request to get all users from manage_users.saga. Queries the db to get all users with the same institution id (inst_id) as the one attached to the user who made the request (req.user.id)
 router.get('/', (req, res) => {
   console.log('in getUsers', req.user.id);
   const query = `SELECT * FROM "user" WHERE inst_id = $1;`;
@@ -16,17 +14,12 @@ router.get('/', (req, res) => {
       console.log(err);
       res.sendStatus(500);
     })
-  // GET route code here
 });
 
-/**
- * POST route template
- */
+// receives request from manage_users.saga. If the click-on user is a research head (user_level 2), the query to demote them to researcher (user_level 1) will run. If the clicked-on user is a researcher (user_level 1), the query to promote them to research head will run.
 router.put('/', (req, res) => {
   console.log('in manage accounts put', req.body);
   let query;
-  // let id;
-
   if (req.body.userLevel == 1) {
     query = `UPDATE "user" SET user_level = '2' WHERE id = $1;`;
   } else if (req.body.userLevel == 2) {
@@ -39,7 +32,6 @@ router.put('/', (req, res) => {
       console.log(err);
       res.sendStatus(500);
     })
-  // POST route code here
 });
 
 module.exports = router;
