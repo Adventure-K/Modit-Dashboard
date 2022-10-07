@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import csvDownload from 'json-to-csv-export'
+import PieChart from '../PatientDetailCharts/PatientDetailCharts';
 
 
 
@@ -23,15 +24,14 @@ function PatientDetail() {
 
   const patients = useSelector((store) => store.patients);
   const patientData = useSelector((store) => store.patientData.patientData)
-  const jsonData = useSelector((store) => store.patientData.processedData)
-  console.log(jsonData);
-  console.log(patientData);
+  const processedData = useSelector((store) => store.patientData.processedData)
+  // console.log(processedData);
 
   const [patientId, setPatientId] = useState(' ');
-
+  // console.log(patientId);
   const dataToConvert = {
-    data: jsonData,
-    filename: 'calculated_data',
+    data: [processedData],
+    filename: 'processed_data',
     delimiter: ',',
     headers: ['ID', 'Session ID', '% time on drugs', '% time on controlled', '% time on neither', '% time on drugs no back', '% time non drugs no back']
   }
@@ -66,13 +66,6 @@ function PatientDetail() {
     csvDownload(dataToConvert)
   }
 
-  // const conditionalData = () => {
-  //   if (patientData.is_active === true) {
-  //     return 1;
-  //   }
-  // }
-
-
 
   //on page load, FETCH_PATIENTS is dispatched to get patients to populate dropdown menu
   useEffect(() => {
@@ -85,10 +78,10 @@ function PatientDetail() {
         <select onChange={(event) => setPatientId(event.target.value)} name="patient" id="patientSelect">
           <option value="initial">Select A Patient</option>
 
-          {patients && patients.map(patient => {// loops over all the institutions and displays them as options
+          {patients && patients.map(patient => {// loops over all the patients and displays them as options
             if (patient.is_active === true) {
               return (
-                <option key={patient.id} value={patient.id}>{patient.first_name} {patient.last_name}</option>
+                <option key={patient.id} value={patient.id} >{patient.first_name} {patient.last_name}</option>
               )
             }
           })}
@@ -109,7 +102,8 @@ function PatientDetail() {
         {/* {JSON.stringify(patients)} */}
         <div>
           {/* {conditionalData} */}
-          {patientData && patientData && patientData.is_active === true && JSON.stringify(patientData)}
+          {/* {patientData && patientData && patientData.is_active === true && JSON.stringify(patientData)} */}
+         {patientData && patientData.is_active === true && <PieChart />} 
 
         </div>
       </div >
