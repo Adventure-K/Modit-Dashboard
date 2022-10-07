@@ -7,7 +7,7 @@ router.get('/:id', (req, res) => {
     let patientId = Number(req.params.id)
     // console.log('yh', patientId);
     const queryText = `
-    SELECT "session".* FROM "session"
+    SELECT * FROM "session"
     JOIN "patient"
     ON "session".modit_id = "patient".modit_id
     WHERE "session".modit_id = "patient".modit_id AND "patient".id = $1;`;

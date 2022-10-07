@@ -23,7 +23,7 @@ function PatientDetail() {
 
 
   const patients = useSelector((store) => store.patients);
-  const patientData = useSelector((store) => store.patientData.patientData)
+  // const patientData = useSelector((store) => store.patientData.patientData)
   const processedData = useSelector((store) => store.patientData.processedData)
   // console.log(processedData);
 
@@ -41,10 +41,10 @@ function PatientDetail() {
     // console.log("getPatientData", patientId);
 
     dispatch({
-      type: 'FETCH_PATIENT_DATA',
+      type: 'FETCH_PATIENT_ALL_DATA',
       payload: patientId
     })
-    dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId })
+    // dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId })
   }
 
   //this function is called when a user clicks the "Add Patient" button. It directs the user to the AddPatientFormPage.
@@ -56,7 +56,7 @@ function PatientDetail() {
   const deletePatient = () => {
     dispatch({
       type: 'DELETE_PATIENT',
-      payload: patientData.id
+      payload: processedData.id
     })
     getPatientData();
   }
@@ -97,13 +97,14 @@ function PatientDetail() {
       <button onClick={() => exportJsonData()}>Export</button>
 
       <div>
-        {patientData && patientData.is_active === true && JSON.stringify(patientData)}
+        {processedData && processedData.is_active === true && JSON.stringify(processedData)}
 
         {/* {JSON.stringify(patients)} */}
         <div>
           {/* {conditionalData} */}
           {/* {patientData && patientData && patientData.is_active === true && JSON.stringify(patientData)} */}
-         {patientData && patientData.is_active === true && <PieChart />} 
+         {processedData && processedData.is_active === true && <PieChart />} 
+
 
         </div>
       </div >

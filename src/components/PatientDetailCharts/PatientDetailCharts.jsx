@@ -36,7 +36,12 @@ const PieChart = () => {
     const processedData = useSelector((store) => store.patientData.processedData)
     console.log(processedData);
     console.log(patientDetails);
-    let num = Number(processedData.proportionOfGazeTimeOnDrugs)
+    let num1 = processedData.proportionOfGazeTimeOnDrugs
+    let num2 = processedData.proportionOfGazeTimeOnNonDrugs
+    let num3 = processedData.proportionOfGazeTimeOnBack
+    let num4 = processedData.proportionOfGazeTimeOnDrugsNoBack
+    let num5 = processedData.proportionOfGazeTimeOnNonDrugsNoBack
+
 
     const [chartData, setChartData] = useState({
         datasets: [],
@@ -45,13 +50,13 @@ const PieChart = () => {
     const [chartOptions, setChartOptions] = useState({})
 
     useEffect(() => {
-        
+
             setChartData({
                 labels: ['% time on drugs', '% time on non drugs,', '% time on back', '% time on drugs no back', '% time on non drugs no back'],
                 datasets: [
                     {
                         label: "Test data",
-                        data: [num],
+                        data: [num1, num2, num3, num4, num5], 
                         backgroundColor: ['rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(255, 206, 86, 0.2)',
@@ -70,7 +75,7 @@ const PieChart = () => {
                     }
                 ]
             })
-            setChartOptions({
+            setChartOptions({ 
                 responsive: true,
                 maintainAspectRatio: false,
 
@@ -89,18 +94,18 @@ const PieChart = () => {
                 }
             })
         
-    }, [])
+    }, []) 
 
     //^^^ all data for creating the chart
     
 
     return (
         <><></>
-            {num &&
+            {processedData &&
                 <div>
                     <Pie options={chartOptions} data={chartData} />
                 </div>
-            }
+}
         </>
 
     )
