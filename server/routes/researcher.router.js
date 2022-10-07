@@ -18,7 +18,7 @@ router.get('/clinicians', (req, res) => {
       })
   });
 
-  // this GET route is to get all clinicians associated with a researcher and institution
+  // this GET route is to get all clinicians associated with a researcher and institution WHERE "researcher_id" = $1
 router.get('/teamData', (req, res) => {
     const query = `
     SELECT "patient".modit_id, "patient".clinician_id, "patient".first_name, "patient".last_name, "session_data".*, "session".* FROM "session_data"
@@ -28,8 +28,8 @@ router.get('/teamData', (req, res) => {
     ON "session".modit_id = "patient".id
     JOIN "user"
     ON "patient".clinician_id = "user".id
-    WHERE "researcher_id" = $1;`;
-    pool.query(query, [req.user.id])
+    ;`;
+    pool.query(query)
       .then(result => {
         res.send(result.rows);
       })
