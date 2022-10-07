@@ -5,11 +5,10 @@ const {
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/', (req, res) => { // Get all institutions
-    console.log('Institutions GET')
+router.get('/', (req, res) => { // Get all institutions for the admin list
     const query = `
         SELECT "institution".*, "user".first_name, "user".last_name FROM "institution"
-        JOIN "user"
+        LEFT JOIN "user"
         ON "user".inst_id = "institution".id
         WHERE "user".user_level = '2';`;
     pool.query(query)
@@ -22,7 +21,7 @@ router.get('/', (req, res) => { // Get all institutions
         })
 })
 
-router.post('/', (req, res) => {
+router.post('/', (req, res) => { // add new institution
     const i = req.body;
     const query = `
         INSERT INTO "institution" ("name", "street_address", "city", "state", "zip")

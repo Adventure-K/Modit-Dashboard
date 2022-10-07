@@ -12,7 +12,7 @@ CREATE TABLE "institution" (
 	"name" VARCHAR(255) NOT NULL,
 	"street_address" VARCHAR(255),
 	"city" VARCHAR(255),
-	"state" VARCHAR(2),
+	"state" VARCHAR(50),
 	"zip" INT
 );
 

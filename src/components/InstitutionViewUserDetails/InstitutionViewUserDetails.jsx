@@ -14,8 +14,8 @@ function InstitutionViewUserDetails(props) {
   const userId = useParams();
 
   useEffect(() => {
-    console.log('Fetching User ID using Params')
-    dispatch({ type: 'GET_SELECTED_USER', payload: userId })
+    console.log('Fetching User ID using Params', userId)
+    dispatch({ type: 'GET_SELECTED_USER', payload: userId.id })
   }, [])
 
   const selectedUser = useSelector((store) => store.selectedUser);
@@ -59,6 +59,7 @@ function InstitutionViewUserDetails(props) {
           <h2>{heading}</h2>
           <p>{selectedUser.first_name} {selectedUser.last_name}</p>
           <p>{selectedUser.email}</p>
+          <p>{JSON.stringify(selectedUser)}</p>
           <button onClick={handleEditMode}>Cancel</button>
           <input type="text" onChange={(event) => handlePassChange(event)} placeholder="New Password" />
           <button onClick={handleSubmit}>Submit</button>
@@ -68,6 +69,7 @@ function InstitutionViewUserDetails(props) {
           <h2>{heading}</h2>
           <p>{selectedUser.first_name} {selectedUser.last_name}</p>
           <p>{selectedUser.email}</p>
+          <p>{JSON.stringify(selectedUser)}</p>
           <button onClick={handleChangeView}>View Data</button>
           <button onClick={handleEditMode}>Change Password</button>
           <button onClick={handleArchiveUser}>Archive User</button>
