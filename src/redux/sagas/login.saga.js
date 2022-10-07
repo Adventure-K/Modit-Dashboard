@@ -15,6 +15,7 @@ function* loginUser(action) {
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
+    console.log(action.payload);
     yield axios.post('/api/user/login', action.payload, config);
 
     // after the user has logged in
@@ -28,7 +29,12 @@ function* loginUser(action) {
       // if user isn't in the database or
       // if the username and password don't match in the database
       yield put({ type: 'LOGIN_FAILED' });
-    } else {
+    } 
+    else if (error.response.status === 500) {// I was able to get this error code from the server which is not a 401
+      // so I'm using this as a way to display a different message
+      yield put({type: 'LOGIN_FAILED_USER_NOT_APPROVED'})
+    }
+    else {
       // Got an error that wasn't a 401
       // Could be anything, but most common cause is the server is not started
       yield put({ type: 'LOGIN_FAILED_NO_CODE' });

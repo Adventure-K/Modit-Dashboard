@@ -40,16 +40,22 @@ passport.use(
     pool
       .query('SELECT * FROM "user" WHERE username = $1', [username])
       .then((result) => {
+        console.log(result.rows[0]);
         const user = result && result.rows && result.rows[0];
-        if (user && encryptLib.comparePassword(password, user.password)) {
+        if (user && encryptLib.comparePassword(password, user.password) && user.is_approved) {// added user.is_approved so they will only be logged in if it is TRUE
           // All good! Passwords match!
           // done takes an error (null in this case) and a user
           done(null, user);
-        } else {
+        }
+        else if (user && encryptLib.comparePassword(password, user.password) && user.is_approved === false) {
+          done(500, null)
+        }
+        else {
           // Not good! Username and password do not match.
           // done takes an error (null in this case) and a user (also null in this case)
           // this will result in the server returning a 401 status code
           done(null, null);
+
         }
       })
       .catch((error) => {
