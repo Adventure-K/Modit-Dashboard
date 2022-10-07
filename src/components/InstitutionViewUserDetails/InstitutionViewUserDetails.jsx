@@ -19,17 +19,37 @@ function InstitutionViewUserDetails(props) {
   }, [])
 
   const selectedUser = useSelector((store) => store.selectedUser);
-  // console.log('Selected user:', selectedUser);
+  console.log('Selected user:', selectedUser);
 
   const [editMode, setEditMode] = useState(false);
   const [newPass, setNewPass] = useState('');
 
   const handleChangeView = () => {
-    console.log('write me!');
+
   }
 
-  const handleArchiveUser = () => {
-    console.log('write me!');
+  const handleRetireUser = () => {
+    if (confirm('This will disable the user\'s account. Proceed?')) {
+      dispatch({
+        type: 'RETIRE_USER',
+        payload: selectedUser.id
+      })
+      window.location.reload();
+    } else {
+      return;
+    }
+  }
+
+  const handleReinstateUser = () => {
+    if (confirm('This will re-enable the user\'s account. Proceed?')) {
+      dispatch({
+        type: 'REINSTATE_USER',
+        payload: selectedUser.id
+      })
+      window.location.reload();
+    } else {
+      return;
+    }
   }
 
   const handleEditMode = (event) => {
@@ -44,7 +64,7 @@ function InstitutionViewUserDetails(props) {
 
   const handleSubmit = () => {
     const pkg = {
-      id: userId.id, 
+      id: userId.id,
       pass: newPass
     }
     dispatch({
@@ -73,7 +93,11 @@ function InstitutionViewUserDetails(props) {
           <p>{selectedUser.email}</p>
           <button onClick={handleChangeView}>View Data</button>
           <button onClick={handleEditMode}>Change Password</button>
-          <button onClick={handleArchiveUser}>Archive User</button>
+          {selectedUser.is_active ?
+            <button onClick={handleRetireUser}>Retire User</button>
+            :
+            <button onClick={handleReinstateUser}>Reinstate User</button>
+          }
         </div>
       }
     </div>
