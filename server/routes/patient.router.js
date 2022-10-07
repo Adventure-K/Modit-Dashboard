@@ -8,6 +8,7 @@ router.get('/:id', (req, res) => {
   const query = `SELECT * FROM "patient" WHERE id = $1;`;
   pool.query(query, [req.params.id])
     .then(response => {
+      console.log('response.rows:', response.rows)
       res.send(response.rows);
     }).catch(err => {
       console.log(err);

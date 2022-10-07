@@ -24,8 +24,26 @@ function* fetchUser() {
   }
 }
 
+function* retireUser(action) {
+  try {
+    yield axios.put(`/api/user/retire/${action.payload}`)
+  } catch (err) {
+    console.log('retire user', err)
+  }
+}
+
+function* reinstateUser(action) {
+  try {
+    yield axios.put(`/api/user/reinstate/${action.payload}`)
+  } catch (err) {
+    console.log('reinstate user', err)
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('RETIRE_USER', retireUser);
+  yield takeLatest('REINSTATE_USER', reinstateUser);
 }
 
 export default userSaga;
