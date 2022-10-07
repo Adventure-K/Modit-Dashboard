@@ -12,8 +12,21 @@ function* getUsers() {
     }
 }
 
+function* changeHeadResearcher(action) {
+    try {
+        yield axios.put('/api/manageAccounts', action.payload);
+        yield put({ type: 'GET_USERS' })
+    } catch (err) {
+        console.error('ERROR IN CHANGE HEAD RESEARCHER', err)
+    }
+}
+
+
+
 function* manageUsersSaga() {
     yield takeLatest('GET_USERS', getUsers)
+    yield takeLatest('SET/REMOVE_HEAD_RESEARCHER', changeHeadResearcher)
+
 }
 
 export default manageUsersSaga;

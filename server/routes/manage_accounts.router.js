@@ -22,7 +22,23 @@ router.get('/', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.put('/', (req, res) => {
+  console.log('in manage accounts put', req.body);
+  let query;
+  // let id;
+
+  if (req.body.userLevel == 1) {
+    query = `UPDATE "user" SET user_level = '2' WHERE id = $1;`;
+  } else if (req.body.userLevel == 2) {
+    query = `UPDATE "user" SET user_level = '1' WHERE id = $1;`;
+  }
+  pool.query(query, [req.body.id])
+    .then(response => {
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
   // POST route code here
 });
 

@@ -45,13 +45,23 @@ function InstitutionManageAccountsPage() {
 
 
   { users && headReseacher() }
-  console.log(headResearcher);
+  // console.log(headResearcher);
 
   //when the name of an approved clinician or researcher is clicked on, this function is called and it pushes the user that that user's detail page
   const toUserDetails = (id) => {
     history.push(`/userDetails/${id}`)
   }
-  // let researchHead = false;
+
+  const promoteUser = (id, userLevel) => {
+    console.log("in promoteUser", id, userLevel)
+    dispatch({
+      type: 'SET/REMOVE_HEAD_RESEARCHER',
+      payload: {
+        id: id,
+        userLevel: userLevel
+      }
+    })
+  }
 
   return (
     <div>
@@ -73,11 +83,13 @@ function InstitutionManageAccountsPage() {
           if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
             return (
 
-              <div onClick={() => (toUserDetails(user.id))}>
+              <div >
                 <p>
-                  {user.first_name} {user.last_name}
+                  <span onClick={() => (toUserDetails(user.id))}>
+                    {user.first_name} {user.last_name}
+                  </span>
                   <span>
-                    {user.user_level == 2 ? <button>demote</button> : <></>}
+                    {user.user_level == 2 ? <button onClick={() => promoteUser(user.id, user.user_level)}>Demote</button> : <></>}
                   </span>
                 </p>
 
@@ -108,11 +120,13 @@ function InstitutionManageAccountsPage() {
             if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
               return (
 
-                <div onClick={() => (toUserDetails(user.id))}>
+                <div >
                   <p>
-                    {user.first_name} {user.last_name}
+                    <span onClick={() => (toUserDetails(user.id))}>
+                      {user.first_name} {user.last_name}
+                    </span>
                     <span>
-                      {user.user_level == 1 ? <button>promote</button> : <></>}
+                      {user.user_level == 1 ? <button onClick={() => promoteUser(user.id, user.user_level)}>Promote</button> : <></>}
                     </span>
                   </p>
 
