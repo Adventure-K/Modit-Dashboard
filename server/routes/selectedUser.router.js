@@ -9,7 +9,7 @@ router.get(`/:id`, (req, res) => {
     pool.query(query, [req.params.id])
         .then(response => {
             console.log('response.rows:', response.rows)
-            res.send(response.rows);
+            res.send(response.rows[0]);
         }).catch(err => {
             console.log('selectedUser GET', err);
             res.sendStatus(500);

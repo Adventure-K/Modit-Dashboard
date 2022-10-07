@@ -110,8 +110,9 @@ router.get('/institutions', (req, res) => {
 })
 
 router.put('/updatePass', (req, res) => {
-  const p = encryptLib.encryptPassword(req.body.newPass);
-  const id = req.body.userId;
+  console.log('req.body:', req.body)
+  const p = encryptLib.encryptPassword(req.body.pass);
+  const id = req.body.id;
   const query = `
     UPDATE "user" SET password = $1
     WHERE id = $2;`;
