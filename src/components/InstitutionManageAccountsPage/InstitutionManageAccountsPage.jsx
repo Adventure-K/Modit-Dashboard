@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './InstitutionManageAccounts.css';
 
 
 function InstitutionManageAccountsPage() {
@@ -65,6 +66,7 @@ function InstitutionManageAccountsPage() {
 
   return (
     <div>
+
       <h3>Waiting for Approval</h3>
       {users.map(user => {
         if (user.is_approved === false) {
