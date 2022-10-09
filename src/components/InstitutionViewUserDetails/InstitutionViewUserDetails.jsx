@@ -29,6 +29,8 @@ function InstitutionViewUserDetails(props) {
   const handleChangeView = () => {
     if (selectedUser.user_level == 0) {
       history.push(`/researcherTeamView/${selectedUser.id}`);
+    } else {
+      history.push('/researcherViewDashboard');
     }
   }
 
