@@ -58,12 +58,75 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+
+          <Route exact path="/login">
+            {user.id && user.user_level === 3 ? (
+              // If the user is already logged in,
+              // redirect to the /user page
+              <Redirect to="/adminInstitutionList" />
+            ) : user.id && user.user_level === 2 ? (
+              <Redirect to="/manageAccounts" />
+            ) : user.id && user.user_level === 1 ? (
+              <Redirect to="/researcherViewDashboard" />
+            ) : user.id && user.user_level === 0 ? (
+              <Redirect to="/patientDetail" />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
+          </Route>
+
+          <Route exact path="/registration">
+            {user.id && user.user_level === 3 ? (
+              // If the user is already logged in,
+              // redirect to the /user page
+              <Redirect to="/adminInstitutionList" />
+            ) : user.id && user.user_level === 2 ? (
+              <Redirect to="/manageAccounts" />
+            ) : user.id && user.user_level === 1 ? (
+              <Redirect to="/researcherViewDashboard" />
+            ) : user.id && user.user_level === 0 ? (
+              <Redirect to="/patientDetail" />
+            ) : (
+              // Otherwise, show the registration page
+              <RegisterPage />
+            )}
+          </Route>
+
+          <Route exact path="/home">
+            {user.id && user.user_level === 3 ? (
+              // If the user is already logged in,
+              // redirect to the /user page
+              <Redirect to="/adminInstitutionList" />
+            ) : user.id && user.user_level === 2 ? (
+              <Redirect to="/manageAccounts" />
+            ) : user.id && user.user_level === 1 ? (
+              <Redirect to="/researcherViewDashboard" />
+            ) : user.id && user.user_level === 0 ? (
+              <Redirect to="/patientDetail" />
+            ) : (
+              // Otherwise, show the Landing page
+              <LandingPage />
+            )}
+          </Route>
+
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/patientDetail"
           >
             <PatientDetailPage />
+            {user.user_level >= 3 ? (
+              <InstitutionViewDashboard />
+            ) : user.user_level >= 2 ? (
+              <InstitutionManageAccountsPage />
+            ) : user.user_level >= 1 ? (
+              <ResearcherViewDashboard />
+            ) : user.user_level === 0 ? (
+              <PatientDetailPage />
+            ) : (
+              <LandingPage />
+            )}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -80,6 +143,19 @@ function App() {
             path="/researcherViewDashboard"
           >
             <ResearcherViewDashboard />
+            {/* user.user_level >= 3 ? (
+              <InstitutionViewUserDetails />
+            ) : */}
+            {/* {user.user_level >= 2 ? (
+              <ResearcherTeamView />
+            ) :  */}
+            {user.user_level >= 1 ? (
+              <ResearcherTeamView />
+            ) : user.user_level === 0 ? (
+              <PatientDetailPage />
+            ) : (
+              <LandingPage />
+            )}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -87,7 +163,19 @@ function App() {
             exact
             path="/researcherTeamView/:id"
           >
-            <ResearcherTeamView />
+            {/* user.user_level >= 3 ? (
+              <InstitutionViewUserDetails />
+            ) : */}
+            {/* {user.user_level >= 2 ? (
+              <ResearcherTeamView />
+            ) :  */}
+            {user.user_level >= 1 ? (
+              <ResearcherTeamView />
+            ) : user.user_level === 0 ? (
+              <PatientDetailPage />
+            ) : (
+              <LandingPage />
+            )}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -95,7 +183,17 @@ function App() {
             exact
             path="/institutionViewDashboard/:id"
           >
-            <InstitutionViewDashboard />
+            {user.user_level >= 3 ? (
+              <InstitutionViewDashboard />
+            ) : user.user_level >= 2 ? (
+              <InstitutionManageAccountsPage />
+            ) : user.user_level >= 1 ? (
+              <ResearcherViewDashboard />
+            ) : user.user_level === 0 ? (
+              <PatientDetailPage />
+            ) : (
+              <LandingPage />
+            )}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -103,7 +201,18 @@ function App() {
             exact
             path="/manageAccounts"
           >
-            <InstitutionManageAccountsPage />
+            {/* user.user_level >= 3 ? (
+              <InstitutionViewUserDetails />
+            ) : */}
+            {user.user_level >= 2 ? (
+              <InstitutionManageAccountsPage />
+            ) : user.user_level >= 1 ? (
+              <ResearcherViewDashboard />
+            ) : user.user_level === 0 ? (
+              <PatientDetailPage />
+            ) : (
+              <LandingPage />
+            )}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -111,28 +220,18 @@ function App() {
             exact
             path="/userDetails/:id"
           >
-            
-            {user.user_level >= 3 ?
-
-<InstitutionViewUserDetails />
-
-: user.user_level >= 2 ?
-
-<InstitutionManageAccountsPage />
-
-: user.user_level >= 1 ?
-
-<ResearcherViewDashboard />
-
-: user.user_level = 0 ?
-
-<PatientDetailPage />
-
-: 
-
-<LandingPage />
-
-}
+            {/* {user.user_level >= 3 ? (
+              <InstitutionViewUserDetails />
+            ) :  */}
+            {user.user_level >= 2 ? (
+              <InstitutionViewUserDetails />
+            ) : user.user_level >= 1 ? (
+              <ResearcherViewDashboard />
+            ) : user.user_level === 0 ? (
+              <PatientDetailPage />
+            ) : (
+              <LandingPage />
+            )}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -140,27 +239,17 @@ function App() {
             exact
             path="/adminInstitutionList"
           >
-            {user.user_level >= 3 ?
-
-            <AdminNewInstitutionForm />
-
-          : user.user_level >= 2 ?
-
-          <InstitutionManageAccountsPage />
-
-          : user.user_level >= 1 ?
-
-          <ResearcherViewDashboard />
-
-          : user.user_level = 0 ?
-
-          <PatientDetailPage />
-
-          : 
-
-          <LandingPage />
-
-          }
+            {user.user_level >= 3 ? (
+              <AdminInstitutionListPage />
+            ) : user.user_level >= 2 ? (
+              <InstitutionManageAccountsPage />
+            ) : user.user_level >= 1 ? (
+              <ResearcherViewDashboard />
+            ) : user.user_level === 0 ? (
+              <PatientDetailPage />
+            ) : (
+              <LandingPage />
+            )}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -168,27 +257,17 @@ function App() {
             exact
             path="/adminNewInstitutionForm"
           >
-            {user.user_level >= 3 ?
-
-            <AdminNewInstitutionForm />
-
-          : user.user_level >= 2 ?
-
-          <InstitutionManageAccountsPage />
-
-          : user.user_level >= 1 ?
-
-          <ResearcherViewDashboard />
-
-          : user.user_level = 0 ?
-
-          <PatientDetailPage />
-
-          : 
-
-          <LandingPage />
-
-          }
+            {user.user_level >= 3 ? (
+              <AdminNewInstitutionForm />
+            ) : user.user_level >= 2 ? (
+              <InstitutionManageAccountsPage />
+            ) : user.user_level >= 1 ? (
+              <ResearcherViewDashboard />
+            ) : user.user_level === 0 ? (
+              <PatientDetailPage />
+            ) : (
+              <LandingPage />
+            )}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -198,73 +277,6 @@ function App() {
           >
             <InfoPage />
           </ProtectedRoute>
-
-          <Route exact path="/login">
-          {user.id && user.user_level >= 3 ? 
-              // If the user is already logged in,
-              // redirect to the /user page
-              <Redirect to="/adminInstitutionList" />
-             : user.id && user.user_level >= 2 ? 
-
-             <Redirect to="/manageAccounts"/>
-            
-            : user.id && user.user_level >= 1 ?
-
-            <Redirect to="/researcherViewDashboard"/>
-
-            : user.id && user.user_level >= 0 ?
-            
-            <Redirect to="/patientDetail"/>
-             : 
-              // Otherwise, show the login page
-              <LoginPage />
-            }
-          </Route>
-
-          <Route exact path="/registration">
-          {user.id && user.user_level >= 3 ? 
-              // If the user is already logged in,
-              // redirect to the /user page
-              <Redirect to="/adminInstitutionList" />
-             : user.id && user.user_level >= 2 ? 
-
-             <Redirect to="/manageAccounts"/>
-            
-            : user.id && user.user_level >= 1 ?
-
-            <Redirect to="/researcherViewDashboard"/>
-
-            : user.id && user.user_level >= 0 ?
-            
-            <Redirect to="/patientDetail"/>
-             : 
-              // Otherwise, show the registration page
-              <RegisterPage />
-            }
-          </Route>
-
-          <Route exact path="/home">
-            {user.id && user.user_level >= 3 ? 
-              // If the user is already logged in,
-              // redirect to the /user page
-              <Redirect to="/adminInstitutionList" />
-             : user.id && user.user_level >= 2 ? 
-
-             <Redirect to="/manageAccounts"/>
-            
-            : user.id && user.user_level >= 1 ?
-
-            <Redirect to="/researcherViewDashboard"/>
-
-            : user.id && user.user_level >= 0 ?
-            
-            <Redirect to="/patientDetail"/>
-            
-            : 
-            // Otherwise, show the Landing page
-              <LandingPage />
-            }
-          </Route>
 
           {/* If none of the other routes matched, we will show a 404. 
               Change url path to look less fresher*/}

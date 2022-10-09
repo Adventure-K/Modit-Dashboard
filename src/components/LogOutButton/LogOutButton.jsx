@@ -1,10 +1,16 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 function LogOutButton(props) {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const logOut = () => {    
+    
+    history.push('/login')
+  }
+
   return (
     <button
       // This button shows up in multiple locations and is styled differently
@@ -15,7 +21,7 @@ function LogOutButton(props) {
     >
       Log Out
     </button>
-  );
+  )
 }
 
-export default LogOutButton;
+export default LogOutButton
