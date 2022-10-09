@@ -2,10 +2,11 @@ const express = require('express');
 const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+const { rejectUnauthorized3 } = require('../modules/authorization3-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/', (req, res) => { // Get all institutions
+router.get('/', rejectUnauthenticated, rejectUnauthorized3, (req, res) => { // Get all institutions
     console.log('Institutions GET')
     const query = `
         SELECT "institution".*, "user".first_name, "user".last_name FROM "institution"
@@ -22,7 +23,7 @@ router.get('/', (req, res) => { // Get all institutions
         })
 })
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, rejectUnauthorized3, (req, res) => {
     const i = req.body;
     const query = `
         INSERT INTO "institution" ("name", "street_address", "city", "state", "zip")

@@ -1,14 +1,16 @@
 const express = require('express');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthorized1 } = require('../modules/authorization1-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
 // this GET route is to get all clinicians associated with a researcher and institution
-router.get('/clinicians', (req, res) => {
+router.get('/clinicians', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
     const query = `
     SELECT * FROM "user"
-    WHERE "researcher_id" = $1
+    WHERE "inst_id" = $1
     ORDER BY "first_name" ASC;`;
-    pool.query(query, [req.user.id])
+    pool.query(query, [req.user.inst_id])
       .then(result => {
         res.send(result.rows);
       })
@@ -19,7 +21,7 @@ router.get('/clinicians', (req, res) => {
   });
 
   // this GET route is to get all clinicians associated with a researcher and institution WHERE "researcher_id" = $1
-router.get('/teamData', (req, res) => {
+router.get('/teamData', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
     const query = `
     SELECT "patient".modit_id, "patient".clinician_id, "patient".first_name, "patient".last_name, "session_data".*, "session".* FROM "session_data"
     JOIN "session"
@@ -40,7 +42,7 @@ router.get('/teamData', (req, res) => {
   });
 
 //GET route for researcher team clinicians
-router.get('/researcherTeam/:id', (req, res) => {
+router.get('/researcherTeam/:id', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
   console.log("in get router")
   const query = `SELECT * FROM "patient" WHERE clinician_id = $1;`;
 
@@ -55,12 +57,14 @@ router.get('/researcherTeam/:id', (req, res) => {
 });
 
 // to get the institution related to the logged in researcher
-router.get('/researchInst', (req, res) => {
+router.get('/researchInst', rejectUnauthenticated, (req, res) => {
     console.log('the user who is logged in is', req.user.id);
-    const query = `SELECT "institution".name FROM "institution"
+    const query = `
+    SELECT "institution".name FROM "institution"
     JOIN "user"
     ON "institution".id = "user".inst_id
-    WHERE "user".id = $1;`;
+    WHERE "user".id = $1;
+    `;
     pool.query(query,[req.user.id])
       .then(result => {
         res.send(result.rows);
