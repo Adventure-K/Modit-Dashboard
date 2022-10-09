@@ -111,7 +111,28 @@ function App() {
             exact
             path="/userDetails/:id"
           >
-            <InstitutionViewUserDetails />
+            
+            {user.user_level >= 3 ?
+
+<InstitutionViewUserDetails />
+
+: user.user_level >= 2 ?
+
+<InstitutionManageAccountsPage />
+
+: user.user_level >= 1 ?
+
+<ResearcherViewDashboard />
+
+: user.user_level = 0 ?
+
+<PatientDetailPage />
+
+: 
+
+<LandingPage />
+
+}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -119,7 +140,27 @@ function App() {
             exact
             path="/adminInstitutionList"
           >
-            <AdminInstitutionListPage />
+            {user.user_level >= 3 ?
+
+            <AdminNewInstitutionForm />
+
+          : user.user_level >= 2 ?
+
+          <InstitutionManageAccountsPage />
+
+          : user.user_level >= 1 ?
+
+          <ResearcherViewDashboard />
+
+          : user.user_level = 0 ?
+
+          <PatientDetailPage />
+
+          : 
+
+          <LandingPage />
+
+          }
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -139,7 +180,7 @@ function App() {
 
           <ResearcherViewDashboard />
 
-          : user.user_level >= 0 ?
+          : user.user_level = 0 ?
 
           <PatientDetailPage />
 
