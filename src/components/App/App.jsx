@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import { HashRouter as Router, Redirect, Route, Switch, useHistory } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -30,6 +30,7 @@ import './App.css'
 
 function App() {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const user = useSelector((store) => store.user.userReducer)
   console.log(user)
@@ -115,7 +116,6 @@ function App() {
             exact
             path="/patientDetail"
           >
-            <PatientDetailPage />
             {user.user_level >= 3 ? (
               <InstitutionViewDashboard />
             ) : user.user_level >= 2 ? (
@@ -142,7 +142,7 @@ function App() {
             exact
             path="/researcherViewDashboard"
           >
-            <ResearcherViewDashboard />
+            
             {/* user.user_level >= 3 ? (
               <InstitutionViewUserDetails />
             ) : */}
@@ -150,7 +150,7 @@ function App() {
               <ResearcherTeamView />
             ) :  */}
             {user.user_level >= 1 ? (
-              <ResearcherTeamView />
+              <ResearcherViewDashboard />
             ) : user.user_level === 0 ? (
               <PatientDetailPage />
             ) : (

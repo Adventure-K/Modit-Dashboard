@@ -5,7 +5,7 @@ import csvDownload from 'json-to-csv-export'
 import './ResearcherTeamView.css';
 
 
-function PatientDetail() {
+function ResearcherTeamView() {
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -108,4 +108,4 @@ function PatientDetail() {
   )
 }
 
-export default PatientDetail
+export default ResearcherTeamView
