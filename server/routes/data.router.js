@@ -5,18 +5,22 @@ const router = express.Router();
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     // console.log(req.params);
-    let patientId = Number(req.params.id)
-    console.log('yh', patientId);
+    let patientModitId = Number(req.params.id)
+    // console.log('yh', patientId);
+
     const queryText = `
     SELECT * FROM "session"
     JOIN "patient"
     ON "session".modit_id = "patient".modit_id
-    WHERE "session".modit_id = "patient".modit_id AND "patient".id = $1;`;
+    WHERE "session".modit_id = "patient".modit_id AND "patient".modit_id = $1;`;
 
-    pool.query(queryText, [patientId])
+    pool.query(queryText, [patientModitId])
     .then(response => {
         console.log('heyo',response.rows);
-        res.send(response.rows[0])
+        let patientDataArray = response.rows
+        res.send(patientDataArray[patientDataArray.length - 1])
+        // patientDataArray is the array from the DB with all of that patient's entries
+        // this sends back the last entry in the array, which should be the newest entry
     })
     .catch(err => {
         console.log(err);

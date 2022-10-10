@@ -35,13 +35,13 @@ const PieChart = () => {
     const patientDetails = useSelector((store) => store.patientData.patientData)
     const processedData = useSelector((store) => store.patientData.processedData)
     console.log(processedData);
-    console.log(patientDetails);
-    let num1 = processedData.proportionOfGazeTimeOnDrugs
-    let num2 = processedData.proportionOfGazeTimeOnNonDrugs
-    let num3 = processedData.proportionOfGazeTimeOnBack
-    let num4 = processedData.proportionOfGazeTimeOnDrugsNoBack
-    let num5 = processedData.proportionOfGazeTimeOnNonDrugsNoBack
-
+    // console.log(patientDetails);
+    let num1 = (processedData.proportionOfGazeTimeOnDrugs) * 100 
+    let num2 = (processedData.proportionOfGazeTimeOnNonDrugs) * 100 
+    let num3 = (processedData.proportionOfGazeTimeOnBack) * 100 
+    // let num4 = (processedData.proportionOfGazeTimeOnDrugsNoBack) * 100 
+    // let num5 = (processedData.proportionOfGazeTimeOnNonDrugsNoBack) * 100 
+    console.log(num1 );
 
     const [chartData, setChartData] = useState({
         datasets: [],
@@ -52,22 +52,24 @@ const PieChart = () => {
     useEffect(() => {
 
             setChartData({
-                labels: ['% time on drugs', '% time on non drugs,', '% time on back', '% time on drugs no back', '% time on non drugs no back'],
+                labels: ['% time on drugs', '% time on non drugs ', '% time on back'],
                 datasets: [
                     {
                         label: "Test data",
-                        data: [num1, num2, num3, num4, num5], 
+                        data: [num1, num2, num3], 
                         backgroundColor: ['rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)'],
+                            // 'rgba(75, 192, 192, 0.2)',
+                            // 'rgba(153, 102, 255, 0.2)'
+                    ],
 
                         borderColor: ['rgba(255, 99, 132, 1)',
                             'rgba(54, 162, 235, 1)',
                             'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)'],
+                            // 'rgba(75, 192, 192, 1)',
+                            // 'rgba(153, 102, 255, 1)'
+                        ],
                         borderWidth: 1,
                         outerHeight: 200,
                         outerWidth: 200
@@ -85,7 +87,7 @@ const PieChart = () => {
                     },
                     title: {
                         display: true,
-                        text: "Test"
+                        text: "Most recent entry"
                     },
                     subtitle: {
                         display: true,
@@ -101,11 +103,11 @@ const PieChart = () => {
 
     return (
         <><></>
-            {processedData &&
+
                 <div>
                     <Pie options={chartOptions} data={chartData} />
                 </div>
-}
+
         </>
 
     )

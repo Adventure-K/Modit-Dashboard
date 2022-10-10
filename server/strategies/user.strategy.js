@@ -42,7 +42,7 @@ passport.use(
       .then((result) => {
         console.log(result.rows[0]);
         const user = result && result.rows && result.rows[0];
-        if (user && encryptLib.comparePassword(password, user.password) && user.is_approved) {// added user.is_approved so they will only be logged in if it is TRUE
+        if (user && encryptLib.comparePassword(password, user.password) && user.is_approved && user.is_active) {// added user.is_approved so they will only be logged in if it is TRUE
           // All good! Passwords match!
           // done takes an error (null in this case) and a user
           done(null, user);
