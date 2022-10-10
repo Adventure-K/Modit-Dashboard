@@ -6,6 +6,7 @@ function InstitutionViewDashboard(props) {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
   const i = useSelector((store) => store.activeInstitution);
+  console.log('activeInstitution:', i)
   const rh = (`${i.first_name} ${i.last_name}`)
   const [heading, setHeading] = useState('Institution Detail');
 

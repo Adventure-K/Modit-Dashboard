@@ -1,5 +1,30 @@
-.centeredHeaders{
+/* .centeredHeaders{
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+} */
+
+.pageContainer {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.displayContainer {
+    display: flex;
+}
+.institutionName {
+    font-weight: normal;
+}
+
+.cliniciansList {
+    width: 25%;
+    /* margin-left: 100px; */
+}
+
+.chartDiv {
+    width: 75%;
+    margin-top: 20px;
+    height: 300px;
+    border: solid;
+    
 }
