@@ -15,7 +15,8 @@ const dataRouter = require('./routes/data.router')
 const selectedUserRouter = require('./routes/selectedUser.router');
 const manageAccountsRouter = require('./routes/manage_accounts.router');
 const approveUsersRouter = require('./routes/approve_users.router');
-const researcherRouter = require('./routes/researcher.router')
+const researcherRouter = require('./routes/researcher.router');
+const moditRouter = require('./routes/modit.router');
 
 
 // Body parser middleware
@@ -38,6 +39,7 @@ app.use('/api/selectedUser', selectedUserRouter);
 app.use('/api/manageAccounts', manageAccountsRouter);
 app.use('/api/approveUsers', approveUsersRouter);
 app.use('/api/researcher', researcherRouter);
+app.use('/api/modit', moditRouter)
 
 // Serve static files
 app.use(express.static('build'));
