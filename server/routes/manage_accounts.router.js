@@ -20,21 +20,52 @@ router.get('/', rejectUnauthenticated, rejectUnauthorized2, (req, res) => {
 });
 
 // receives request from manage_users.saga. If the click-on user is a research head (user_level 2), the query to demote them to researcher (user_level 1) will run. If the clicked-on user is a researcher (user_level 1), the query to promote them to research head will run.
-router.put('/', rejectUnauthenticated, rejectUnauthorized3, (req, res) => {
+router.put('/', rejectUnauthenticated, rejectUnauthorized3, async (req, res) => {
   console.log('in manage accounts put', req.body);
-  let query;
+
+  const connection = await pool.connect();
+
   if (req.body.userLevel == 1) {
-    query = `UPDATE "user" SET user_level = '2' WHERE id = $1;`;
-  } else if (req.body.userLevel == 2) {
-    query = `UPDATE "user" SET user_level = '1' WHERE id = $1;`;
-  }
-  pool.query(query, [req.body.id])
-    .then(response => {
-      res.sendStatus(200)
-    }).catch(err => {
-      console.log(err);
+    try {
+      await connection.query('BEGIN');
+      const query1 = `UPDATE "user" SET user_level = '2' WHERE id = $1;`;
+      await connection.query(query1, [req.body.id])
+      const query2 = `
+        UPDATE "institution"
+        SET "rh_id" = $1 FROM "user"
+        WHERE "institution".id = "user".inst_id
+        AND "user".id = $1;`
+      await connection.query(query2, [req.body.id])
+      await connection.query('COMMIT')
+      res.sendStatus(200);
+    } catch (err) {
+      await connection.query('ROLLBACK');
+      console.log('promote user', err)
       res.sendStatus(500);
-    })
+    } finally {
+      connection.release();
+    }
+  } else if (req.body.userLevel == 2) {
+    try {
+      await connection.query('BEGIN');
+      const query1 = `UPDATE "user" SET user_level = '1' WHERE id = $1;`;
+      await connection.query(query1, [req.body.id])
+      const query2 = `
+          UPDATE "institution"
+          SET "rh_id" = NULL FROM "user"
+          WHERE "institution".id = "user".inst_id
+          AND "user".id = $1;`
+      await connection.query(query2, [req.body.id])
+      await connection.query('COMMIT')
+      res.sendStatus(200);
+    } catch (err) {
+      await connection.query('ROLLBACK');
+      console.log('promote user', err)
+      res.sendStatus(500);
+    } finally {
+      connection.release();
+    }
+  }
 });
 
 module.exports = router;
