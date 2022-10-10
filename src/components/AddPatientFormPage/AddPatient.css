@@ -1,0 +1,25 @@
+.patientFormDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.addPatientFormCard {
+    border: solid;
+    max-width: 450px;
+}
+
+.addPatientHeading {
+    text-align: center;
+}
+
+.registerBtnContainer {
+    text-align: center;
+}
+
+.inputsDiv {
+   display: flex;
+   justify-content: space-between;
+}
+
+
+
