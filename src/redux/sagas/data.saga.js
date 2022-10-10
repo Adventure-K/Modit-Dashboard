@@ -1,4 +1,4 @@
-import { put, take, takeLates, takeEvery } from 'redux-saga/effects';
+import { put, take, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchPatientData(action) {
@@ -17,7 +17,10 @@ function* fetchPatientAllData(action) {
     try {
         yield put({type: 'RESET_STORE'})
         let response = yield axios.get(`/api/data/${action.payload}`)
-        yield put({type: 'STORE_PROCESSED_DATA', payload: response.data})
+        // console.log(response.data);
+        yield put({type: 'STORE_ALL_PROCESSED_DATA', payload: response.data})// for average data chart display
+        yield put({type: 'STORE_RECENT_PROCESSED_DATA', payload: response.data[response.data.length - 1]})// for most recent data chart display
+
     }
     catch {
         console.log('DATA SAGA: error in retrieving all patient data');

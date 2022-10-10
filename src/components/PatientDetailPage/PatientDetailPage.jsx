@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import csvDownload from 'json-to-csv-export'
-import PieChart from '../PatientDetailCharts/PatientDetailCharts';
+import PieChart1 from '../PatientDetailCharts/PatientDetailRecentChart';
+import PieChart2 from '../PatientDetailCharts/PatientDetailAverageChart';
+
 import './PatientDetail.css';
 
 
@@ -17,7 +19,7 @@ function PatientDetail() {
   // contains array of patients displayed in dropdown menu
   const patients = useSelector((store) => store.patients);
   const patientData = useSelector((store) => store.patientData.patientData)
-  const processedData = useSelector((store) => store.patientData.processedData)
+  const processedData = useSelector((store) => store.patientData.recentProcessedData)
   // console.log(processedData);
   // console.log(patients);
   
@@ -101,7 +103,8 @@ function PatientDetail() {
         {/* {processedData && processedData.is_active === true && JSON.stringify(processedData)} */}
         <div>
           <div id='chartWrapper'>
-          {processedData && processedData.is_active === true && <PieChart />}
+          {processedData && processedData.is_active === true && <PieChart1 />}
+          {processedData && processedData.is_active === true && <PieChart2 />}
           </div>
 
 

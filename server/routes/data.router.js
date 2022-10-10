@@ -17,8 +17,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [patientModitId])
     .then(response => {
         console.log('heyo',response.rows);
-        let patientDataArray = response.rows
-        res.send(patientDataArray[patientDataArray.length - 1])
+        res.send(response.rows)
         // patientDataArray is the array from the DB with all of that patient's entries
         // this sends back the last entry in the array, which should be the newest entry
     })
