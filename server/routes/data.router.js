@@ -7,16 +7,15 @@ router.get('/:id', (req, res) => {
     let patientId = Number(req.params.id)
     // console.log('yh', patientId);
     const queryText = `
-    SELECT "session_data".* FROM "session_data"
-    JOIN "session"
-    ON "session_data".session_id = "session".id
-    WHERE "session_data".id = $1;
-    `;
+    SELECT * FROM "session"
+    JOIN "patient"
+    ON "session".modit_id = "patient".modit_id
+    WHERE "session".modit_id = "patient".modit_id AND "patient".id = $1;`;
 
     pool.query(queryText, [patientId])
     .then(response => {
-        // console.log(response.rows);
-        res.send(response.rows)
+        console.log('heyo',response.rows);
+        res.send(response.rows[0])
     })
     .catch(err => {
         console.log(err);
