@@ -36,11 +36,11 @@ const PieChart = () => {
     const processedData = useSelector((store) => store.patientData.processedData)
     console.log(processedData);
     console.log(patientDetails);
-    let num1 = processedData.proportionOfGazeTimeOnDrugs
-    let num2 = processedData.proportionOfGazeTimeOnNonDrugs
-    let num3 = processedData.proportionOfGazeTimeOnBack
-    let num4 = processedData.proportionOfGazeTimeOnDrugsNoBack
-    let num5 = processedData.proportionOfGazeTimeOnNonDrugsNoBack
+    let num1 = (processedData.proportionOfGazeTimeOnDrugs) * 100 
+    let num2 = (processedData.proportionOfGazeTimeOnNonDrugs) * 100 
+    let num3 = (processedData.proportionOfGazeTimeOnBack) * 100 
+    let num4 = (processedData.proportionOfGazeTimeOnDrugsNoBack) * 100 
+    let num5 = (processedData.proportionOfGazeTimeOnNonDrugsNoBack) * 100 
 
 
     const [chartData, setChartData] = useState({
@@ -85,7 +85,7 @@ const PieChart = () => {
                     },
                     title: {
                         display: true,
-                        text: "Test"
+                        text: "Most recent entry"
                     },
                     subtitle: {
                         display: true,

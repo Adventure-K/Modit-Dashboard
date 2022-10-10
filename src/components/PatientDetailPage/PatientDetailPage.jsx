@@ -19,11 +19,13 @@ function PatientDetail() {
   const patientData = useSelector((store) => store.patientData.patientData)
   const processedData = useSelector((store) => store.patientData.processedData)
   // console.log(processedData);
+  console.log(patients);
+  let array = [0, 1, 5]
+  console.log(array[array.length - 1]);
 
 
   // //contains the id of the patient selected in the dropdown menu
   const [patientId, setPatientId] = useState(' ');
-  // console.log(patientId);
   const dataToConvert = {
     data: [processedData],
     filename: 'processed_data',
@@ -78,7 +80,7 @@ function PatientDetail() {
             {patients && patients.map(patient => {// loops over all the institutions and displays them as options
               if (patient.is_active === true) {
                 return (
-                  <option key={patient.id} value={patient.id}>{patient.first_name} {patient.last_name}</option>
+                  <option key={patient.id} value={patient.modit_id}>{patient.first_name} {patient.last_name}</option>
                 )
               }
             })}
@@ -96,20 +98,12 @@ function PatientDetail() {
       <div className="exportBtnDiv">
         <button onClick={() => exportJsonData()}>Export Data</button>
       </div>
-
-      {/* <div>
-        {patientData && patientData.is_active === true && JSON.stringify(patientData)} */}
-
-      {/* {JSON.stringify(patients)} */}
       <div>
-
-        {processedData && processedData.is_active === true && JSON.stringify(processedData)}
-
-        {/* {JSON.stringify(patients)} */}
+        {/* {processedData && processedData.is_active === true && JSON.stringify(processedData)} */}
         <div>
-          {/* {conditionalData} */}
-          {/* {patientData && patientData && patientData.is_active === true && JSON.stringify(patientData)} */}
-         {processedData && processedData.is_active === true && <PieChart />} 
+          <div id='chartWrapper'>
+          {processedData && processedData.is_active === true && <PieChart />}
+          </div>
 
 
         </div>

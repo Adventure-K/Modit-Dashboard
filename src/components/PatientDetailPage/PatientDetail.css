@@ -19,3 +19,8 @@
 .deletePatientBtn {
     margin-left: 15px;
 }
+
+#chartWrapper {
+    width: 500px;
+    height: 500px;
+}
