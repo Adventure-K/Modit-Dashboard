@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import './InstitutionViewUserDetails.css';
 
 // Basic functional component structure for React with default state
@@ -13,6 +13,7 @@ function InstitutionViewUserDetails(props) {
 
   const dispatch = useDispatch();
   const userId = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     console.log('Fetching User ID using Params', userId)
@@ -26,7 +27,11 @@ function InstitutionViewUserDetails(props) {
   const [newPass, setNewPass] = useState('');
 
   const handleChangeView = () => {
-
+    if (selectedUser.user_level == 0) {
+      history.push(`/researcherTeamView/${selectedUser.id}`);
+    } else {
+      history.push('/researcherViewDashboard');
+    }
   }
 
   const handleRetireUser = () => {
