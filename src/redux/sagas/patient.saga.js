@@ -1,4 +1,4 @@
-import { put, take, takeLatest } from 'redux-saga/effects';
+import { put, take, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 //addPatient() gets called when registerPatient() dispatches 'REGISTER_PATIENT' in the AddPatientFormPage file. It sends the new patient's data to the post route in the patient.router file to be posted to the database.
@@ -45,7 +45,7 @@ function* deactivatePatient(action) {
 
 function* patientSaga() {
     yield takeLatest('REGISTER_PATIENT', addPatient)
-    yield takeLatest('FETCH_PATIENTS', getPatients)
+    yield takeEvery('FETCH_PATIENTS', getPatients)
     yield takeLatest('FETCH_PATIENT_DATA', getPatientData)
     yield takeLatest('DELETE_PATIENT', deactivatePatient)
 }

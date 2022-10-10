@@ -1,9 +1,12 @@
 const express = require('express');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthorized2 } = require('../modules/authorization2-middleware');
+const { rejectUnauthorized3 } = require('../modules/authorization3-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
 // receives request to get all users from manage_users.saga. Queries the db to get all users with the same institution id (inst_id) as the one attached to the user who made the request (req.user.id)
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, rejectUnauthorized2, (req, res) => {
   console.log('in getUsers', req.user.id);
   const query = `SELECT * FROM "user" WHERE inst_id = $1;`;
   pool.query(query, [req.user.inst_id])
@@ -17,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 // receives request from manage_users.saga. If the click-on user is a research head (user_level 2), the query to demote them to researcher (user_level 1) will run. If the clicked-on user is a researcher (user_level 1), the query to promote them to research head will run.
-router.put('/', async (req, res) => {
+router.put('/', rejectUnauthenticated, rejectUnauthorized3, async (req, res) => {
   console.log('in manage accounts put', req.body);
 
   const connection = await pool.connect();

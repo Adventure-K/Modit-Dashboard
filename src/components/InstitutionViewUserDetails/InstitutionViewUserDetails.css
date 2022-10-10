@@ -1,0 +1,37 @@
+.editModeContainer {
+    display:flex;
+    justify-content: space-between;
+}
+
+h2 {
+    text-align: center;
+}
+
+.detailsCard {
+    text-align: center;
+}
+
+.resetForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.notEditModeContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardBtns {
+    display: flex;
+    flex-direction: column;
+}
+
+.cardBtn {
+    width: 125px;
+}
+
+.cardBtnContainer {
+    display: flex;
+    justify-content: space-between;
+
+}

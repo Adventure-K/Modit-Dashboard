@@ -2,6 +2,7 @@ const express = require('express');
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+const { rejectUnauthorized2 } = require('../modules/authorization2-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
@@ -9,7 +10,7 @@ const userStrategy = require('../strategies/user.strategy');
 const router = express.Router();
 
 // Handles Ajax request for user information if user is authenticated
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
   // console.log(req.user);
   res.send(req.user);
@@ -109,7 +110,7 @@ router.get('/institutions', (req, res) => {
   })
 })
 
-router.put('/updatePass', (req, res) => {
+router.put('/updatePass', rejectUnauthenticated, rejectUnauthorized2,(req, res) => {
   console.log('req.body:', req.body)
   const p = encryptLib.encryptPassword(req.body.pass);
   const id = req.body.id;

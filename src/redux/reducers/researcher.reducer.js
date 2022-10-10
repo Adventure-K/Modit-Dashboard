@@ -12,7 +12,7 @@ const researcherReducer = (state = [], action) => {
 
   const researcherInstReducer = (state = {}, action) => {
     switch (action.type) {
-      case 'SET_RESEARCHERINST':
+      case 'SET_RESEARCHER_INST':
         return action.payload;
       default:
         return state;
