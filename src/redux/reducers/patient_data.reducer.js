@@ -12,6 +12,8 @@ const processedData = (state = {}, action) => {
     switch (action.type) {
         case 'STORE_PROCESSED_DATA':
             return action.payload;
+        case 'RESET_STORE':
+            return null;
         default:
             return state;
     }

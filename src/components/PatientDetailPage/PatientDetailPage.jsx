@@ -19,8 +19,8 @@ function PatientDetail() {
   const patientData = useSelector((store) => store.patientData.patientData)
   const processedData = useSelector((store) => store.patientData.processedData)
   // console.log(processedData);
-  console.log(patients);
-
+  // console.log(patients);
+  
 
 
   // //contains the id of the patient selected in the dropdown menu

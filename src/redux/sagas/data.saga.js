@@ -15,6 +15,7 @@ function* fetchPatientData(action) {
 
 function* fetchPatientAllData(action) {
     try {
+        yield put({type: 'RESET_STORE'})
         let response = yield axios.get(`/api/data/${action.payload}`)
         yield put({type: 'STORE_PROCESSED_DATA', payload: response.data})
     }
