@@ -20,8 +20,7 @@ function PatientDetail() {
   const processedData = useSelector((store) => store.patientData.processedData)
   // console.log(processedData);
   console.log(patients);
-  let array = [0, 1, 5]
-  console.log(array[array.length - 1]);
+
 
 
   // //contains the id of the patient selected in the dropdown menu
@@ -36,7 +35,7 @@ function PatientDetail() {
   // this function dispatches the id of the patient selected in the dropdown menu to the getPatientData() function in the patient.saga file
   const getPatientData = () => {
     event.preventDefault();
-    // console.log("getPatientData", patientId);
+    console.log("getPatientData", patientId);
 
     dispatch({
       type: 'FETCH_PATIENT_ALL_DATA',
