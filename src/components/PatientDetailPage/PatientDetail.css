@@ -1,0 +1,21 @@
+.btnRowDiv {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.exportBtnDiv {
+    /* font-display: flex; */
+    float: right;
+    margin-right: 100px;
+}
+
+.getDataBtn {
+    margin-left: 15px;
+    
+}
+
+.deletePatientBtn {
+    margin-left: 15px;
+}

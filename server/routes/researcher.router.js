@@ -5,25 +5,31 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 // this GET route is to get all clinicians associated with a researcher and institution
-router.get('/clinicians', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
-    const query = `
-    SELECT * FROM "user"
-    WHERE "inst_id" = $1
-    ORDER BY "first_name" ASC;`;
-    pool.query(query, [req.user.inst_id])
-      .then(result => {
-        res.send(result.rows);
-      })
-      .catch(err => {
-        console.log('Error in getting clinician list for researcher', err);
-        res.sendStatus(500)
-      })
-  });
 
-  // this GET route is to get all clinicians associated with a researcher and institution WHERE "researcher_id" = $1
-router.get('/teamData', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
-    const query = `
-    SELECT "patient".modit_id, "patient".clinician_id, "patient".first_name, "patient".last_name, "session_data".*, "session".* FROM "session_data"
+router.get('/clinicians', rejectUnauthenticated, rejectUnauthorized1,(req, res) => {
+  console.log('in get clinicians', req.user)
+  // const query = `
+  //   SELECT * FROM "user"
+  //   WHERE "researcher_id" = $1
+  //   ORDER BY "first_name" ASC;`;
+  const query = `SELECT * FROM "user"
+  WHERE inst_id = $1 AND user_level = 0
+  ORDER BY first_name ASC;`;
+  // pool.query(query, [req.user.id])
+  pool.query(query, [req.user.inst_id])
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('Error in getting clinician list for researcher', err);
+      res.sendStatus(500)
+    })
+});
+
+// this GET route is to get all clinicians associated with a researcher and institution
+router.get('/teamData', rejectUnauthenticated, rejectUnauthorized1,(req, res) => {
+  const query = `
+    SELECT "patient".username, "patient".clinician_id, "patient".first_name, "patient".last_name, "session_data".*, "session".* FROM "session_data"
     JOIN "session"
     ON "session_data".session_id = "session".id
     JOIN "patient"
@@ -41,9 +47,9 @@ router.get('/teamData', rejectUnauthenticated, rejectUnauthorized1, (req, res) =
       })
   });
 
-//GET route for researcher team clinicians
+//GET route for researcher clinicians
 router.get('/researcherTeam/:id', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
-  console.log("in get router")
+ 
   const query = `SELECT * FROM "patient" WHERE clinician_id = $1;`;
 
   pool.query(query, [req.params.id])

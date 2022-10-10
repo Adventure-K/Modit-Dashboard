@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import './InstitutionViewUserDetails.css';
 
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
@@ -8,14 +9,15 @@ import { useParams } from 'react-router-dom';
 function InstitutionViewUserDetails(props) {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
-  const [heading, setHeading] = useState('User Detail');
+  const [heading, setHeading] = useState('Manage User');
 
   const dispatch = useDispatch();
   const userId = useParams();
+  const history = useHistory();
 
   useEffect(() => {
-    console.log('Fetching User ID using Params')
-    dispatch({ type: 'GET_SELECTED_USER', payload: userId })
+    console.log('Fetching User ID using Params', userId)
+    dispatch({ type: 'GET_SELECTED_USER', payload: userId.id })
   }, [])
 
   const selectedUser = useSelector((store) => store.selectedUser);
@@ -25,11 +27,35 @@ function InstitutionViewUserDetails(props) {
   const [newPass, setNewPass] = useState('');
 
   const handleChangeView = () => {
-    console.log('write me!');
+    if (selectedUser.user_level == 0) {
+      history.push(`/researcherTeamView/${selectedUser.id}`);
+    } else {
+      history.push('/researcherViewDashboard');
+    }
   }
 
-  const handleArchiveUser = () => {
-    console.log('write me!');
+  const handleRetireUser = () => {
+    if (confirm('This will disable the user\'s account. Proceed?')) {
+      dispatch({
+        type: 'RETIRE_USER',
+        payload: selectedUser.id
+      })
+      window.location.reload();
+    } else {
+      return;
+    }
+  }
+
+  const handleReinstateUser = () => {
+    if (confirm('This will re-enable the user\'s account. Proceed?')) {
+      dispatch({
+        type: 'REINSTATE_USER',
+        payload: selectedUser.id
+      })
+      window.location.reload();
+    } else {
+      return;
+    }
   }
 
   const handleEditMode = (event) => {
@@ -43,7 +69,10 @@ function InstitutionViewUserDetails(props) {
   }
 
   const handleSubmit = () => {
-    const pkg = [userId, newPass]
+    const pkg = {
+      id: userId.id,
+      pass: newPass
+    }
     dispatch({
       type: 'UPDATE_PASSWORD',
       payload: pkg
@@ -54,24 +83,49 @@ function InstitutionViewUserDetails(props) {
 
   return (
     <div>
+      <h2>{heading}</h2>
       {editMode ? // Render for Edit Mode
-        <div>
-          <h2>{heading}</h2>
-          <p>{selectedUser.first_name} {selectedUser.last_name}</p>
-          <p>{selectedUser.email}</p>
-          <button onClick={handleEditMode}>Cancel</button>
-          <input type="text" onChange={(event) => handlePassChange(event)} placeholder="New Password" />
-          <button onClick={handleSubmit}>Submit</button>
+        <div className="editModeContainer">
+          <div></div>
+          <div className="detailsCard">
+            <p>{selectedUser.first_name} {selectedUser.last_name}</p>
+            <p>{selectedUser.username}</p>
+            <div className="resetForm">
+              <input type="text" onChange={(event) => handlePassChange(event)} placeholder="New Password" />
+              <div>
+                <button onClick={handleSubmit}>Submit</button>
+                <button onClick={handleEditMode}>Cancel</button>
+              </div>
+            </div>
+          </div>
+          <div></div>
         </div>
         : // Render for Not Edit Mode
-        <div>
-          <h2>{heading}</h2>
-          <p>{selectedUser.first_name} {selectedUser.last_name}</p>
-          <p>{selectedUser.email}</p>
-          <button onClick={handleChangeView}>View Data</button>
-          <button onClick={handleEditMode}>Change Password</button>
-          <button onClick={handleArchiveUser}>Archive User</button>
+
+        <div className="notEditModeContainer">
+          <div></div>
+          <div className="detailsCard">
+            <p>{selectedUser.first_name} {selectedUser.last_name}</p>
+            <p>{selectedUser.username}</p>
+            <div className="cardBtnContainer">
+              <div></div>
+              <div className="cardBtns">
+                <button className="cardBtn" onClick={handleChangeView}>View Data</button>
+                <button className="cardBtn" onClick={handleEditMode}>Change Password</button>
+                {selectedUser.is_active ?
+                  <button className="cardBtn" onClick={handleRetireUser}>Retire User</button>
+                  :
+                  <button className="cardBtn" onClick={handleReinstateUser}>Reinstate User</button>
+                }
+
+              </div>
+              <div></div>
+            </div>
+          </div>
+          <div></div>
         </div>
+
+
       }
     </div>
   );

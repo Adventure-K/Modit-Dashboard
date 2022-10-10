@@ -110,9 +110,10 @@ router.get('/institutions', (req, res) => {
   })
 })
 
-router.put('/updatePass', rejectUnauthenticated, rejectUnauthorized2, (req, res) => {
-  const p = encryptLib.encryptPassword(req.body.newPass);
-  const id = req.body.userId;
+router.put('/updatePass', rejectUnauthenticated, rejectUnauthorized2,(req, res) => {
+  console.log('req.body:', req.body)
+  const p = encryptLib.encryptPassword(req.body.pass);
+  const id = req.body.id;
   const query = `
     UPDATE "user" SET password = $1
     WHERE id = $2;`;
@@ -122,6 +123,36 @@ router.put('/updatePass', rejectUnauthenticated, rejectUnauthorized2, (req, res)
     res.sendStatus(200)
   }).catch(err => {
     console.log('password PUT', err);
+    res.sendStatus(500);
+  })
+})
+
+router.put('/retire/:id', (req, res) => {
+  console.log(req.params.id)
+  const id = req.params.id
+  const query = `
+    UPDATE "user" SET "is_active" = false
+    WHERE id = $1;`;
+  pool.query(query, [id])
+  .then(result => {
+    res.sendStatus(200)
+  }).catch(err => {
+    console.log('retire user', err)
+    res.sendStatus(500);
+  })
+})
+
+router.put('/reinstate/:id', (req, res) => {
+  console.log(req.params.id)
+  const id = req.params.id
+  const query = `
+    UPDATE "user" SET "is_active" = true
+    WHERE id = $1;`;
+  pool.query(query, [id])
+  .then(result => {
+    res.sendStatus(200)
+  }).catch(err => {
+    console.log('reinstate user', err)
     res.sendStatus(500);
   })
 })

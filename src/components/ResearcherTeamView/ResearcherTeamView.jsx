@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import csvDownload from 'json-to-csv-export'
+import './ResearcherTeamView.css';
 
 
 function PatientDetail() {
@@ -67,31 +68,37 @@ function PatientDetail() {
   return (
     <div>
       {/* <h2>{heading}</h2> */}
-      <form onSubmit={getPatientData}>
-        <select
-          onChange={(event) => setPatientId(event.target.value)}
-          name="patient"
-          id="patientSelect"
-        >
-          <option value="initial">Select A Patient</option>
+      <div className="btnRowDiv">
+        <div className="selectMenu">
+          <select
+            onChange={(event) => setPatientId(event.target.value)}
+            name="patient"
+            id="patientSelect"
+          >
+            <option value="initial">Select A Patient</option>
 
-          {patients.map((patient) => {
-            // loops over all the institutions and displays them as options
-            if (patient.is_active === true) {
-              return (
-                <option key={patient.id} value={patient.id}>
-                  {patient.first_name} {patient.last_name}
-                </option>
-              )
-            }
-          })}
-        </select>
-        <button type="submit">Get Data</button>
-      </form>
+            {patients.map((patient) => {
+              // loops over all the institutions and displays them as options
+              if (patient.is_active === true) {
+                return (
+                  <option key={patient.id} value={patient.id}>
+                    {patient.first_name} {patient.last_name}
+                  </option>
+                )
+              }
+            })}
+          </select>
+          <button className="getDataBtn" onClick={getPatientData}>Get Data</button>
+        </div>
 
-      <button onClick={toAddPatientForm}>New Patient</button>
-      <button onClick={deletePatient}>Delete Patient</button>
-      <button onClick={() => exportJsonData()}>Export</button>      
+        <div className="patientDetailBtns">
+          <button className="patientDetailBtns" onClick={toAddPatientForm}>New Patient</button>
+          <button className="deletePatientBtn" onClick={deletePatient}>Delete Patient</button>
+        </div>
+      </div>
+      <div className="exportBtnDiv">
+        <button onClick={() => exportJsonData()}>Export</button>
+      </div>
       {/* {JSON.stringify(patients)} */}
       <div>
         {/* {conditionalData} */}

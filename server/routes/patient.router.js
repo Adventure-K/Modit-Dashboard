@@ -6,9 +6,14 @@ const router = express.Router();
 // this route gets patient data from the db of the patient that the clinician selects in the dropdown menu on the PatientDetailPage. Request comes from and response is returned to getPatientData() in patient.saga.js
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   console.log(req.params);
-  const query = `SELECT * FROM "patient" WHERE id = $1;`;
+  const query = `SELECT "patient".*, "session".* FROM "patient"
+  JOIN "session"
+  ON "patient".modit_id = "session".modit_id 
+  WHERE "patient".id = $1;`;
   pool.query(query, [req.params.id])
     .then(response => {
+      console.log('response.rows:', response.rows)
+
       res.send(response.rows);
     }).catch(err => {
       console.log(err);
