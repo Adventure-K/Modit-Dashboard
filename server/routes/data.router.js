@@ -1,11 +1,13 @@
 const express = require('express');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     // console.log(req.params);
     let patientModitId = Number(req.params.id)
     // console.log('yh', patientId);
+
     const queryText = `
     SELECT * FROM "session"
     JOIN "patient"

@@ -2,10 +2,12 @@ const express = require('express');
 const {
     rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+const { rejectUnauthorized3 } = require('../modules/authorization3-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/', (req, res) => { // Get all institutions for the admin list
+
+router.get('/', rejectUnauthenticated, rejectUnauthorized3, (req, res) => { // Get all institutions for the admin list
     const query = 
         `SELECT * FROM "institution";`
         // `
@@ -23,7 +25,8 @@ router.get('/', (req, res) => { // Get all institutions for the admin list
         })
 })
 
-router.post('/', (req, res) => { // add new institution
+router.post('/', rejectUnauthenticated, rejectUnauthorized3, (req, res) => { // add new institution
+
     const i = req.body;
     const query = `
         INSERT INTO "institution" ("name", "street_address", "city", "state", "zip")

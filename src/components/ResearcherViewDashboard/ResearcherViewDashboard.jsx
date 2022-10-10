@@ -35,7 +35,7 @@ function ResearcherView(props) {
 
   // calls the researcher saga to run through the GET for the researcher's institution
   useEffect(() => {
-    dispatch({ type: 'FETCH_RESEARCHERINST' });
+    dispatch({ type: 'FETCH_RESEARCHER_INST' });
   }, []);
   console.log(institution);
 
@@ -60,6 +60,7 @@ function ResearcherView(props) {
         </div>
         <div className="chartDiv">
           {JSON.stringify(teamData)}
+          <button onClick={() => exportJsonData()}>Export</button>
         </div>
       </div>
     </div>

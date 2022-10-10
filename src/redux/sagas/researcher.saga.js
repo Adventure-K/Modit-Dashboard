@@ -18,7 +18,7 @@ function* fetchResearcherInst() {
     try {
         const institution = yield axios.get('/api/researcher/researchInst');
         console.log('get institution for researcher view:', institution.data);
-        yield put({ type: 'SET_RESEARCHERINST', payload: institution.data[0] });
+        yield put({ type: 'SET_RESEARCHER_INST', payload: institution.data[0] });
     } catch {
         console.log('fetch researcher inst saga error');
     }
@@ -63,8 +63,8 @@ function* getTeamData() {
 
 function* researcherSaga() {
     yield takeEvery('FETCH_CLINICIANS', fetchClinicians),
-    yield takeEvery('FETCH_RESEARCHERINST', fetchResearcherInst),
-    yield takeEvery('FETCH_TEAMPATIENTS', getTeamPatients),
+    yield takeEvery('FETCH_RESEARCHER_INST', fetchResearcherInst),
+    yield takeEvery('FETCH_TEAM_PATIENTS', getTeamPatients),
     yield takeEvery('FETCH_TEAM_DATA', getTeamData)
     // yield takeEvery('APPROVE', approve)
 }
