@@ -14,6 +14,7 @@ CREATE TABLE "institution" (
 	"city" VARCHAR(255),
 	"state" VARCHAR(50),
 	"zip" INT
+	"rh_id" INT REFERENCES "user" -- user ID of institution's research head. Used only to display on the institution list.
 );
 
 CREATE TABLE "user" (
