@@ -8,9 +8,9 @@ const patientData = (state = {}, action) => {
     }
 }
 
-const processedData = (state = {}, action) => {
+const recentProcessedData = (state = {}, action) => {
     switch (action.type) {
-        case 'STORE_PROCESSED_DATA':
+        case 'STORE_RECENT_PROCESSED_DATA':
             return action.payload;
         case 'RESET_STORE':
             return null;
@@ -19,7 +19,17 @@ const processedData = (state = {}, action) => {
     }
 }
 
+const averagePatientProcessedData = (state = {}, action) => {
+    switch (action.type) {
+        case 'STORE_AVERAGE_PROCESSED_DATA':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     patientData,
-    processedData
+    recentProcessedData,
+    averagePatientProcessedData
 });

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import csvDownload from 'json-to-csv-export'
-import PieChart from '../PatientDetailCharts/PatientDetailCharts';
+import PieChart1 from '../PatientDetailCharts/PatientDetailRecentChart';
+import PieChart2 from '../PatientDetailCharts/PatientDetailAverageChart';
+
 import './PatientDetail.css';
 
 
@@ -17,7 +19,7 @@ function PatientDetail() {
   // contains array of patients displayed in dropdown menu
   const patients = useSelector((store) => store.patients);
   const patientData = useSelector((store) => store.patientData.patientData)
-  const processedData = useSelector((store) => store.patientData.processedData)
+  const processedData = useSelector((store) => store.patientData.recentProcessedData)
   // console.log(processedData);
   // console.log(patients);
 
@@ -98,21 +100,34 @@ function PatientDetail() {
         </div>
       </div>
       <br />
+
+
       <div className="exportBtnDiv">
         <button onClick={() => exportJsonData()}>Export Data</button>
       </div>
-      <div>
-        {/* {processedData && processedData.is_active === true && JSON.stringify(processedData)} */}
+
+
+
+      {/* {processedData && processedData.is_active === true && JSON.stringify(processedData)} */}
+<div id='tester'>
+<div className='filler'></div>
+      <div id='chartWrapper'>
+        <div><p>hello</p></div>
         <div>
-          <div id='chartWrapper'>
-            {processedData && processedData.is_active === true && <PieChart />}
-          </div>
-
-
+          {processedData && processedData.is_active === true && <PieChart1 />}
         </div>
-      </div >
-
+        <div className='filler'></div>
+        <div className="chartRight">
+          {processedData && processedData.is_active === true && <PieChart2 />}
+        </div>
+        <div><p>hello</p></div>
+      </div>
+      <div className='filler'></div>
+      </div>
     </div>
+
+
+
   );
 
 }

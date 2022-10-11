@@ -33,15 +33,14 @@ const PieChart = () => {
 
     const dispatch = useDispatch()
     const patientDetails = useSelector((store) => store.patientData.patientData)
-    const processedData = useSelector((store) => store.patientData.processedData)
-    console.log(processedData);
+    const processedData = useSelector((store) => store.patientData.recentProcessedData)
+    // console.log(processedData);
     // console.log(patientDetails);
     let num1 = (processedData.proportionOfGazeTimeOnDrugs) * 100 
     let num2 = (processedData.proportionOfGazeTimeOnNonDrugs) * 100 
     let num3 = (processedData.proportionOfGazeTimeOnBack) * 100 
-    // let num4 = (processedData.proportionOfGazeTimeOnDrugsNoBack) * 100 
-    // let num5 = (processedData.proportionOfGazeTimeOnNonDrugsNoBack) * 100 
-    console.log(num1 );
+
+
 
     const [chartData, setChartData] = useState({
         datasets: [],
@@ -57,16 +56,16 @@ const PieChart = () => {
                     {
                         label: "Test data",
                         data: [num1, num2, num3], 
-                        backgroundColor: ['rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
+                        backgroundColor: ['rgba(255, 116, 115, 0.2)',
+                            'rgba(111, 239, 139, 0.2)',
+                            'rgba(141, 141, 141, 0.2)',
                             // 'rgba(75, 192, 192, 0.2)',
                             // 'rgba(153, 102, 255, 0.2)'
                     ],
 
-                        borderColor: ['rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
+                        borderColor: ['rgba(255, 116, 115, 1)',
+                            'rgba(111, 239, 139, 1)',
+                            'rgba(141, 141, 141, 1)',
                             // 'rgba(75, 192, 192, 1)',
                             // 'rgba(153, 102, 255, 1)'
                         ],
@@ -87,7 +86,7 @@ const PieChart = () => {
                     },
                     title: {
                         display: true,
-                        text: "Most recent entry"
+                        text: "Most Recent Entry"
                     },
                     subtitle: {
                         display: true,
