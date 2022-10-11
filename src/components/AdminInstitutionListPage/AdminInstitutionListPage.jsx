@@ -12,7 +12,6 @@ function AdminInstitutionListPage(props) {
   const history = useHistory();
 
   useEffect(() => {
-    console.log('IVD useEffect')
     dispatch({ type: 'FETCH_INSTITUTIONS' })
   }, [])
 
@@ -31,6 +30,7 @@ function AdminInstitutionListPage(props) {
   return (
     <div>
       <h2>{heading}</h2>
+      <button onClick={() => history.push('/adminNewInstitutionForm')}>Add Institution</button>
       <table>
         <thead>
           <tr>

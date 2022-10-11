@@ -40,7 +40,7 @@ function InstitutionManageAccountsPage() {
   }
 
   let headResearcher = false;
-  const headReseacher = () => {
+  const isHeadResearcher = () => {
     for (let user of users) {
       if (user.user_level == 2) {
         headResearcher = true;
@@ -49,7 +49,7 @@ function InstitutionManageAccountsPage() {
   }
 
 
-  { users && headReseacher() }
+  { users && isHeadResearcher() }
   // console.log(headResearcher);
 
   //when the name of an approved clinician or researcher is clicked on, this function is called and it pushes the user that that user's detail page
@@ -176,9 +176,6 @@ function InstitutionManageAccountsPage() {
               </div>
             </>
         }
-
-        {/* {JSON.stringify(users)} */}
-        {JSON.stringify(loggedInUser)}
 
       </div >
     </>
