@@ -33,17 +33,13 @@ const PieChart = () => {
 
     const dispatch = useDispatch()
     // const patientDetails = useSelector((store) => store.patientData.patientData)
-    const averageProcessedData = useSelector((store) => store.patientData.averagePatientProcessedData)
-    console.log(averageProcessedData);
-    let num1 = (averageProcessedData.drugs) * 100
-    let num2 = (averageProcessedData.noDrugs) * 100
-    let num3 = (averageProcessedData.back) * 100 
-    console.log(averageProcessedData.drugs);
+    const averageAggregateData = useSelector((store) => store.researcher.aggregateResearcherData[0])
+    console.log(averageAggregateData);
 
-
-
-
-
+    let num1 = (averageAggregateData.drugs) * 100
+    let num2 = (averageAggregateData.noDrugs) * 100
+    let num3 = (averageAggregateData.back) * 100 
+    
     const [chartData, setChartData] = useState({
         datasets: [],
     })
@@ -57,7 +53,7 @@ const PieChart = () => {
             datasets: [
                 {
                     label: "Test data",
-                    data: [num1, num2, num3],
+                    data: [num1, num2, num3 ],
                     backgroundColor: ['rgba(255, 116, 115, 0.2)',
                         'rgba(111, 239, 139, 0.2)',
                         'rgba(141, 141, 141, 0.2)',
@@ -108,7 +104,7 @@ const PieChart = () => {
             <div>
                 <Pie options={chartOptions} data={chartData} />
             </div>
-            
+             
 
         </>
 

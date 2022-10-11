@@ -111,8 +111,8 @@ function PatientDetail() {
       {/* {processedData && processedData.is_active === true && JSON.stringify(processedData)} */}
 <div id='tester'>
 <div className='filler'></div>
-      <div id='chartWrapper'>
-        <div><p>hello</p></div>
+      <div className='chartWrapper'>
+        <div></div>
         <div>
           {processedData && processedData.is_active === true && <PieChart1 />}
         </div>
@@ -120,7 +120,7 @@ function PatientDetail() {
         <div className="chartRight">
           {processedData && processedData.is_active === true && <PieChart2 />}
         </div>
-        <div><p>hello</p></div>
+        <div></div>
       </div>
       <div className='filler'></div>
       </div>
