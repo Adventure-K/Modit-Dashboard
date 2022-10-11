@@ -9,6 +9,8 @@ function InstitutionManageAccountsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const i = useSelector((store) => store.activeInstitution);
+
   //this variable contains an array of all users within the organization of the logged-in user
   const users = useSelector((store) => store.usersToManage);
 

@@ -23,11 +23,20 @@ function* changeHeadResearcher(action) {
     }
 }
 
+function* adminSetInst(action) { // When admin clicks Manage Users on an institution's dashboard, sets admin's inst_id to that institution's id
+    try {
+        yield axios.put('/api/manageAccounts/admin_inst_id', action.payload);
+    } catch (err) {
+        console.error('Change Admin inst_id', err)
+    }
+}
+
 
 
 function* manageUsersSaga() {
     yield takeLatest('GET_USERS', getUsers)
     yield takeLatest('SET/REMOVE_HEAD_RESEARCHER', changeHeadResearcher)
+    yield takeLatest('ADMIN_SET_INST', adminSetInst)
 
 }
 

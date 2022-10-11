@@ -9,12 +9,20 @@ function InstitutionViewDashboard(props) {
   console.log('activeInstitution:', i)
   const rh = (`${i.first_name} ${i.last_name}`)
   const [heading, setHeading] = useState('Institution Detail');
+  console.log('i.id:', i.id)
 
-  const history = useHistory()
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const handleManage = () => {
+    dispatch({ type: 'ADMIN_SET_INST', payload: {id: i.id} })
+    history.push('/manageAccounts')
+  }
 
   return (
     <div>
-      <button onClick={() => {history.push('/manageAccounts')}}>Manage Users</button>
+      <p>i.id:{JSON.stringify(i.id)}</p>
+      <button onClick={() => handleManage()}>Manage Users</button>
       <button>Export</button>
       <h2>{heading}</h2>
       <h3><span>{i.name}<br/>
