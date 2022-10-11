@@ -17,14 +17,32 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [patientModitId])
     .then(response => {
         console.log('heyo',response.rows);
-        let patientDataArray = response.rows
-        res.send(patientDataArray[patientDataArray.length - 1])
+        res.send(response.rows)
         // patientDataArray is the array from the DB with all of that patient's entries
         // this sends back the last entry in the array, which should be the newest entry
     })
     .catch(err => {
         console.log(err);
         res.sendStatus(500)
+    })
+})
+
+router.get('/avgData/:id', rejectUnauthenticated, (req, res) => {
+    let patientModitId = Number(req.params.id)
+    console.log(patientModitId);
+
+    const queryText = `
+    SELECT AVG("proportionOfGazeTimeOnDrugs") AS "drugs", AVG("proportionOfGazeTimeOnNonDrugs") AS "noDrugs", AVG("proportionOfGazeTimeOnBack") AS "back"
+    FROM "session" WHERE "modit_id" = $1;
+    `;
+
+    pool.query(queryText, [patientModitId])
+    .then(response => {
+        res.send(response.rows)
+    })
+    .catch(err => {
+        console.log(err);
+        res.sendStatus(200);
     })
 })
 
