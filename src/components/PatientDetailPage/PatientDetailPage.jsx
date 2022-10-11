@@ -22,7 +22,7 @@ function PatientDetail() {
   const processedData = useSelector((store) => store.patientData.recentProcessedData)
   // console.log(processedData);
   // console.log(patients);
-  
+
 
 
   // //contains the id of the patient selected in the dropdown menu
@@ -96,22 +96,33 @@ function PatientDetail() {
         </div>
       </div>
       <br />
+
+
       <div className="exportBtnDiv">
         <button onClick={() => exportJsonData()}>Export Data</button>
       </div>
-      <div>
-        {/* {processedData && processedData.is_active === true && JSON.stringify(processedData)} */}
+
+
+      {/* {processedData && processedData.is_active === true && JSON.stringify(processedData)} */}
+<div id='tester'>
+<div className='filler'></div>
+      <div id='chartWrapper'>
+        <div><p>hello</p></div>
         <div>
-          <div id='chartWrapper'>
           {processedData && processedData.is_active === true && <PieChart1 />}
-          {processedData && processedData.is_active === true && <PieChart2 />}
-          </div>
-
-
         </div>
-      </div >
-
+        <div className='filler'></div>
+        <div className="chartRight">
+          {processedData && processedData.is_active === true && <PieChart2 />}
+        </div>
+        <div><p>hello</p></div>
+      </div>
+      <div className='filler'></div>
+      </div>
     </div>
+
+
+
   );
 
 }
