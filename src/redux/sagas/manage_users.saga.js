@@ -32,13 +32,19 @@ function* adminSetInst(action) { // When admin clicks Manage Users on an institu
     }
 }
 
-
+function* adminClearInst() {
+    try {
+        yield axios.put('/api/manageAccounts/admin_clear_inst_id')
+    } catch (err) {
+        console.error('admin clear inst', err)
+    }
+}
 
 function* manageUsersSaga() {
     yield takeLatest('GET_USERS', getUsers)
     yield takeLatest('SET/REMOVE_HEAD_RESEARCHER', changeHeadResearcher)
     yield takeLatest('ADMIN_SET_INST', adminSetInst)
-
+    yield takeLatest('ADMIN_CLEAR_INST', adminClearInst)
 }
 
 export default manageUsersSaga;
