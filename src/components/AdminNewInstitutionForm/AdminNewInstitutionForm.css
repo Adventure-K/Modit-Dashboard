@@ -1,0 +1,43 @@
+.displayContainer {
+    margin-left: 100px;
+    margin-right: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.heading {
+    text-align: center;
+}
+
+/* .inputsContainer {
+    display: flex;
+
+} */
+
+.inputsLeft {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputsRight {
+    display: flex;
+    flex-direction: column;
+}
+
+.adminInput {
+    width: 225px;
+}
+
+.btnDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.noteDiv {
+ display: flex;
+ justify-content: space-between;
+}
+
+.newInstNote {
+    width: 600px;
+}
