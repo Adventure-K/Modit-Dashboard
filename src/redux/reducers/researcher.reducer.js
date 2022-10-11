@@ -18,10 +18,20 @@ const researcherReducer = (state = [], action) => {
         return state;
     }
   };
+
+  const aggregateResearcherData = (state = {}, action) => {
+    switch (action.type) {
+      case 'SET_AGGREGATE_DATA':
+        return action.payload;
+      default:
+        return state;
+    }
+  }
   
   // user will be on the redux state at:
   // state.user
   export default combineReducers({
     researcherReducer,
     researcherInstReducer,
+    aggregateResearcherData
   });

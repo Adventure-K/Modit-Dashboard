@@ -29,15 +29,13 @@ router.get('/clinicians', rejectUnauthenticated, rejectUnauthorized1,(req, res) 
 // this GET route is to get all clinicians associated with a researcher and institution
 router.get('/teamData', rejectUnauthenticated, rejectUnauthorized1,(req, res) => {
   const query = `
-    SELECT "patient".username, "patient".clinician_id, "patient".first_name, "patient".last_name, "session_data".*, "session".* FROM "session_data"
-    JOIN "session"
-    ON "session_data".session_id = "session".id
+    SELECT AVG("proportionOfGazeTimeOnDrugs") AS "drugs", AVG("proportionOfGazeTimeOnNonDrugs") AS "noDrugs", AVG("proportionOfGazeTimeOnBack") AS "back" FROM "session"
     JOIN "patient"
-    ON "session".modit_id = "patient".id
+    ON "patient".modit_id = "session".modit_id
     JOIN "user"
-    ON "patient".clinician_id = "user".id
-    ;`;
-    pool.query(query)
+    ON "user".id = "patient".clinician_id
+    WHERE "user".inst_id = $1;`;
+    pool.query(query, [req.user.inst_id])
       .then(result => {
         res.send(result.rows);
       })
