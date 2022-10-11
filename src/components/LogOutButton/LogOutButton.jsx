@@ -7,8 +7,10 @@ function LogOutButton(props) {
   const history = useHistory()
 
   const logOut = () => {    
-    history.push('/login')
-    dispatch({ type: 'LOGOUT' })    
+    dispatch({ 
+      type: 'LOGOUT',
+      callback: () => history.push('/login')
+    })    
   }
 
   return (
