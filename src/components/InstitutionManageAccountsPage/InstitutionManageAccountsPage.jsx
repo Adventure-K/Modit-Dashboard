@@ -13,6 +13,8 @@ function InstitutionManageAccountsPage() {
 
   //this variable contains an array of all users within the organization of the logged-in user
   const users = useSelector((store) => store.usersToManage);
+  const loggedInUser = useSelector((store) => store.user.userReducer);
+
 
   //On page load, "GET_USERS" triggers the getUsers() function in the manage_users.saga file. It ultimately stores all users attached to the institution of the logged in user in the "users" variable (above)
   useEffect(() => {
@@ -66,106 +68,122 @@ function InstitutionManageAccountsPage() {
     })
   }
 
+
   return (
-    <div className="displayDiv">
-      <div className="awaitingApprovalDiv">
-        <h3>Waiting for Approval</h3>
-        {users.map(user => {
-          if (user.is_approved === false) {
-            return (
-              <div>
-                <p><span><button onClick={() => (deleteRequest(user.id))}>Delete</button></span><span><button onClick={() => (approveRequest(user.id))}>Approve</button></span>{user.first_name} {user.last_name}</p>
-              </div>
-            )
-          }
-        })}
-      </div>
+    <>
 
-      {/* if there is a head researcher assigned to this institution, this block of code runs */}
-      {headResearcher ? <>
-        <div className="researchersDiv">
-          <h3>Researchers</h3>
+      < div className="displayDiv" >
+        <div className="awaitingApprovalDiv">
+          <h3>Waiting for Approval</h3>
           {users.map(user => {
-            if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
+            if (user.is_approved === false && loggedInUser.user_level == 2) {
               return (
-
-                <div >
-                  <p>
-                    <span onClick={() => (toUserDetails(user.id))}>
-                      {user.first_name} {user.last_name}
-                    </span>
-                    <span>
-                      {user.user_level == 2 ? <button onClick={() => promoteUser(user.id, user.user_level)}>Demote</button> : <></>}
-                    </span>
-                  </p>
-
+                <div>
+                  <p><span><button onClick={() => (deleteRequest(user.id))}>Delete</button></span><span><button onClick={() => (approveRequest(user.id))}>Approve</button></span>{user.first_name} {user.last_name}</p>
                 </div>
               )
+            } else if (user.is_approved === false && loggedInUser.user_level == 3) {
+              return (
+                <div>
+                  <p>{user.first_name} {user.last_name}</p>
+                </div>
+
+              )
             }
-          })
-          }
-        </div>
-        <div className="cliniciansDiv">
-          <h3>Clinicians</h3>
-          {
-            users.map(user => {
-              if (user.is_approved === true && user.user_level === 0) {
-                return (
-                  <div onClick={() => (toUserDetails(user.id))}>
-                    <p>{user.first_name} {user.last_name}</p>
-                  </div>
-                )
-              }
-            })
-          }
+          })}
+
+
         </div>
 
-      </> :
-        // if there is no research head, this block of code runs
-        <>
-          <div className="researchersDiv">
-            <h3>Researchers</h3>
-            {users.map(user => {
-              if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
-                return (
-
-                  <div >
-                    <p>
-                      <span onClick={() => (toUserDetails(user.id))}>
-                        {user.first_name} {user.last_name}
-                      </span>
-                      <span>
-                        {user.user_level == 1 ? <button onClick={() => promoteUser(user.id, user.user_level)}>Promote</button> : <></>}
-                      </span>
-                    </p>
-
-                  </div>
-                )
-              }
-            })
-            }
-          </div>
-          <div className="cliniciansDiv">
-            <h3>Clinicians</h3>
-            {
-              users.map(user => {
-                if (user.is_approved === true && user.user_level === 0) {
+        {/* if there is a head researcher assigned to this institution, this block of code runs */}
+        {
+          headResearcher ? <>
+            <div className="researchersDiv">
+              <h3>Researchers</h3>
+              {users.map(user => {
+                if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
                   return (
-                    <div onClick={() => (toUserDetails(user.id))}>
-                      <p>{user.first_name} {user.last_name}</p>
+
+                    <div >
+                      <p>
+                        <span onClick={() => (toUserDetails(user.id))}>
+                          {user.first_name} {user.last_name}
+                        </span>
+                        <span>
+                          {user.user_level == 2 && loggedInUser.user_level == 3 ? <button onClick={() => promoteUser(user.id, user.user_level)}>Demote</button> : <></>}
+                        </span>
+                      </p>
+
                     </div>
                   )
                 }
               })
-            }
-          </div>
-        </>}
+              }
+            </div>
+            <div className="cliniciansDiv">
+              <h3>Clinicians</h3>
+              {
+                users.map(user => {
+                  if (user.is_approved === true && user.user_level === 0) {
+                    return (
+                      <div onClick={() => (toUserDetails(user.id))}>
+                        <p>{user.first_name} {user.last_name}</p>
+                      </div>
+                    )
+                  }
+                })
+              }
+            </div>
 
-      {/* {JSON.stringify(users)} */}
+          </> :
+            // if there is no research head, this block of code runs
+            <>
+              <div className="researchersDiv">
+                <h3>Researchers</h3>
+                {users.map(user => {
+                  if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
+                    return (
 
-    </div>
+                      <div >
+                        <p>
+                          <span onClick={() => (toUserDetails(user.id))}>
+                            {user.first_name} {user.last_name}
+                          </span>
+                          <span>
+                            {user.user_level == 1 && loggedInUser.user_level == 3 ? <button onClick={() => promoteUser(user.id, user.user_level)}>Promote</button> : <></>}
+                          </span>
+                        </p>
 
+                      </div>
+                    )
+                  }
+                })
+                }
+              </div>
+              <div className="cliniciansDiv">
+                <h3>Clinicians</h3>
+                {
+                  users.map(user => {
+                    if (user.is_approved === true && user.user_level === 0) {
+                      return (
+                        <div onClick={() => (toUserDetails(user.id))}>
+                          <p>{user.first_name} {user.last_name}</p>
+                        </div>
+                      )
+                    }
+                  })
+                }
+              </div>
+            </>
+        }
+
+        {/* {JSON.stringify(users)} */}
+        {JSON.stringify(loggedInUser)}
+
+      </div >
+    </>
   );
+
 }
 
 export default InstitutionManageAccountsPage;
