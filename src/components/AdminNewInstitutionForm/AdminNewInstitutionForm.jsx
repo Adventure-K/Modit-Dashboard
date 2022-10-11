@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import './AdminNewInstitutionForm.css';
+import './AdminNewInstitutionForm.css'
 
 function AdminNewInstitutionForm() {
   const store = useSelector((store) => store);

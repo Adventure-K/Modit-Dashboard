@@ -51,7 +51,7 @@ const PieChart = () => {
     useEffect(() => {
 
             setChartData({
-                labels: ['% time on drugs', '% time on non drugs ', '% time on back'],
+                labels: ['% gaze on trigger', '% gaze on control', '% gaze on back'],
                 datasets: [
                     {
                         label: "Test data",
@@ -82,7 +82,7 @@ const PieChart = () => {
 
                 plugins: {
                     legend: {
-                        position: 'top'
+                        position: 'bottom'
                     },
                     title: {
                         display: true,

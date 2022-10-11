@@ -40,8 +40,8 @@ function* getTeamData() {
     // get aggregate data for research team from the DB and stores in patient reducer redux state
     try {
         const teamData = yield axios.get('/api/researcher/teamData');
-        console.log('get aggregate data for researcher view:', teamData.data);
-        yield put({ type: 'SET_PATIENT_DATA', payload: teamData.data });
+        console.log('get aggregate data for researcher view:', teamData.data[0]);
+        yield put({ type: 'SET_AGGREGATE_DATA', payload: teamData.data });
     } catch {
         console.log('fetch researcher team data saga error');
     }

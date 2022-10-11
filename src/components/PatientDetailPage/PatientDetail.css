@@ -20,7 +20,7 @@
     margin-left: 15px;
 }
 
-#chartWrapper {
+.chartWrapper {
     display: flex;
 justify-content: space-around;
     width: 400px;
