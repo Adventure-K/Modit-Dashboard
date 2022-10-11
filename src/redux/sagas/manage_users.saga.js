@@ -15,6 +15,7 @@ function* getUsers() {
 
 // this function is triggered when a user clicks the "promote" or "demote" button on the InstitutionManageAccountsPage. It sends the clicked-on user's id and user level to the router, where a query is run to change the user's user level. When the server responds with a 200 status, the getUsers function is triggered which refreshes the page to reflect the change. 
 function* changeHeadResearcher(action) {
+    console.log("in changeHeadResearcher")
     try {
         yield axios.put('/api/manageAccounts', action.payload);
         yield put({ type: 'GET_USERS' })
