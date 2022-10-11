@@ -27,4 +27,23 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
+router.get('/avgData/:id', rejectUnauthenticated, (req, res) => {
+    let patientModitId = Number(req.params.id)
+    console.log(patientModitId);
+
+    const queryText = `
+    SELECT AVG("proportionOfGazeTimeOnDrugs") AS "drugs", AVG("proportionOfGazeTimeOnNonDrugs") AS "noDrugs", AVG("proportionOfGazeTimeOnBack") AS "back"
+    FROM "session" WHERE "modit_id" = $1;
+    `;
+
+    pool.query(queryText, [patientModitId])
+    .then(response => {
+        res.send(response.rows)
+    })
+    .catch(err => {
+        console.log(err);
+        res.sendStatus(200);
+    })
+})
+
 module.exports = router;

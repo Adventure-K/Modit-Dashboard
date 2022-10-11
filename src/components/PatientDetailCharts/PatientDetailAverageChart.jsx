@@ -33,13 +33,15 @@ const PieChart = () => {
 
     const dispatch = useDispatch()
     // const patientDetails = useSelector((store) => store.patientData.patientData)
-    const processedData = useSelector((store) => store.patientData.allPatientProcessedData)
-    console.log(processedData);
-    
-    {processedData.map(dataEntry => {
-        {dataEntry.proportionOfGazeTimeOnDrugs}
-    })}
-   
+    const averageProcessedData = useSelector((store) => store.patientData.averagePatientProcessedData)
+    console.log(averageProcessedData);
+    let num1 = (averageProcessedData.drugs) * 100
+    let num2 = (averageProcessedData.noDrugs) * 100
+    let num3 = (averageProcessedData.back) * 100 
+    console.log(averageProcessedData.drugs);
+
+
+
 
 
     const [chartData, setChartData] = useState({
@@ -55,13 +57,13 @@ const PieChart = () => {
             datasets: [
                 {
                     label: "Test data",
-                    data: [], 
+                    data: [num1, num2, num3],
                     backgroundColor: ['rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
                         // 'rgba(75, 192, 192, 0.2)',
                         // 'rgba(153, 102, 255, 0.2)'
-                ],
+                    ],
 
                     borderColor: ['rgba(255, 99, 132, 1)',
                         'rgba(54, 162, 235, 1)',
@@ -76,37 +78,41 @@ const PieChart = () => {
                 }
             ]
         })
-            setChartOptions({ 
-                responsive: true,
-                maintainAspectRatio: false,
+        setChartOptions({
+            responsive: true,
+            maintainAspectRatio: false,
 
-                plugins: {
-                    legend: {
-                        position: 'top'
-                    },
-                    title: {
-                        display: true,
-                        text: "Data averages"
-                    },
-                    subtitle: {
-                        display: true,
-                        text: 'CATEGORY'
-                    }
+            plugins: {
+                legend: {
+                    position: 'top'
+                },
+                title: {
+                    display: true,
+                    text: "Data averages"
+                },
+                subtitle: {
+                    display: true,
+                    text: 'CATEGORY'
                 }
-            })
-        
-    }, []) 
+            }
+        })
+
+    }, [])
 
     //^^^ all data for creating the chart
-    
+
 
     return (
         <><></>
 
-                <div>
-                    <Pie options={chartOptions} data={chartData} />
-                </div>
-            
+            <div>
+                <Pie options={chartOptions} data={chartData} />
+            </div>
+            {/* {processedData.map(dataEntry => {
+                return (
+                    <p>1</p>
+                )
+            })} */}
 
         </>
 

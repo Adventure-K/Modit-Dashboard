@@ -15,10 +15,12 @@ function* fetchPatientData(action) {
 
 function* fetchPatientAllData(action) {
     try {
-        yield put({type: 'RESET_STORE'})
+        yield put({type: 'RESET_STORE'})// resets the store for the patient recent data
         let response = yield axios.get(`/api/data/${action.payload}`)
+        let result = yield axios.get(`/api/data/avgData/${action.payload}`)
         // console.log(response.data);
-        yield put({type: 'STORE_ALL_PROCESSED_DATA', payload: response.data})// for average data chart display
+        // console.log(result.data);
+        yield put({type: 'STORE_AVERAGE_PROCESSED_DATA', payload: result.data[0]})// for average data chart display
         yield put({type: 'STORE_RECENT_PROCESSED_DATA', payload: response.data[response.data.length - 1]})// for most recent data chart display
 
     }

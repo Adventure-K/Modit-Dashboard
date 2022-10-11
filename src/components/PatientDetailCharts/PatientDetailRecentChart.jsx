@@ -39,8 +39,7 @@ const PieChart = () => {
     let num1 = (processedData.proportionOfGazeTimeOnDrugs) * 100 
     let num2 = (processedData.proportionOfGazeTimeOnNonDrugs) * 100 
     let num3 = (processedData.proportionOfGazeTimeOnBack) * 100 
-    // let num4 = (processedData.proportionOfGazeTimeOnDrugsNoBack) * 100 
-    // let num5 = (processedData.proportionOfGazeTimeOnNonDrugsNoBack) * 100 
+
 
 
     const [chartData, setChartData] = useState({
