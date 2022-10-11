@@ -8,6 +8,7 @@ const router = express.Router();
 
 
 router.get('/', rejectUnauthenticated, rejectUnauthorized3, (req, res) => { // Get all institutions for the admin list
+    console.log('in institution get')
     const query = `
         SELECT "institution".*, "user".first_name, "user".last_name, "user".inst_id, "user".user_level FROM "institution"
         LEFT OUTER JOIN "user"
@@ -32,7 +33,8 @@ router.post('/', rejectUnauthenticated, rejectUnauthorized3, (req, res) => { // 
     const values = [i.name, i.street_address, i.city, i.state, i.zip];
     pool.query(query, values)
         .then(result => {
-            res.sendStatus(201)})
+            res.sendStatus(201)
+        })
         .catch(err => {
             console.log('Institution POST', err);
             res.sendStatus(500);
