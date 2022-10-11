@@ -35,9 +35,9 @@ function ResearcherTeamView() {
     dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId})
   }
 
-  const toAddPatientForm = () => {
-    history.push('/addPatientForm')
-  }
+  // const toAddPatientForm = () => {
+  //   history.push('/addPatientForm')
+  // }
 
   const deletePatient = () => {
     console.log('patient id', patientData.id)
@@ -92,7 +92,7 @@ function ResearcherTeamView() {
         </div>
 
         <div className="patientDetailBtns">
-          <button className="patientDetailBtns" onClick={toAddPatientForm}>New Patient</button>
+          {/* <button className="patientDetailBtns" onClick={toAddPatientForm}>New Patient</button> */}
           <button className="deletePatientBtn" onClick={deletePatient}>Delete Patient</button>
         </div>
       </div>
