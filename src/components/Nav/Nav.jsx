@@ -10,8 +10,11 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/home">
+
         <h2 className="nav-title">Neurotype Inc.</h2>
+
       </Link>
+      <p><span>{user.id} - {user.username} | level: {user.user_level} | inst: {user.inst_id}</span></p>
       <div>
         {/* If no user is logged in, show these links */}
         {!user.id && (

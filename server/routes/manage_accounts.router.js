@@ -68,4 +68,20 @@ router.put('/', rejectUnauthenticated, rejectUnauthorized3, async (req, res) => 
   }
 });
 
+// Sets logged in admin's inst_id to id of selected institution in order to manage users
+router.put('/admin_inst_id', rejectUnauthenticated, rejectUnauthorized3, (req, res) => {
+  console.log('admin_inst_id req.body:', req.body)
+  const query = `
+  UPDATE "user" SET "inst_id" = $1
+  WHERE "user".id = $2;`;
+  const values = [req.body.id, req.user.id]
+  pool.query(query, values)
+  .then(result => {
+    res.sendStatus(200);
+  }).catch(err => {
+    console.log('admin inst_id set', err);
+    res.sendStatus(500);
+  })
+});
+
 module.exports = router;

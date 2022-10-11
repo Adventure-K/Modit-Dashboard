@@ -53,11 +53,15 @@ function PatientDetail() {
 
   //this function sends the id of the selected user to be deleted to the deactivatePatient() function in the patient.saga file. It then calls getPatientData() which will clear the display until a new patient is selected.
   const deletePatient = () => {
-    dispatch({
-      type: 'DELETE_PATIENT',
-      payload: processedData.id
-    })
-    getPatientData();
+    if (confirm('This will render patient\'s data inaccessible. Contact an admin to restore.')) {
+      dispatch({
+        type: 'DELETE_PATIENT',
+        payload: processedData.id
+      })
+      getPatientData();
+    } else {
+      return;
+    }
   }
 
 
@@ -101,6 +105,7 @@ function PatientDetail() {
       <div className="exportBtnDiv">
         <button onClick={() => exportJsonData()}>Export Data</button>
       </div>
+
 
 
       {/* {processedData && processedData.is_active === true && JSON.stringify(processedData)} */}
