@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import csvDownload from 'json-to-csv-export'
 import './ResearcherTeamView.css';
+import PieChart1 from '../PatientDetailCharts/PatientDetailRecentChart';
+import PieChart2 from '../PatientDetailCharts/PatientDetailAverageChart';
+
 
 
 function ResearcherTeamView() {
@@ -12,28 +15,30 @@ function ResearcherTeamView() {
   const params = useParams()
   const patients = useSelector((store) => store.patients)
   const patientData = useSelector((store) => store.patientData.patientData)
-  const jsonData = useSelector((store) => store.patientData.processedData)
-  console.log(jsonData);
-  console.log(patientData);
+  const processedData = useSelector((store) => store.patientData.recentProcessedData)
+
+  // console.log(jsonData);
+  // console.log(patientData);
   
   const [patientId, setPatientId] = useState(' ')
 
-  const dataToConvert = {
-    data: jsonData,
-    filename: 'calculated_data',
-    delimiter: ',',
-    headers: ['ID', 'Session ID', '% time on drugs', '% time on controlled', '% time on neither', '% time on drugs no back', '% time non drugs no back']
-  }
-
-  // const getPatientData = () => {
-  //   event.preventDefault()
-  //   console.log('getPatientData', patientId)
-  //   dispatch({
-  //     type: 'FETCH_PATIENT_DATA',
-  //     payload: patientId,
-  //   })
-  //   dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId})
+  // const dataToConvert = {
+  //   data: jsonData,
+  //   filename: 'calculated_data',
+  //   delimiter: ',',
+  //   headers: ['ID', 'Session ID', '% time on drugs', '% time on controlled', '% time on neither', '% time on drugs no back', '% time non drugs no back']
   // }
+
+  const getPatientData = () => {
+    event.preventDefault();
+    console.log("getPatientData", patientId);
+
+    dispatch({
+      type: 'FETCH_PATIENT_ALL_DATA',
+      payload: patientId
+    })
+    // dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId })
+  }
 
   // const toAddPatientForm = () => {
   //   history.push('/addPatientForm')
@@ -81,7 +86,7 @@ function ResearcherTeamView() {
               // loops over all the institutions and displays them as options
               if (patient.is_active === true) {
                 return (
-                  <option key={patient.id} value={patient.id}>
+                  <option key={patient.id} value={patient.modit_id}>
                     {patient.first_name} {patient.last_name}
                   </option>
                 )
@@ -96,13 +101,27 @@ function ResearcherTeamView() {
           <button className="deletePatientBtn" onClick={deletePatient}>Delete Patient</button>
         </div>
       </div>
+
       <div className="exportBtnDiv">
         <button onClick={() => exportJsonData()}>Export</button>
       </div>
-      {/* {JSON.stringify(patients)} */}
-      <div>
-        {/* {conditionalData} */}
-        {patientData.is_active === true && JSON.stringify(patientData)}
+
+
+      <div className='tester'>
+        {/* {patientData.is_active === true && JSON.stringify(patientData)} */}
+        <div className='filler'></div>
+      <div className='chartWrapper'>
+        <div></div>
+        <div>
+          {processedData && processedData.is_active === true && <PieChart1 />}
+        </div>
+        <div className='filler'></div>
+        <div className="chartRight">
+          {processedData && processedData.is_active === true && <PieChart2 />}
+        </div>
+        <div></div>
+      </div>
+      <div className='filler'></div>
       </div>
     </div>
   )

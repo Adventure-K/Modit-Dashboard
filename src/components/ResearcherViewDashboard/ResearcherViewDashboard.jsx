@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import PieChart from './ResearcherViewAggregateChart';
+import csvDownload from 'json-to-csv-export'
 
 import './ResearcherViewDashboard.css'
 
@@ -23,18 +24,24 @@ function ResearcherView(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-
-
-  // calls the researcher saga to run through the GET for the clinicians on researcher team
-
   useEffect(() => {
-    dispatch({ type: 'FETCH_CLINICIANS' });
+    dispatch({ type: 'CLEAR_PROCESSED_DATA_REDUCERS' });
+    dispatch({ type: 'FETCH_CLINICIANS' });// calls the researcher saga to run through the GET for the clinicians in the same institution
     dispatch({ type: 'FETCH_TEAM_DATA' });
-    dispatch({ type: 'FETCH_RESEARCHER_INST' });
+    dispatch({ type: 'FETCH_RESEARCHER_INST' });// calls the researcher saga to run through the GET for the researcher's institution
   }, []);
-  // calls the researcher saga to run through the GET for the researcher's institution
-  
-  console.log(institution);
+
+  const dataToConvert = {
+    data: [averageAggregateData],
+    filename: 'patient_aggregate_data',
+    delimiter: ',',
+    headers: ['% time on drugs', '% time on controlled', '% time on neither']
+  }
+
+  const exportJsonData = () => {
+    csvDownload(dataToConvert)
+  }
+
 
   const clinicianDetails = (clinician) => {
     console.log('clicking on clinician for details', clinician.id);
@@ -45,7 +52,6 @@ function ResearcherView(props) {
     <div className="pageContainer">
       <h1 className='centeredHeaders'>{heading}</h1>
       <h4>Institution: <span className="institutionName">{institution.name}</span></h4>
-      {/* <h2>Clinicians</h2> */}
       <div className="displayContainer">
         <div className="cliniciansList">
           <h4>Clinicians</h4>

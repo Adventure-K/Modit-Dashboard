@@ -109,7 +109,7 @@ function PatientDetail() {
 
 
       {/* {processedData && processedData.is_active === true && JSON.stringify(processedData)} */}
-<div id='tester'>
+<div className='tester'>
 <div className='filler'></div>
       <div className='chartWrapper'>
         <div></div>
