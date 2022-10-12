@@ -14,22 +14,31 @@ function InstitutionViewDashboard(props) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleManage = () => { // Clears admin user's inst_id and sets it to the institution being viewed. This is used to allow the admin to manage users.
-    dispatch({ type: 'ADMIN_CLEAR_INST' });
-    dispatch({ type: 'ADMIN_SET_INST', payload: {id: i.id} })
-    history.push('/manageAccounts')
-  }
+  useEffect(() => {
+    // dispatch({ type: 'ADMIN_CLEAR_INST' });
+    dispatch({
+      type: 'ACTIVE_INSTITUTION',
+      payload: i
+    });
+  }, [])
+
+  // const handleManage = () => { // Clears admin user's inst_id and sets it to the institution being viewed. This is used to allow the admin to manage users.
+  //   dispatch({ type: 'ADMIN_SET_INST', payload: { id: i.id } })
+  //   history.push(`/manageAccounts/${i.id}`)
+  // }
 
   return (
     <div>
-      <p>i.id:{JSON.stringify(i.id)}</p>
-      <button onClick={() => handleManage()}>Manage Users</button>
-      <button>Export</button>
-      <h2>{heading}</h2>
-      <h3><span>{i.name}<br/>
-      {i.street_address}, {i.city}, {i.state} {i.zip}</span></h3>
-      <h4>Research Head: {rh}</h4>
-      <p>{JSON.stringify(i)}</p>
+      {i.id &&
+        <>
+          <button onClick={() => history.push(`/manageAccountsAdmin/${i.id}`)}>Manage Users</button>
+          <button>Export</button>
+          <h2>{heading}</h2>
+          <h3><span>{i.name}<br />
+            {i.street_address}, {i.city}, {i.state} {i.zip}</span></h3>
+          {i.last_name && <h4>Research Head: {rh}</h4>}
+        </>
+      }
     </div>
   );
 }
