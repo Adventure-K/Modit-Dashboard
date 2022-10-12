@@ -19,14 +19,14 @@ function InstitutionManageAccountsPageAdmin() {
   // Admins may view this page for any institution, so the inst_id is retrieved from the URL instead of the logged in user's inst_id as with a research head.
   if (loggedInUser.user_level >= 3) {
     useEffect(() => {
-      dispatch({ 
+      dispatch({
         type: 'GET_USERS_ADMIN',
-        payload: i.id 
+        payload: i.id
       });
     }, []);
   } else {
     useEffect(() => {
-      dispatch({ 
+      dispatch({
         type: 'GET_USERS'
       });
     }, [])
