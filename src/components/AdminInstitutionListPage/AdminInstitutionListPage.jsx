@@ -19,14 +19,6 @@ function AdminInstitutionListPage(props) {
   const [heading, setHeading] = useState('Research Institutions');
   console.log('Institutions from store:', institutions)
 
-  // const handleClick = () => {
-  //   history.push(`/institutionViewDashboard/${i.id}`)
-  //   dispatch({
-  //     type: 'ACTIVE_INSTITUTION',
-  //     payload: i
-  //   });
-  // }
-
   return (
     <div>
       <h2>{heading}</h2>

@@ -12,14 +12,13 @@ CREATE TABLE "institution" (
 	"name" VARCHAR(255) NOT NULL,
 	"street_address" VARCHAR(255),
 	"city" VARCHAR(255),
-	"state" VARCHAR(50),
+	"state" VARCHAR(20),
 	"zip" INT
-	"rh_id" INT REFERENCES "user" -- user ID of institution's research head. Used only to display on the institution list.
 );
 
 CREATE TABLE "user" (
 	"id" SERIAL PRIMARY KEY,
-	"username" VARCHAR(255) NOT NULL,
+	"username" VARCHAR(255) UNIQUE NOT NULL,
 	"password" VARCHAR(255),
 	"first_name" VARCHAR(255) NOT NULL,
 	"last_name" VARCHAR(255) NOT NULL,
@@ -29,6 +28,9 @@ CREATE TABLE "user" (
 	"researcher_id" INT REFERENCES "user", -- Meant to assign clinicians to a given researcher
 	"is_active" BOOLEAN DEFAULT true
 );
+
+ALTER TABLE "institution" ADD COLUMN "rh_id" INT REFERENCES "user";
+-- user ID of institution's research head. Used only to display on the institution list.
 
 CREATE TABLE "patient" (
 	"id" SERIAL PRIMARY KEY,
@@ -41,7 +43,7 @@ CREATE TABLE "patient" (
 );
 
 CREATE TABLE "session" (
-	"id" SERIAL PRIMARY KEY,
+	"session_id" SERIAL PRIMARY KEY,
 	"modit_id" INT NOT NULL REFERENCES "patient" (modit_id), -- Links to "patient".modit_id
 	"proportionOfGazeTimeOnDrugs" NUMERIC(3, 2),
 	"proportionOfGazeTimeOnNonDrugs" NUMERIC(3, 2),
@@ -53,29 +55,39 @@ CREATE TABLE "session" (
 INSERT INTO "institution" ("name", "street_address", "city", "state", "zip")
 VALUES 	('Hazelden Betty Ford Foundation', '15251 Pleasant Valley Road', 'Center City', 'MN', '55102'),
 		('Minnesota Adult & Teen Challenge', '740 E 24th St', 'Minneapolis', 'MN', '55404'),
-		('Neurotype', '1234 Main St', 'Minneapolis', 'MN', '55404')
-;
+		('Hennepin Healthcare', '701 Park Ave', 'Minneapolis', 'MN', '55415');
 
 INSERT INTO "user" ("username", "first_name", "last_name", "inst_id", "user_level", "is_approved", "is_active")
-VALUES 	('loblaw@loblaw.law', 'Bob', 'Loblaw', '1', '1', TRUE, TRUE),
-		('stan@mntc.fake', 'Stan', 'Jones', '2', '0', TRUE, TRUE),
-		('admin@ad.min', 'Scott', 'Admin', '3', '3', TRUE, TRUE),
-		('authority@mntc.fake',	'Beverly', 'Star', '2',	'2', FALSE,	TRUE),
-		('researchhead@loblaw.law',	'Dave',	'Loblaw', '1',	'2', FALSE,	TRUE),
-		('level2@zds.com', 'Jamie', 'Wilson', '3', '2',	FALSE, TRUE),
-		('Barryb@axios.net', 'John', 'Spartan',	'3', '2', FALSE, TRUE),
-		('akane', 'King of', 'All Cosmos', '3',	'3', TRUE,	TRUE);
+VALUES 	('jr1021@gmail.com', 'John', 'Rowles', '1', '2', TRUE, TRUE),
+		('stanjones@hotmail.com', 'Stan', 'Ryan', '2', '2', TRUE, TRUE),
+		('research@hcmc.net', 'Sally', 'Rodriguez', '3', '1', TRUE, TRUE),
+		('lab3@hbff.org', 'Mike', 'Charles', '1', '0', TRUE, TRUE),
+		('sue001@mntc.org',	'Sue', 'Christensen', '2', '0', TRUE, TRUE),
+		('level2@zds.com', 'Jamie', 'Cox', '3', '0',FALSE, TRUE),
+		('logan@yahoo.net', 'Logan', 'Ricks', '1', '1', TRUE, TRUE),
+		('admin@neurotype.io', 'Scott', 'Burwell', NULL, '3', TRUE,	TRUE);
+		
+-- Go into institution table. Set rh_id of #1 to '1' and of #2 to '2' --
 		
 INSERT INTO "patient" ("modit_id", "clinician_id", "first_name", "last_name", "email", "is_active")
-VALUES 	('12345', '1', 'Mary', 'Mallon', 'marymallon@gmail.fake', true),
-		('12346', '1', 'Tom', 'Hanks', 'th@p2p.net', true),
-		('12347', '1', 'Jimbo', 'Frank', 'therehegoes@yahoo.com', true),
-		('12348', '1', 'Rip', 'Torn', 'mibceo@mib.gov', true),
-		('12349', '1', 'Bill', 'Musk', 'archtroll@forbes.fake', true);
+VALUES 	('12345', '4', 'Bob', 'Loblaw', 'lawblog@gmail.com', true),
+		('12346', '4', 'Tom', 'Hammond', 'th@p2p.net', true),
+		('12347', '5', 'Jim', 'Frank', 'therehegoes@yahoo.com', true),
+		('12348', '5', 'Rip', 'Torn', 'mibceo@mib.gov', true),
+		('12349', '6', 'Bill', 'Margrave', 'archbill@yahoo.com', true),
+		('12350', '6', 'Hank', 'Jones', 'hankeye@hotmail.com', true);
 
 INSERT INTO "session" ("modit_id", "proportionOfGazeTimeOnDrugs", "proportionOfGazeTimeOnNonDrugs", "proportionOfGazeTimeOnBack", "proportionOfGazeTimeOnDrugsNoBack", "proportionOfGazeTimeOnNonDrugsNoBack")
 VALUES 	('12345', '0.20', '0.20', '0.60', '0.50', '0.50'),
+		('12345', '0.35', '0.50', '0.15', '0.41', '0.59'),
 		('12346', '0.75', '0.15', '0.10', '0.83', '0.17'),
+		('12346', '0.50', '0.40', '0.10', '0.56', '0.44'),
+		('12347', '0.20', '0.20', '0.60', '0.50', '0.50'),
 		('12347', '0.66', '0.29', '0.05', '0.69', '0.31'),
 		('12348', '0.55', '0.20', '0.25', '0.73', '0.27'),
-		('12349', '0.80', '0.10', '0.10', '0.89', '0.11');
+		('12348', '0.75', '0.15', '0.10', '0.83', '0.17'),
+		('12349', '0.50', '0.40', '0.10', '0.56', '0.44'),
+		('12349', '0.80', '0.10', '0.10', '0.89', '0.11'),
+		('12350', '0.20', '0.20', '0.60', '0.50', '0.50'),
+		('12350', '0.80', '0.10', '0.10', '0.89', '0.11')
+;

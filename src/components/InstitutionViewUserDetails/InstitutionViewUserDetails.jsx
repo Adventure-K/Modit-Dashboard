@@ -91,7 +91,7 @@ function InstitutionViewUserDetails(props) {
             <p>{selectedUser.first_name} {selectedUser.last_name}</p>
             <p>{selectedUser.username}</p>
             <div className="resetForm">
-              <input type="text" onChange={(event) => handlePassChange(event)} placeholder="New Password" />
+              <input type="password" onChange={(event) => handlePassChange(event)} placeholder="New Password" />
               <div>
                 <button onClick={handleSubmit}>Submit</button>
                 <button onClick={handleEditMode}>Cancel</button>

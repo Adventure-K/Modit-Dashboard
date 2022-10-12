@@ -20,6 +20,7 @@ import AddPatientFormPage from '../AddPatientFormPage/AddPatientFormPage'
 import ResearcherViewDashboard from '../ResearcherViewDashboard/ResearcherViewDashboard'
 import InstitutionViewDashboard from '../InstitutionViewDashboard/InstitutionViewDashboard'
 import InstitutionManageAccountsPage from '../InstitutionManageAccountsPage/InstitutionManageAccountsPage'
+import InstitutionManageAccountsPageAdmin from '../InstitutionManageAccountsPageAdmin/InstitutionManageAccountsPageAdmin'
 import InstitutionViewUserDetails from '../InstitutionViewUserDetails/InstitutionViewUserDetails'
 import AdminInstitutionListPage from '../AdminInstitutionListPage/AdminInstitutionListPage'
 import AdminNewInstitutionForm from '../AdminNewInstitutionForm/AdminNewInstitutionForm'
@@ -201,10 +202,9 @@ function App() {
             exact
             path="/manageAccounts"
           >
-            {/* user.user_level >= 3 ? (
-              <InstitutionViewUserDetails />
-            ) : */}
-            {user.user_level >= 2 ? (
+            {user.user_level >= 3 ? (
+              <InstitutionManageAccountsPageAdmin />
+            ) : user.user_level == 2 ? (
               <InstitutionManageAccountsPage />
             ) : user.user_level >= 1 ? (
               <ResearcherViewDashboard />
@@ -276,6 +276,24 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/manageAccountsAdmin/:id"
+          >
+            {user.user_level >= 3 ? (
+              <InstitutionManageAccountsPageAdmin />
+            ) : user.user_level == 2 ? (
+              <InstitutionManageAccountsPage />
+            ) : user.user_level >= 1 ? (
+              <ResearcherViewDashboard />
+            ) : user.user_level === 0 ? (
+              <PatientDetailPage />
+            ) : (
+              <LandingPage />
+            )}
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. 
