@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import PieChart from './ResearcherViewAggregateChart';
 import csvDownload from 'json-to-csv-export'
 
@@ -18,17 +18,26 @@ function ResearcherView(props) {
   const institution = useSelector((store) => store.researcher.researcherInstReducer);
   const teamData = useSelector((store) => store.patientData);
   const averageAggregateData = useSelector((store) => store.researcher.aggregateResearcherData[0])
-
+  const loggedInUser = useSelector(store => store.user.userReducer)
 
   const [heading, setHeading] = useState('Researcher Dashboard');
   const dispatch = useDispatch();
   const history = useHistory();
+  const selectedUserInst = useParams();
+  console.log('selectedUserInst', selectedUserInst.id)
+  console.log('Logged-in user:', loggedInUser)
 
   useEffect(() => {
     dispatch({ type: 'CLEAR_PROCESSED_DATA_REDUCERS' });
-    dispatch({ type: 'FETCH_CLINICIANS' });// calls the researcher saga to run through the GET for the clinicians in the same institution
-    dispatch({ type: 'FETCH_TEAM_DATA' });
-    dispatch({ type: 'FETCH_RESEARCHER_INST' });// calls the researcher saga to run through the GET for the researcher's institution
+    if (loggedInUser.user_level <= 2) {
+      dispatch({ type: 'FETCH_RESEARCHER_INST' });// calls the researcher saga to run through the GET for the researcher's institution
+      dispatch({ type: 'FETCH_CLINICIANS' });// calls the researcher saga to run through the GET for the clinicians in the same institution
+      dispatch({ type: 'FETCH_TEAM_DATA' });
+    } else if (loggedInUser.user_level == 3) {
+      dispatch({ type: 'FETCH_RESEARCHER_INST_ADMIN', payload: selectedUserInst.id });
+      dispatch({ type: 'FETCH_CLINICIANS_ADMIN', payload: selectedUserInst.id });
+      dispatch({ type: 'FETCH_TEAM_DATA_ADMIN', payload: selectedUserInst.id });
+    }
   }, []);
 
   const dataToConvert = {
@@ -65,7 +74,7 @@ function ResearcherView(props) {
           {/* {JSON.stringify(teamData)} */}
           <button onClick={() => exportJsonData()}>Export</button>
           <div className='chartWrapper'>
-          {averageAggregateData && <PieChart />}
+            {averageAggregateData && <PieChart />}
           </div>
         </div>
       </div>

@@ -118,7 +118,7 @@ function InstitutionManageAccountsPageAdmin() {
                 if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
                   return (
 
-                    <div >
+                    <div key={user.id}>
                       <p>
                         <span onClick={() => (toUserDetails(user.id))}>
                           {user.first_name} {user.last_name}
@@ -140,7 +140,7 @@ function InstitutionManageAccountsPageAdmin() {
                 users.map(user => {
                   if (user.is_approved === true && user.user_level === 0) {
                     return (
-                      <div onClick={() => (toUserDetails(user.id))}>
+                      <div key={user.id} onClick={() => (toUserDetails(user.id))}>
                         <p>{user.first_name} {user.last_name}</p>
                       </div>
                     )
@@ -158,7 +158,7 @@ function InstitutionManageAccountsPageAdmin() {
                   if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
                     return (
 
-                      <div >
+                      <div key={user.id}>
                         <p>
                           <span onClick={() => (toUserDetails(user.id))}>
                             {user.first_name} {user.last_name}
@@ -180,7 +180,7 @@ function InstitutionManageAccountsPageAdmin() {
                   users.map(user => {
                     if (user.is_approved === true && user.user_level === 0) {
                       return (
-                        <div onClick={() => (toUserDetails(user.id))}>
+                        <div key={user.id} onClick={() => (toUserDetails(user.id))}>
                           <p>{user.first_name} {user.last_name}</p>
                         </div>
                       )
