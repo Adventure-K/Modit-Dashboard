@@ -15,7 +15,7 @@ function ResearcherTeamView() {
   const jsonData = useSelector((store) => store.patientData.processedData)
   console.log(jsonData);
   console.log(patientData);
-  
+
   const [patientId, setPatientId] = useState(' ')
 
   const dataToConvert = {
@@ -25,15 +25,15 @@ function ResearcherTeamView() {
     headers: ['ID', 'Session ID', '% time on drugs', '% time on controlled', '% time on neither', '% time on drugs no back', '% time non drugs no back']
   }
 
-  // const getPatientData = () => {
-  //   event.preventDefault()
-  //   console.log('getPatientData', patientId)
-  //   dispatch({
-  //     type: 'FETCH_PATIENT_DATA',
-  //     payload: patientId,
-  //   })
-  //   dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId})
-  // }
+  const getPatientData = () => {
+    event.preventDefault()
+    console.log('getPatientData', patientId)
+    dispatch({
+      type: 'FETCH_PATIENT_DATA',
+      payload: patientId,
+    })
+    dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId })
+  }
 
   // const toAddPatientForm = () => {
   //   history.push('/addPatientForm')
