@@ -25,19 +25,19 @@ function ResearcherTeamView() {
     headers: ['ID', 'Session ID', '% time on drugs', '% time on controlled', '% time on neither', '% time on drugs no back', '% time non drugs no back']
   }
 
-  const getPatientData = () => {
-    event.preventDefault()
-    console.log('getPatientData', patientId)
-    dispatch({
-      type: 'FETCH_PATIENT_DATA',
-      payload: patientId,
-    })
-    dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId})
-  }
+  // const getPatientData = () => {
+  //   event.preventDefault()
+  //   console.log('getPatientData', patientId)
+  //   dispatch({
+  //     type: 'FETCH_PATIENT_DATA',
+  //     payload: patientId,
+  //   })
+  //   dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId})
+  // }
 
-  const toAddPatientForm = () => {
-    history.push('/addPatientForm')
-  }
+  // const toAddPatientForm = () => {
+  //   history.push('/addPatientForm')
+  // }
 
   const deletePatient = () => {
     console.log('patient id', patientData.id)
@@ -92,7 +92,7 @@ function ResearcherTeamView() {
         </div>
 
         <div className="patientDetailBtns">
-          <button className="patientDetailBtns" onClick={toAddPatientForm}>New Patient</button>
+          {/* <button className="patientDetailBtns" onClick={toAddPatientForm}>New Patient</button> */}
           <button className="deletePatientBtn" onClick={deletePatient}>Delete Patient</button>
         </div>
       </div>

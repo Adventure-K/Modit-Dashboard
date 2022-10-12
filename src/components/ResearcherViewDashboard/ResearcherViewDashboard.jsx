@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import PieChart from './ResearcherViewAggregateChart';
 
 import './ResearcherViewDashboard.css'
 
@@ -15,6 +16,7 @@ function ResearcherView(props) {
   const clinicians = useSelector((store) => store.researcher.researcherReducer);
   const institution = useSelector((store) => store.researcher.researcherInstReducer);
   const teamData = useSelector((store) => store.patientData);
+  const averageAggregateData = useSelector((store) => store.researcher.aggregateResearcherData[0])
 
 
   const [heading, setHeading] = useState('Researcher Dashboard');
@@ -27,16 +29,11 @@ function ResearcherView(props) {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_CLINICIANS' });
-  }, []);
-
-  useEffect(() => {
     dispatch({ type: 'FETCH_TEAM_DATA' });
-  }, []);
-
-  // calls the researcher saga to run through the GET for the researcher's institution
-  useEffect(() => {
     dispatch({ type: 'FETCH_RESEARCHER_INST' });
   }, []);
+  // calls the researcher saga to run through the GET for the researcher's institution
+  
   console.log(institution);
 
   const clinicianDetails = (clinician) => {
@@ -59,8 +56,11 @@ function ResearcherView(props) {
           })}
         </div>
         <div className="chartDiv">
-          {JSON.stringify(teamData)}
+          {/* {JSON.stringify(teamData)} */}
           <button onClick={() => exportJsonData()}>Export</button>
+          <div className='chartWrapper'>
+          {averageAggregateData && <PieChart />}
+          </div>
         </div>
       </div>
     </div>

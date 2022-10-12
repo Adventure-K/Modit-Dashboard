@@ -14,7 +14,8 @@ function InstitutionViewDashboard(props) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleManage = () => {
+  const handleManage = () => { // Clears admin user's inst_id and sets it to the institution being viewed. This is used to allow the admin to manage users.
+    dispatch({ type: 'ADMIN_CLEAR_INST' });
     dispatch({ type: 'ADMIN_SET_INST', payload: {id: i.id} })
     history.push('/manageAccounts')
   }
