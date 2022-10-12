@@ -67,14 +67,14 @@ function RegisterForm() {
           />
         </label>
       </div>
-      <div>
+      <div className="flex flex-col items-center" >
         <select name="role" id="roleSelection" value={role} onChange={dropDownChange}>
           <option value="select">Select a role</option>
           <option value={0}>Clinician</option>
           <option value={1}>Researcher</option>
         </select>
       </div>
-      <div>
+      <div className="flex flex-col items-center" >
         <input className="btn" type="submit" name="submit" value="Register" />
       </div>
     </form>
