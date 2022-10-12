@@ -61,8 +61,8 @@ function LoginForm() {
           />
         </label>
       </div>
-      <div>
-        <input className="inline-block rounded-lg bg-cyan-500 text-white leading-normal uppercase shadow-md hover:bg-cyan-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-20 h-9" type="submit" name="submit" value="Log In" />
+      <div className="flex flex-col items-center" >
+        <input className="rounded-lg bg-cyan-500 text-white leading-normal uppercase shadow-md hover:bg-cyan-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-20 h-9" type="submit" name="submit" value="Log In" />
       </div>
     </form>
   );
