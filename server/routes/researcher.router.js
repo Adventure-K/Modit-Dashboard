@@ -8,12 +8,8 @@ const router = express.Router();
 
 router.get('/clinicians', rejectUnauthenticated, rejectUnauthorized1,(req, res) => {
   console.log('in get clinicians', req.user)
-  // const query = `
-  //   SELECT * FROM "user"
-  //   WHERE "researcher_id" = $1
-  //   ORDER BY "first_name" ASC;`;
   const query = `SELECT * FROM "user"
-  WHERE inst_id = $1 AND user_level = 0
+  WHERE inst_id = $1 AND user_level = 0 AND is_approved = TRUE
   ORDER BY first_name ASC;`;
   // pool.query(query, [req.user.id])
   pool.query(query, [req.user.inst_id])

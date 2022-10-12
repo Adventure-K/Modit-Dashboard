@@ -11,7 +11,7 @@ function AdditionalInfoRegistration() {
     const [lastName, setLastName] = useState('')
     const dispatch = useDispatch()
     const history = useHistory()
-    // console.log(institutions);
+
 
     useEffect(() => {
         dispatch({ type: 'FETCH_INSTITUTIONS_FOR_REGISTRATION' });// retrieves institution names from DB
@@ -37,7 +37,7 @@ function AdditionalInfoRegistration() {
         }
 
 
-        
+
     }
 
     const dropDownChange = (e) => {
