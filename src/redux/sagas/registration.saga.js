@@ -8,12 +8,12 @@ function* registerUser(action) {
     yield put({ type: 'CLEAR_REGISTRATION_ERROR' });
 
     // passes the username and password from the payload to the server
-    // console.log(action.payload);
     yield axios.post('/api/user/register', action.payload);
 
     // automatically log a user in after registration
     if (action.payload.is_approved === false) {
       console.log("they can't login yet");
+      yield put({ type: 'LOGIN_FAILED_USER_NOT_APPROVED' });
       // with this statement, user is registered a step before, but will not be logged in
       // user is sent back to login screen 
     }

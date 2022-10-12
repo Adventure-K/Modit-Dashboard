@@ -1,0 +1,24 @@
+.displayDiv {
+    display: flex;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.awaitingApprovalDiv {
+    border-right: solid;
+    padding-right: 20px;
+    width: 300px;
+    
+}
+
+.researchersDiv {
+    padding-left: 20px;
+    width: 300px;
+    
+
+}
+
+.cliniciansDiv {
+    padding-left: 20px;
+    width: 300px;
+}

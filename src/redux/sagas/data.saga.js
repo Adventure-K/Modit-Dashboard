@@ -15,7 +15,7 @@ function* fetchPatientData(action) {
 
 function* fetchPatientAllData(action) {
     try {
-        yield put({type: 'RESET_STORE'})// resets the store for the patient recent data
+        yield put({type: 'RESET_PROCESSED_DATA'})// resets the store for the patient recent data
         let response = yield axios.get(`/api/data/${action.payload}`)
         let result = yield axios.get(`/api/data/avgData/${action.payload}`)
         // console.log(response.data);
@@ -29,9 +29,22 @@ function* fetchPatientAllData(action) {
     }
 }
 
+function* clearDataReducers() {
+    try {
+        yield put({type: 'RESET_PROCESSED_DATA'})
+        yield put({type: 'RESET_AVERAGE_DATA'})
+    }
+    catch {
+        console.log('DATA SAGA: error in clearing data reducers');
+    }
+}
+
+
 function* dataSaga() {
     yield takeEvery('FETCH_PROCESSED_DATA', fetchPatientData)
     yield takeEvery('FETCH_PATIENT_ALL_DATA', fetchPatientAllData)
+    yield takeEvery('CLEAR_PROCESSED_DATA_REDUCERS', clearDataReducers)
+
 }
 
 export default dataSaga;
