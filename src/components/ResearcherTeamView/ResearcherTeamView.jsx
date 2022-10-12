@@ -36,33 +36,18 @@ function ResearcherTeamView() {
     headers: ['ID', 'Session ID', '% time on drugs', '% time on controlled', '% time on neither', '% time on drugs no back', '% time non drugs no back']
   }
 
+
+
   const getPatientData = () => {
+    event.preventDefault();
+    console.log("getPatientData", patientId);
 
-    event.preventDefault()
-    console.log('getPatientData', patientId)
+
     dispatch({
-      type: 'FETCH_PATIENT_DATA',
-      payload: patientId,
+      type: 'FETCH_PATIENT_ALL_DATA',
+      payload: patientId
     })
-    dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId })
   }
-
-  // const toAddPatientForm = () => {
-  //   history.push('/addPatientForm')
-  // }
-
-  // const deletePatient = () => {
-  //   console.log('patient id', patientData.id)
-
-  //   event.preventDefault();
-  //   console.log("getPatientData", patientId);
-
-
-  //   dispatch({
-  //     type: 'FETCH_PATIENT_ALL_DATA',
-  //     payload: patientId
-  //   })
-  // }
 
 
   //this function sends the id of the selected user to be deleted to the deactivatePatient() function in the patient.saga file. It then calls getPatientData() which will clear the display until a new patient is selected.
