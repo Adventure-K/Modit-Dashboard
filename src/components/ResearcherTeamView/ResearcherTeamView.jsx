@@ -32,6 +32,7 @@ function ResearcherTeamView() {
   const getPatientData = () => {
     event.preventDefault();
     console.log("getPatientData", patientId);
+    
     dispatch({
       type: 'FETCH_PATIENT_ALL_DATA',
       payload: patientId
