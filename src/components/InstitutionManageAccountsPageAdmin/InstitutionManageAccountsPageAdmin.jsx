@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import './InstitutionManageAccounts.css';
 
 
-function InstitutionManageAccountsPage() {
+function InstitutionManageAccountsPageAdmin() {
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -70,13 +70,14 @@ function InstitutionManageAccountsPage() {
     history.push(`/userDetails/${id}`)
   }
 
-  const promoteUser = (id, userLevel) => {
-    console.log("in promoteUser", id, userLevel)
+  const promoteUser = (id, userLevel, inst_id) => {
+    console.log("in promoteUser", id, userLevel, inst_id)
     dispatch({
       type: 'SET/REMOVE_HEAD_RESEARCHER',
       payload: {
         id: id,
-        userLevel: userLevel
+        userLevel: userLevel,
+        inst_id: inst_id
       }
     })
   }
@@ -123,7 +124,7 @@ function InstitutionManageAccountsPage() {
                           {user.first_name} {user.last_name}
                         </span>
                         <span>
-                          {user.user_level == 2 && loggedInUser.user_level == 3 ? <button onClick={() => promoteUser(user.id, user.user_level)}>Demote</button> : <></>}
+                          {user.user_level == 2 && loggedInUser.user_level == 3 ? <button onClick={() => promoteUser(user.id, user.user_level, user.inst_id)}>Demote</button> : <></>}
                         </span>
                       </p>
 
@@ -137,7 +138,7 @@ function InstitutionManageAccountsPage() {
               <h3>Clinicians</h3>
               {
                 users.map(user => {
-                  if (user.is_approved === true && user.user_level == 0) {
+                  if (user.is_approved === true && user.user_level === 0) {
                     return (
                       <div onClick={() => (toUserDetails(user.id))}>
                         <p>{user.first_name} {user.last_name}</p>
@@ -163,7 +164,7 @@ function InstitutionManageAccountsPage() {
                             {user.first_name} {user.last_name}
                           </span>
                           <span>
-                            {user.user_level == 1 && loggedInUser.user_level == 3 ? <button onClick={() => promoteUser(user.id, user.user_level)}>Promote</button> : <></>}
+                            {user.user_level == 1 && loggedInUser.user_level == 3 ? <button onClick={() => promoteUser(user.id, user.user_level, user.inst_id)}>Promote</button> : <></>}
                           </span>
                         </p>
 
@@ -177,7 +178,7 @@ function InstitutionManageAccountsPage() {
                 <h3>Clinicians</h3>
                 {
                   users.map(user => {
-                    if (user.is_approved === true && user.user_level == 0) {
+                    if (user.is_approved === true && user.user_level === 0) {
                       return (
                         <div onClick={() => (toUserDetails(user.id))}>
                           <p>{user.first_name} {user.last_name}</p>
@@ -189,10 +190,11 @@ function InstitutionManageAccountsPage() {
               </div>
             </>
         }
+
       </div >
     </>
   );
 
 }
 
-export default InstitutionManageAccountsPage;
+export default InstitutionManageAccountsPageAdmin;
