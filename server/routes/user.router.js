@@ -2,6 +2,7 @@ const express = require('express');
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+const { checkDeactivated } = require('../modules/checkDeactivated')
 const { rejectUnauthorized2 } = require('../modules/authorization2-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
@@ -27,27 +28,6 @@ router.post('/register', (req, res, next) => {
   const firstName = req.body.firstName
   const lastName = req.body.lastName
   const selectedInstitution = req.body.selectedInstitution
-
-  const queryText = `
-  SELECT "username" FROM "user";
-  `;
-
-  pool.query(queryText)
-    .then(response => {
-      let dbUsernames = response.rows
-      console.log(dbUsernames);
-
-      for (username of dbUsernames) {
-        if (newUsername === username.username) {
-          console.log('NOPE');
-          res.send(406)// Not allowed
-        }
-        else {
-          console.log('AIGHT');
-        }
-      }
-
-
 
       const secondQueryText = `
   SELECT "id" FROM "institution"
@@ -87,7 +67,7 @@ router.post('/register', (req, res, next) => {
           res.sendStatus(500);
         })
 
-    })
+
 });
 
 // Handles login form authenticate/login POST
