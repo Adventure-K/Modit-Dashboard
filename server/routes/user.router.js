@@ -2,6 +2,7 @@ const express = require('express');
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
+const { checkDeactivated } = require('../modules/checkDeactivated')
 const { rejectUnauthorized2 } = require('../modules/authorization2-middleware');
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
@@ -21,60 +22,52 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // is that the password gets encrypted before being inserted
 router.post('/register', (req, res, next) => {
   // console.log(req.body);
-  const username = req.body.credentials.username;
+  const newUsername = req.body.credentials.username;
   const password = encryptLib.encryptPassword(req.body.credentials.password);
   const role = Number(req.body.credentials.role)
   const firstName = req.body.firstName
   const lastName = req.body.lastName
   const selectedInstitution = req.body.selectedInstitution
 
-  const queryText = `
+      const secondQueryText = `
   SELECT "id" FROM "institution"
   WHERE "name" = $1;
   `;
 
-  pool.query(queryText, [selectedInstitution])
-  .then(response => {
-    // console.log(response.rows[0]);
-    let institutionId = response.rows[0].id
+      pool.query(secondQueryText, [selectedInstitution])
+        .then(response => {
+          // console.log(response.rows[0]);
+          let institutionId = response.rows[0].id
 
-    const secondQueryText = `
+          const thirdQueryText = `
     INSERT INTO "user" (username, password, first_name, last_name, inst_id, user_level)
     VALUES($1, $2, $3, $4, $5, $6);
     `;
 
-    let queryValues = [
-      username,
-      password,
-      firstName,
-      lastName,
-      institutionId,
-      role
-    ]
+          let queryValues = [
+            newUsername,
+            password,
+            firstName,
+            lastName,
+            institutionId,
+            role
+          ]
 
-    pool.query(secondQueryText, queryValues)
-    .then(response => {
-      res.sendStatus(201);
-    })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500);
-    })
-  })
-  .catch(err => {
-    console.log(err);
-    res.sendStatus(500);
-  })
+          pool.query(thirdQueryText, queryValues)
+            .then(response => {
+              res.sendStatus(201);
+            })
+            .catch(err => {
+              console.log(err);
+              res.sendStatus(500);
+            })
+        })
+        .catch(err => {
+          console.log(err);
+          res.sendStatus(500);
+        })
 
-  // const queryText = `INSERT INTO "user" (username, password)
-  //   VALUES ($1, $2) RETURNING id`;
-  // pool
-  //   .query(queryText, [username, password])
-  //   .then(() => res.sendStatus(201))
-  //   .catch((err) => {
-  //     console.log('User registration failed: ', err);
-  //     res.sendStatus(500);
-  //   });
+
 });
 
 // Handles login form authenticate/login POST
@@ -94,23 +87,23 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/institutions', (req, res) => {
-  let queryText = `
+  let queryText = ` 
   SELECT "name" FROM "institution"
   ORDER BY "name" ASC;
   `
 
   pool.query(queryText)
-  .then(response => {
-    // console.log(response.rows);
-    res.send(response.rows)
-  })
-  .catch(err => {
-    console.log(err);
-  res.send(500);
-  })
+    .then(response => {
+      // console.log(response.rows);
+      res.send(response.rows)
+    })
+    .catch(err => {
+      console.log(err);
+      res.send(500);
+    })
 })
 
-router.put('/updatePass', rejectUnauthenticated, rejectUnauthorized2,(req, res) => {
+router.put('/updatePass', rejectUnauthenticated, rejectUnauthorized2, (req, res) => {
   console.log('req.body:', req.body)
   const p = encryptLib.encryptPassword(req.body.pass);
   const id = req.body.id;
@@ -119,12 +112,12 @@ router.put('/updatePass', rejectUnauthenticated, rejectUnauthorized2,(req, res) 
     WHERE id = $2;`;
   const values = [p, id]
   pool.query(query, values)
-  .then(result => {
-    res.sendStatus(200)
-  }).catch(err => {
-    console.log('password PUT', err);
-    res.sendStatus(500);
-  })
+    .then(result => {
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log('password PUT', err);
+      res.sendStatus(500);
+    })
 })
 
 router.put('/retire/:id', (req, res) => {
@@ -134,12 +127,12 @@ router.put('/retire/:id', (req, res) => {
     UPDATE "user" SET "is_active" = false
     WHERE id = $1;`;
   pool.query(query, [id])
-  .then(result => {
-    res.sendStatus(200)
-  }).catch(err => {
-    console.log('retire user', err)
-    res.sendStatus(500);
-  })
+    .then(result => {
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log('retire user', err)
+      res.sendStatus(500);
+    })
 })
 
 router.put('/reinstate/:id', (req, res) => {
@@ -149,12 +142,12 @@ router.put('/reinstate/:id', (req, res) => {
     UPDATE "user" SET "is_active" = true
     WHERE id = $1;`;
   pool.query(query, [id])
-  .then(result => {
-    res.sendStatus(200)
-  }).catch(err => {
-    console.log('reinstate user', err)
-    res.sendStatus(500);
-  })
+    .then(result => {
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log('reinstate user', err)
+      res.sendStatus(500);
+    })
 })
 
 

@@ -35,6 +35,11 @@ function LoginForm() {
           {errors.loginMessage}
         </h3>
       )}
+      {errors.registrationMessage && (
+        <h3 className="alert" role="alert">
+          {errors.registrationMessage}
+        </h3>
+      )}
       <div>
         <label htmlFor="username">
           Username:
