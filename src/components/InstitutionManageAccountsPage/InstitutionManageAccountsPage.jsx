@@ -9,6 +9,7 @@ function InstitutionManageAccountsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  // this variable contains logged in user's institution info or the institution that an admin user has scoped into if logged in user is admin-level.
   const i = useSelector((store) => store.activeInstitution);
 
   //this variable contains an array of all users within the organization of the logged-in user
@@ -52,6 +53,7 @@ function InstitutionManageAccountsPage() {
     })
   }
 
+  //checks to see if the user does or does not have a head researcher already assigned
   let headResearcher = false;
   const isHeadResearcher = () => {
     for (let user of users) {
@@ -61,11 +63,10 @@ function InstitutionManageAccountsPage() {
     }
   }
 
-
   { users && isHeadResearcher() }
   // console.log(headResearcher);
 
-  //when the name of an approved clinician or researcher is clicked on, this function is called and it pushes the user that that user's detail page
+  //when the name of an approved clinician or researcher is clicked on, this function is called and it pushes the logged-user that clinician's detail page
   const toUserDetails = (id) => {
     history.push(`/userDetails/${id}`)
   }
