@@ -141,9 +141,22 @@ function App() {
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
+            path="/researcherViewDashboard/:id"
+          >
+
+            {user.user_level >= 3 ? (
+              <ResearcherViewDashboard />
+            ) : (
+              <Redirect to="/home" />
+            )}
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
             path="/researcherViewDashboard"
           >
-            
+
             {/* user.user_level >= 3 ? (
               <InstitutionViewUserDetails />
             ) : */}

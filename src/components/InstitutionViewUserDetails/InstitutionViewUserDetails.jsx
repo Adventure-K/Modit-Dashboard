@@ -20,8 +20,10 @@ function InstitutionViewUserDetails(props) {
     dispatch({ type: 'GET_SELECTED_USER', payload: userId.id })
   }, [])
 
+  const loggedInUser = useSelector(store => store.user.userReducer)
   const selectedUser = useSelector((store) => store.selectedUser);
   console.log('Selected user:', selectedUser);
+  console.log('Selected user inst ID:', selectedUser.inst_id);
 
   const [editMode, setEditMode] = useState(false);
   const [newPass, setNewPass] = useState('');
@@ -29,8 +31,11 @@ function InstitutionViewUserDetails(props) {
   const handleChangeView = () => {
     if (selectedUser.user_level == 0) {
       history.push(`/researcherTeamView/${selectedUser.id}`);
+    } else if (loggedInUser.user_level == 3) {
+      console.log('you must be an admin!')
+      history.push(`/researcherViewDashboard/${selectedUser.inst_id}`);
     } else {
-      history.push('/researcherViewDashboard');
+      history.push(`/researcherViewDashboard`);
     }
   }
 
