@@ -22,12 +22,12 @@ function ResearcherTeamView() {
   
   const [patientId, setPatientId] = useState(' ')
 
-  // const dataToConvert = {
-  //   data: jsonData,
-  //   filename: 'calculated_data',
-  //   delimiter: ',',
-  //   headers: ['ID', 'Session ID', '% time on drugs', '% time on controlled', '% time on neither', '% time on drugs no back', '% time non drugs no back']
-  // }
+  const dataToConvert = {
+    data: [processedData],
+    filename: 'processed_data',
+    delimiter: ',',
+    headers: ['ID', 'Session ID', '% time on drugs', '% time on controlled', '% time on neither', '% time on drugs no back', '% time non drugs no back']
+  }
 
   const getPatientData = () => {
     event.preventDefault();
@@ -37,31 +37,26 @@ function ResearcherTeamView() {
       type: 'FETCH_PATIENT_ALL_DATA',
       payload: patientId
     })
-    // dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId })
   }
 
-  // const toAddPatientForm = () => {
-  //   history.push('/addPatientForm')
-  // }
 
-  const deletePatient = () => {
-    console.log('patient id', patientData.id)
-    dispatch({
-      type: 'DELETE_PATIENT',
-      payload: patientData.id,
-    })
-    getPatientData()
+   //this function sends the id of the selected user to be deleted to the deactivatePatient() function in the patient.saga file. It then calls getPatientData() which will clear the display until a new patient is selected.
+   const deletePatient = () => {
+    if (confirm('This will render patient\'s data inaccessible. Contact an admin to restore.')) {
+      dispatch({
+        type: 'DELETE_PATIENT',
+        payload: processedData.id
+      })
+      getPatientData();
+    } else {
+      return;
+    }
   }
 
   const exportJsonData = () => {
     csvDownload(dataToConvert)
   }
 
-  // const conditionalData = () => {
-  //   if (patientData.is_active === true) {
-  //     return 1;
-  //   }
-  // }
 
   useEffect(() => {
     dispatch({
