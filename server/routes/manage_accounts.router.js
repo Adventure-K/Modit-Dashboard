@@ -116,6 +116,15 @@ router.put('/admin_inst_id', rejectUnauthenticated, rejectUnauthorized3, (req, r
 
 router.put('/reinstate', (req, res) => {
   console.log('in reinstate put', req.body)
+  query = `UPDATE "user" SET "is_active" = 'true'
+          WHERE "user".id = $1;`;
+  pool.query(query, [req.body.id])
+    .then(result => {
+      res.sendStatus(200);
+    }).catch(err => {
+      console.log('reinstate user query error', err);
+      res.sendStatus(500);
+    })
 })
 
 module.exports = router;
