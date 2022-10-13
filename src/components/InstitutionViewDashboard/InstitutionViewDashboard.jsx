@@ -31,8 +31,12 @@ function InstitutionViewDashboard(props) {
     <div>
       {i.id &&
         <>
-          <button onClick={() => history.push(`/manageAccountsAdmin/${i.id}`)}>Manage Users</button>
-          <button>Export</button>
+          <button  onClick={() => history.push(`/manageAccountsAdmin/${i.id}`)}
+          className="rounded-lg bg-cyan-750 text-white leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out w-36 h-9"
+          >Manage Users</button>
+          <button 
+          className="rounded-lg bg-cyan-750 text-white leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out w-20 h-9"
+          >Export</button>
           <h2>{heading}</h2>
           <h3><span>{i.name}<br />
             {i.street_address}, {i.city}, {i.state} {i.zip}</span></h3>
