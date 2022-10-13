@@ -52,7 +52,8 @@ function* changeHeadResearcher(action) {
 function* reinstateClinician(action) {
     console.log("reinstate clinician", action.payload)
     try {
-        yield axios.put('/api/manageAccounts/reinstate', action.payload)
+        yield axios.put('/api/manageAccounts/reinstate', action.payload);
+        yield put({ type: 'GET_USERS' })
     } catch (err) {
         console.error('error in reinstate clinician')
     }

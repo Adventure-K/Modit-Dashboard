@@ -206,7 +206,6 @@ function InstitutionManageAccountsPage() {
             </>
         }
       </div >
-      {JSON.stringify(users)}
       <h3>Reinstate User</h3>
       <div className="reinstateSelect">
         <select onChange={(event) => setClinicianToReinstate(event.target.value)} name="clinician" id="reinstateClinicianSelect">
