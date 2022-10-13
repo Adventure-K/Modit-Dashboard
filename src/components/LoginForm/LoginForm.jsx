@@ -35,31 +35,27 @@ function LoginForm() {
           {errors.loginMessage}
         </h3>
       )}
-      <div>
-        <label htmlFor="username">
-          Username:
+      <div className="flex flex-col items-center">
           <input
             type="text"
             name="username"
-            required
             value={username}
+            required
             onChange={(event) => setUsername(event.target.value)}
-            className="w-full border border-gray-900 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+            className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+            placeholder="Email Address"
           />
-        </label>
       </div>
-      <div>
-        <label htmlFor="password">
-          Password:
+      <div className="flex flex-col items-center">
           <input
             type="password"
             name="password"
-            required
             value={password}
+            required
             onChange={(event) => setPassword(event.target.value)}
-            className="w-full border border-gray-900 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+            className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+            placeholder="Password"
           />
-        </label>
       </div>
       <div className="flex flex-col items-center" >
         <input className="rounded-lg bg-cyan-500 text-white leading-normal uppercase shadow-md hover:bg-cyan-700 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out w-20 h-9" type="submit" name="submit" value="Log In" />

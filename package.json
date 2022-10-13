@@ -7,6 +7,7 @@
     "node": "16.x"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "chart.js": "^3.9.1",
