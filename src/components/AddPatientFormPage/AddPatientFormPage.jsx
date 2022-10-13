@@ -41,12 +41,12 @@ function AddPatient() {
         <h2 className='addPatientHeading'>Add New Patient</h2>
         <div div="inputsDiv">
           <div>
-            <input onChange={(event) => setFirstName(event.target.value)} value={firstName} placeholder="First Name" />
-            <input onChange={(event) => setLastName(event.target.value)} value={lastName} placeholder="Last Name" />
+            <input required onChange={(event) => setFirstName(event.target.value)} value={firstName} placeholder="First Name" />
+            <input required onChange={(event) => setLastName(event.target.value)} value={lastName} placeholder="Last Name" />
           </div>
           <div>
             <input onChange={(event) => setEmail(event.target.value)} value={email} placeholder="Email (Optional)" />
-            <input onChange={(event) => setPatientId(event.target.value)} value={patientId} placeholder="Patient Modit ID" />
+            <input required onChange={(event) => setPatientId(event.target.value)} value={patientId} placeholder="Patient Modit ID" />
           </div>
         </div>
 
