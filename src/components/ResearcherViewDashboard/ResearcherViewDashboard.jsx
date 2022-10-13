@@ -17,15 +17,20 @@ function ResearcherView(props) {
   const clinicians = useSelector((store) => store.researcher.researcherReducer);
   const institution = useSelector((store) => store.researcher.researcherInstReducer);
   const teamData = useSelector((store) => store.patientData);
-  const averageAggregateData = useSelector((store) => store.researcher.aggregateResearcherData[0])
+  let averageAggregateData = useSelector((store) => store.researcher.aggregateResearcherData[0])
   const loggedInUser = useSelector(store => store.user.userReducer)
 
   const [heading, setHeading] = useState('Researcher Dashboard');
   const dispatch = useDispatch();
   const history = useHistory();
   const selectedUserInst = useParams();
-  console.log('selectedUserInst', selectedUserInst.id)
-  console.log('Logged-in user:', loggedInUser)
+  // console.log(averageAggregateData);
+  
+  for (let prop in averageAggregateData) {
+    prop = Number(`${averageAggregateData[prop]}`);
+    
+  }
+  console.log(averageAggregateData);
 
   useEffect(() => {
     dispatch({ type: 'CLEAR_PROCESSED_DATA_REDUCERS' });

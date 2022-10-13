@@ -105,7 +105,7 @@ function InstitutionManageAccountsPageAdmin() {
                   <p><span><button onClick={() => (deleteRequest(user.id))}>Delete</button></span><span><button onClick={() => (approveRequest(user.id))}>Approve</button></span>{user.first_name} {user.last_name}</p>
                 </div>
               )
-            } 
+              }
           })}
 
 

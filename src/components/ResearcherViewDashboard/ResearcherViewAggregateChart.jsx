@@ -34,7 +34,7 @@ const PieChart = () => {
     const dispatch = useDispatch()
     // const patientDetails = useSelector((store) => store.patientData.patientData)
     const averageAggregateData = useSelector((store) => store.researcher.aggregateResearcherData[0])
-    console.log(averageAggregateData);
+    // console.log(averageAggregateData);
 
     let num1 = (averageAggregateData.drugs) * 100
     let num2 = (averageAggregateData.noDrugs) * 100

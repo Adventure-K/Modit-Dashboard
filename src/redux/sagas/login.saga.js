@@ -61,7 +61,7 @@ function* logoutUser(action) {
     // the client-side code know the user is logged out
     yield put({ type: 'UNSET_USER' });
 
-    //move them to a differnt page
+    //move them to a different page
     if(action.callback) {
       action.callback()
     }
