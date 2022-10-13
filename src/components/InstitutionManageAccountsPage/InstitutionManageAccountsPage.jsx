@@ -9,31 +9,35 @@ function InstitutionManageAccountsPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const [clinicianId, setClinicianToReinstate] = useState(' ');
+
   // this variable contains logged in user's institution info or the institution that an admin user has scoped into if logged in user is admin-level.
   const i = useSelector((store) => store.activeInstitution);
 
   //this variable contains an array of all users within the organization of the logged-in user
   const loggedInUser = useSelector((store) => store.user.userReducer);
 
+  const users = useSelector((store) => store.usersToManage);
+
 
   // On page load, "GET_USERS" triggers the getUsers() function in the manage_users.saga file. It ultimately stores all users attached to the institution of the logged in user in the "users" variable (above)
   // Admins may view this page for any institution, so the inst_id is retrieved from the URL instead of the logged in user's inst_id as with a research head.
   if (loggedInUser.user_level >= 3) {
     useEffect(() => {
-      dispatch({ 
+      dispatch({
         type: 'GET_USERS_ADMIN',
-        payload: i.id 
+        payload: i.id
       });
     }, []);
   } else {
     useEffect(() => {
-      dispatch({ 
+      dispatch({
         type: 'GET_USERS'
       });
     }, [])
   }
 
-  const users = useSelector((store) => store.usersToManage);
+
 
   //when the user clicks the "Delete" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the deleted clinician or researcher to the deleteRequest function in the approve_users.saga file.
   const deleteRequest = (id) => {
@@ -69,7 +73,7 @@ function InstitutionManageAccountsPage() {
   //when the name of an approved clinician or researcher is clicked on, this function is called and it pushes the logged-user that clinician's detail page
   const toUserDetails = (id) => {
     history.push(`/userDetails/${id}`)
-  }
+  };
 
   const promoteUser = (id, userLevel) => {
     console.log("in promoteUser", id, userLevel)
@@ -80,6 +84,10 @@ function InstitutionManageAccountsPage() {
         userLevel: userLevel
       }
     })
+  };
+
+  const reinstateClinician = () => {
+    console.log('in reinstate')
   }
 
 
@@ -115,7 +123,7 @@ function InstitutionManageAccountsPage() {
             <div className="researchersDiv">
               <h3>Researchers</h3>
               {users.map(user => {
-                if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
+                if (user.is_active === true && user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
                   return (
 
                     <div >
@@ -138,7 +146,7 @@ function InstitutionManageAccountsPage() {
               <h3>Clinicians</h3>
               {
                 users.map(user => {
-                  if (user.is_approved === true && user.user_level == 0) {
+                  if (user.is_active === true && user.is_approved === true && user.user_level == 0) {
                     return (
                       <div onClick={() => (toUserDetails(user.id))}>
                         <p>{user.first_name} {user.last_name}</p>
@@ -191,6 +199,21 @@ function InstitutionManageAccountsPage() {
             </>
         }
       </div >
+      {JSON.stringify(users)}
+      <h3>Reinstate User</h3>
+      <div className="reinstateSelect">
+        <select onChange={(event) => setClinicianToReinstate(event.target.value)} name="clinician" id="reinstateClinicianSelect">
+          <option value="initial">Select A Clinician</option>
+          {users && users.map(clinician => {
+            if (clinician.is_active === false) {
+              return (
+                <option key={clinician.id} value={clinician.id}>{clinician.first_name} {clinician.last_name}</option>
+              )
+            }
+          })}
+        </select>
+        <button className="reinstateClinicianBtn" onClick={reinstateClinician}>Reinstate</button>
+      </div>
     </>
   );
 
