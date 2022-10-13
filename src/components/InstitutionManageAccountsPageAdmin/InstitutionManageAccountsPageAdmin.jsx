@@ -19,14 +19,14 @@ function InstitutionManageAccountsPageAdmin() {
   // Admins may view this page for any institution, so the inst_id is retrieved from the URL instead of the logged in user's inst_id as with a research head.
   if (loggedInUser.user_level >= 3) {
     useEffect(() => {
-      dispatch({ 
+      dispatch({
         type: 'GET_USERS_ADMIN',
-        payload: i.id 
+        payload: i.id
       });
     }, []);
   } else {
     useEffect(() => {
-      dispatch({ 
+      dispatch({
         type: 'GET_USERS'
       });
     }, [])
@@ -90,7 +90,7 @@ function InstitutionManageAccountsPageAdmin() {
         <div className="awaitingApprovalDiv">
           <h3>Waiting for Approval</h3>
           {users.map(user => {
-            if (user.is_approved === false && loggedInUser.user_level == 2) {
+            if (user.is_approved === false && loggedInUser.user_level == 3) {
               return (
                 <div>
                   <p><span><button onClick={() => (deleteRequest(user.id))}>Delete</button></span><span><button onClick={() => (approveRequest(user.id))}>Approve</button></span>{user.first_name} {user.last_name}</p>
