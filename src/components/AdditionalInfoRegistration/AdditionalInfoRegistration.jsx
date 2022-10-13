@@ -49,10 +49,10 @@ function AdditionalInfoRegistration() {
         <>
             <h1 className='centeredHeaders'>Additional Info</h1>
             <div className='inputDiv'>
-                <input type="text" value={firstName}
+                <input required type="text" value={firstName}
                     onChange={(event) => setFirstName(event.target.value)} placeholder='First name' />
 
-                <input type="text" value={lastName}
+                <input required type="text" value={lastName}
                     onChange={(event) => setLastName(event.target.value)} placeholder='Last name' />
 
                 <br />

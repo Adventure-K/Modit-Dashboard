@@ -65,7 +65,6 @@ function InstitutionViewUserDetails(props) {
 
   const handleEditMode = (event) => {
     event.preventDefault();
-    // some code that clears the input field
     setEditMode(!editMode);
   }
 
@@ -82,7 +81,6 @@ function InstitutionViewUserDetails(props) {
       type: 'UPDATE_PASSWORD',
       payload: pkg
     })
-    // some code that clears the input field
     setEditMode(!editMode);
   }
 
