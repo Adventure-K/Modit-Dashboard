@@ -13,26 +13,26 @@ function InstitutionManageAccountsPageAdmin() {
 
   //this variable contains an array of all users within the organization of the logged-in user
   const loggedInUser = useSelector((store) => store.user.userReducer);
+  const users = useSelector((store) => store.usersToManage);
 
 
   // On page load, "GET_USERS" triggers the getUsers() function in the manage_users.saga file. It ultimately stores all users attached to the institution of the logged in user in the "users" variable (above)
   // Admins may view this page for any institution, so the inst_id is retrieved from the URL instead of the logged in user's inst_id as with a research head.
   if (loggedInUser.user_level >= 3) {
     useEffect(() => {
-      dispatch({ 
+      dispatch({
         type: 'GET_USERS_ADMIN',
-        payload: i.id 
+        payload: i.id
       });
     }, []);
   } else {
     useEffect(() => {
-      dispatch({ 
+      dispatch({
         type: 'GET_USERS'
       });
     }, [])
   }
 
-  const users = useSelector((store) => store.usersToManage);
 
   //when the user clicks the "Delete" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the deleted clinician or researcher to the deleteRequest function in the approve_users.saga file.
   const deleteRequest = (id) => {
