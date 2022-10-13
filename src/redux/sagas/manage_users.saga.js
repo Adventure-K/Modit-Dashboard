@@ -49,10 +49,21 @@ function* changeHeadResearcher(action) {
 //     }
 // }
 
+function* reinstateClinician(action) {
+    console.log("reinstate clinician", action.payload)
+    try {
+        yield axios.put('/api/manageAccounts/reinstate', action.payload)
+    } catch (err) {
+        console.error('error in reinstate clinician')
+    }
+}
+
 function* manageUsersSaga() {
     yield takeLatest('GET_USERS', getUsers)
     yield takeLatest('SET/REMOVE_HEAD_RESEARCHER', changeHeadResearcher)
     yield takeLatest('GET_USERS_ADMIN', getUsersAdmin)
+    yield takeLatest('REINSTATE_CLINICIAN', reinstateClinician)
+
     // yield takeLatest('ADMIN_SET_INST', adminSetInst)
     // yield takeLatest('ADMIN_CLEAR_INST', adminClearInst)
 }

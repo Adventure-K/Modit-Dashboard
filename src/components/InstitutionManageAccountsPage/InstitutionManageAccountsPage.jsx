@@ -87,8 +87,15 @@ function InstitutionManageAccountsPage() {
   };
 
   const reinstateClinician = () => {
-    console.log('in reinstate')
-  }
+    console.log('in reinstate', clinicianId)
+    dispatch({
+      type: 'REINSTATE_CLINICIAN',
+      payload: {
+        id: clinicianId
+      }
+    })
+    setClinicianToReinstate(' ');
+  };
 
 
   return (
