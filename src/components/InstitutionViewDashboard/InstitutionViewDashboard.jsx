@@ -28,9 +28,9 @@ function InstitutionViewDashboard(props) {
   // }
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center max-h-lg">
       {i.id &&
-        <div className="flex flex-col items-center block p-6 rounded-lg shadow-lg bg-gray-100 max-w-sm">
+        <div className="flex flex-col items-center block p-6 rounded-lg shadow-lg bg-gray-100 max-w-lg">
           
           {/* <h2 className="text-xl mb-5">{heading}</h2> */}
           <h3 className="text-xl mb-2">{i.name}</h3>

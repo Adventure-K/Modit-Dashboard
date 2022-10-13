@@ -87,14 +87,18 @@ function InstitutionManageAccountsPageAdmin() {
   return (
     <>
 
-      < div className="displayDiv" >
-        <div className="awaitingApprovalDiv">
-          <h3>Waiting for Approval</h3>
+      < div className="flex flex-row">
+        <div className="basis-1/3 ml-5 mt-2 text-center">
+          <h3 className="text-xl bg-white border-b">Waiting for Approval</h3>
           {users.map(user => {
             if (user.is_approved === false && loggedInUser.user_level == 3) {
               return (
-                <div>
-                  <p><span><button onClick={() => (deleteRequest(user.id))}>Delete</button></span><span><button onClick={() => (approveRequest(user.id))}>Approve</button></span>{user.first_name} {user.last_name}</p>
+                <div className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650">
+                  <p className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><span><button onClick={() => (deleteRequest(user.id))}
+        className="rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-8"
+        >Delete</button></span><span><button onClick={() => (approveRequest(user.id))}
+        className="rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-8"
+        >Approve</button></span>{user.first_name} {user.last_name}</p>
                 </div>
               )
             } else if (user.is_approved === false && loggedInUser.user_level == 3) {
@@ -113,14 +117,14 @@ function InstitutionManageAccountsPageAdmin() {
         {/* if there is a head researcher assigned to this institution, this block of code runs */}
         {
           headResearcher ? <>
-            <div className="researchersDiv">
-              <h3>Researchers</h3>
+            <div className="basis-1/3 mt-2 text-center">
+              <h3 className="text-xl bg-white border-b">Researchers</h3>
               {users.map(user => {
                 if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
                   return (
 
-                    <div key={user.id}>
-                      <p>
+                    <div className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650" key={user.id}>
+                      <p className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <span onClick={() => (toUserDetails(user.id))}>
                           {user.first_name} {user.last_name}
                         </span>
@@ -135,8 +139,8 @@ function InstitutionManageAccountsPageAdmin() {
               })
               }
             </div>
-            <div className="cliniciansDiv">
-              <h3>Clinicians</h3>
+            <div className="basis-1/3 mr-5 mt-2 text-center">
+              <h3 className="text-xl mb-3 bg-white border-b">Clinicians</h3>
               {
                 users.map(user => {
                   if (user.is_approved === true && user.user_level === 0) {
