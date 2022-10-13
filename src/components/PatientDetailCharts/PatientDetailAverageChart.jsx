@@ -53,7 +53,7 @@ const PieChart = () => {
     useEffect(() => {
 
         setChartData({
-            labels: ['% gaze on trigger', '% gaze on control', '% gaze on back'],
+            labels: ['gaze on trigger: ' + Math.round(num1) + '%', 'gaze on control: ' + Math.round(num2) + '%', 'gaze on back: ' + Math.round(num3) + '%'],
             datasets: [
                 {
                     label: "Test data",

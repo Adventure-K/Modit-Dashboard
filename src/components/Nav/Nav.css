@@ -1,3 +1,27 @@
+.clinician {
+  background-color: #008592;
+}
+
+.clinicianLink:hover {
+  background-color: #005159;
+}
+
+.researcher {
+  background-color: #8a0071;
+}
+
+.researcherLink:hover {
+  background-color: #570058;
+}
+
+.admin {
+  background-color: #b49600;
+}
+
+.adminLink:hover {
+  background-color: #766200;
+}
+
 .nav {
   /* flex box layout */
   display: flex;
@@ -5,7 +29,6 @@
   align-items: center;
 
   margin: 0 0 30px;
-  background-color: #008592;
   overflow: hidden;
 }
 
@@ -24,7 +47,7 @@
 .navLink {
   display: inline-block;
   color: #f2f2f2;
-  background-color: #008592;
+  /* background-color: #008592; */
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -37,6 +60,6 @@
   outline: 0;
 }
 
-.navLink:hover {
+/* .navLink:hover {
   background-color: #008183;
-}
+} */
