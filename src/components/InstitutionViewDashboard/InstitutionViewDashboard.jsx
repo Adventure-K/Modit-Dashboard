@@ -32,7 +32,6 @@ function InstitutionViewDashboard(props) {
       {i.id &&
         <>
           <button onClick={() => history.push(`/manageAccountsAdmin/${i.id}`)}>Manage Users</button>
-          <button>Export</button>
           <h2>{heading}</h2>
           <h3><span>{i.name}<br />
             {i.street_address}, {i.city}, {i.state} {i.zip}</span></h3>
