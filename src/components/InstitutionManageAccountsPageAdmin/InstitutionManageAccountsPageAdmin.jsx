@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import './InstitutionManageAccounts.css';
 
 
@@ -8,8 +8,9 @@ function InstitutionManageAccountsPageAdmin() {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const i = useParams();
 
-  const i = useSelector((store) => store.activeInstitution);
+  // const i = useSelector((store) => store.activeInstitution);
 
   //this variable contains an array of all users within the organization of the logged-in user
   const loggedInUser = useSelector((store) => store.user.userReducer);
@@ -39,18 +40,25 @@ function InstitutionManageAccountsPageAdmin() {
   const deleteRequest = (id) => {
     console.log("in deleteRequest", id)
     dispatch({
-      type: 'DELETE_REQUEST',
-      payload: id
-    })
+      type: 'DELETE_REQUEST_ADMIN',
+      payload: { 
+        uid: id,
+        iid: i.id
+    }})
+    // window.location.reload();
   }
 
   //when the user clicks the "Approve" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the approved clinician or researcher to the approveRequest function in the approve_users.saga file.
   const approveRequest = (id) => {
-    console.log("in approveRequest", id)
+    const pkg = { 
+      uid: id,
+      iid: i.id
+    }
+    console.log("in approveRequestAdmin", pkg)
     dispatch({
-      type: 'APPROVE_REQUEST',
-      payload: id
-    })
+      type: 'APPROVE_REQUEST_ADMIN',
+      payload: pkg })
+    // window.location.reload();
   }
 
   let headResearcher = false;
@@ -97,14 +105,7 @@ function InstitutionManageAccountsPageAdmin() {
                   <p><span><button onClick={() => (deleteRequest(user.id))}>Delete</button></span><span><button onClick={() => (approveRequest(user.id))}>Approve</button></span>{user.first_name} {user.last_name}</p>
                 </div>
               )
-              // } else if (user.is_approved === false && loggedInUser.user_level == 3) {
-              //   return (
-              //     <div>
-              //       <p>{user.first_name} {user.last_name}</p>
-              //     </div>
-
-              //   )
-            }
+              }
           })}
 
 
