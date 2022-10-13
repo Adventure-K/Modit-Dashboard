@@ -35,6 +35,7 @@ function* getPatientData(action) {
 //deactivatePatient sends the id of the deleted patient to the patient.router file so that the specified patient can be deactivated. Dispatch to this function is made by deletePatient() in the PatientDetailPage file. getPatients() (in this file) is called when 'FETCH_PATIENTS' is dispatched to refresh the dropdown menu after a patient is deactivated.
 function* deactivatePatient(action) {
     try {
+        yield put({type: 'CLEAR_PROCESSED_DATA_REDUCERS'})
         yield axios.put(`/api/patient/${action.payload}`)
         yield put({ type: 'FETCH_PATIENTS' })
         // yield put({ try: 'FETCH_PATIENT_DATA' })

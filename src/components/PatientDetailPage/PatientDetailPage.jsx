@@ -20,7 +20,7 @@ function PatientDetail() {
   const patients = useSelector((store) => store.patients);
   const patientData = useSelector((store) => store.patientData.patientData)
   const processedData = useSelector((store) => store.patientData.recentProcessedData)
-  // console.log(processedData);
+  console.log(processedData);
   // console.log(patients);
 
 

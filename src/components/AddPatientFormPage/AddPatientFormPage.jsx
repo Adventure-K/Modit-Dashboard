@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import './AddPatient.css';
 
 
@@ -7,12 +8,17 @@ function AddPatient() {
 
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   //these variables are set when values are entered into their respective input fields 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [patientId, setPatientId] = useState('');
+
+  useEffect(() => {
+    dispatch({ type: 'CLEAR_PROCESSED_DATA_REDUCERS'})
+  }, []);
 
 
   //this function dispatches the above variables to the addPatient() function in the patient.saga file. It then resets the input fields
@@ -32,6 +38,9 @@ function AddPatient() {
     setLastName('')
     setEmail('')
     setPatientId('')
+
+    history.push('/patientDetail')
+    dispatch({ type: 'FETCH_PATIENTS' });
   }
 
   return (
