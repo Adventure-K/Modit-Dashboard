@@ -18,7 +18,7 @@ function* getUsersAdmin(action) {
         const users = yield axios.get(`/api/manageAccounts/admin/${action.payload}`);
         yield put({ type: 'SET_USERS_TO_MANAGE', payload: users.data });
     } catch (err) {
-        console.error('ERROR IN GET_USERS ADMIN', err)
+        console.error('ERROR IN GET_USERS_ADMIN', err)
     }
 }
 
@@ -61,8 +61,8 @@ function* reinstateClinician(action) {
 
 function* manageUsersSaga() {
     yield takeLatest('GET_USERS', getUsers)
-    yield takeLatest('SET/REMOVE_HEAD_RESEARCHER', changeHeadResearcher)
     yield takeLatest('GET_USERS_ADMIN', getUsersAdmin)
+    yield takeLatest('SET/REMOVE_HEAD_RESEARCHER', changeHeadResearcher)
     yield takeLatest('REINSTATE_CLINICIAN', reinstateClinician)
 
     // yield takeLatest('ADMIN_SET_INST', adminSetInst)
