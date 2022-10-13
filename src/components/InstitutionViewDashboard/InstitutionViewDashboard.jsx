@@ -28,20 +28,19 @@ function InstitutionViewDashboard(props) {
   // }
 
   return (
-    <div>
+    <div className="flex justify-center">
       {i.id &&
-        <>
+        <div className="flex flex-col items-center block p-6 rounded-lg shadow-lg bg-gray-100 max-w-sm">
+          
+          {/* <h2 className="text-xl mb-5">{heading}</h2> */}
+          <h3 className="text-xl mb-2">{i.name}</h3>
+            <h3>{i.street_address}, {i.city}, {i.state} {i.zip}</h3>
+          {i.last_name && 
+          <h4>Research Head: {rh}</h4>}
           <button  onClick={() => history.push(`/manageAccountsAdmin/${i.id}`)}
-          className="rounded-lg bg-cyan-750 text-white leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out w-36 h-9"
+          className="mt-5 rounded-lg bg-cyan-750 text-white leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out w-36 h-9"
           >Manage Users</button>
-          <button 
-          className="rounded-lg bg-cyan-750 text-white leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out w-20 h-9"
-          >Export</button>
-          <h2>{heading}</h2>
-          <h3><span>{i.name}<br />
-            {i.street_address}, {i.city}, {i.state} {i.zip}</span></h3>
-          {i.last_name && <h4>Research Head: {rh}</h4>}
-        </>
+        </div>
       }
     </div>
   );

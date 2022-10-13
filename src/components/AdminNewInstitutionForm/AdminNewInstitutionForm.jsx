@@ -58,7 +58,7 @@ function AdminNewInstitutionForm() {
         </div>
         <div className="noteDiv">
           <div></div>
-          <p className="newInstNote">Note: An existing Researcher user may be assigned as this group's Research Head by an Admin after it has been registered.</p>
+          <p className="newInstNote">Note: Add an institution to the app before adding users for that institution. <br/> A research head may be assigned after the user is created.</p>
           <div></div>
         </div>
 

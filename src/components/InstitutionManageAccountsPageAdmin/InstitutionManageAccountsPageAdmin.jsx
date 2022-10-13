@@ -13,6 +13,8 @@ function InstitutionManageAccountsPageAdmin() {
 
   //this variable contains an array of all users within the organization of the logged-in user
   const loggedInUser = useSelector((store) => store.user.userReducer);
+  //this variable contains all users within the logged-in user's institution
+  const users = useSelector((store) => store.usersToManage);
 
 
   // On page load, "GET_USERS" triggers the getUsers() function in the manage_users.saga file. It ultimately stores all users attached to the institution of the logged in user in the "users" variable (above)
@@ -32,7 +34,6 @@ function InstitutionManageAccountsPageAdmin() {
     }, [])
   }
 
-  const users = useSelector((store) => store.usersToManage);
 
   //when the user clicks the "Delete" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the deleted clinician or researcher to the deleteRequest function in the approve_users.saga file.
   const deleteRequest = (id) => {
