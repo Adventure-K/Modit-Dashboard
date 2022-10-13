@@ -45,26 +45,26 @@ function RegisterForm() {
         </h3>
       )}
       <div className="flex flex-col items-center">
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required
-            onChange={(event) => setUsername(event.target.value)}
-            className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
-            placeholder="Email Address"
-          />
+        <input
+          type="text"
+          name="username"
+          value={username}
+          required
+          onChange={(event) => setUsername(event.target.value)}
+          className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+          placeholder="Email Address"
+        />
       </div>
       <div className="flex flex-col items-center">
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(event) => setPassword(event.target.value)}
-            className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
-            placeholder="Password"
-          />
+        <input
+          type="password"
+          name="password"
+          value={password}
+          required
+          onChange={(event) => setPassword(event.target.value)}
+          className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+          placeholder="Password"
+        />
       </div>
       <div className="flex flex-col items-center">
         <select
@@ -73,12 +73,13 @@ function RegisterForm() {
           value={role}
           onChange={dropDownChange}
           className="w-full text-center border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
-
         >
-          <option value="select" 
-          className="w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
-
-        >Select a role</option>
+          <option
+            value="select"
+            className="w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+          >
+            Select a role
+          </option>
           <option value={0}>Clinician</option>
           <option value={1}>Researcher</option>
         </select>
