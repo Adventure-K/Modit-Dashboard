@@ -22,11 +22,11 @@ router.get('/', rejectUnauthenticated, rejectUnauthorized2, (req, res) => {
 
 // This route is similar to the one above but governs requests by admins to manage all users.
 router.get('/admin/:id', rejectUnauthenticated, rejectUnauthorized3, (req, res) => {
-  console.log('in getUsers for inst', req.params.id);
+  // console.log('in getUsers for inst', req.params.id);
   const query = `SELECT * FROM "user" WHERE inst_id = $1;`;
   pool.query(query, [req.params.id])
     .then(result => {
-      console.log(result.rows);
+      // console.log(result.rows);
       res.send(result.rows);
     }).catch(err => {
       console.log(err);
@@ -36,7 +36,7 @@ router.get('/admin/:id', rejectUnauthenticated, rejectUnauthorized3, (req, res) 
 
 // receives request from manage_users.saga. If the click-on user is a research head (user_level 2), the query to demote them to researcher (user_level 1) will run. If the clicked-on user is a researcher (user_level 1), the query to promote them to research head will run.
 router.put('/', rejectUnauthenticated, rejectUnauthorized3, async (req, res) => {
-  console.log('in manage accounts put', req.body);
+  // console.log('in manage accounts put', req.body);
 
   const connection = await pool.connect();
 
@@ -55,7 +55,7 @@ router.put('/', rejectUnauthenticated, rejectUnauthorized3, async (req, res) => 
       res.sendStatus(200);
     } catch (err) {
       await connection.query('ROLLBACK');
-      console.log('promote user', err)
+      // console.log('promote user', err)
       res.sendStatus(500);
     } finally {
       connection.release();
@@ -88,7 +88,7 @@ router.put('/admin_clear_inst_id', rejectUnauthenticated, rejectUnauthorized3, (
   const query = `
     UPDATE "user" SET "inst_id" = NULL
     WHERE "user".id = $1;`;
-    pool.query(query, [req.user.id])
+  pool.query(query, [req.user.id])
     .then(result => {
       res.sendStatus(200);
     }).catch(err => {
@@ -100,18 +100,31 @@ router.put('/admin_clear_inst_id', rejectUnauthenticated, rejectUnauthorized3, (
 
 // Sets logged in admin's inst_id to id of selected institution in order to manage users
 router.put('/admin_inst_id', rejectUnauthenticated, rejectUnauthorized3, (req, res) => {
-  console.log('admin_inst_id req.body:', req.body)
+  // console.log('admin_inst_id req.body:', req.body)
   const query = `
   UPDATE "user" SET "inst_id" = $1
   WHERE "user".id = $2;`;
   const values = [req.body.id, req.user.id]
   pool.query(query, values)
-  .then(result => {
-    res.sendStatus(200);
-  }).catch(err => {
-    console.log('admin inst_id set', err);
-    res.sendStatus(500);
-  })
+    .then(result => {
+      res.sendStatus(200);
+    }).catch(err => {
+      console.log('admin inst_id set', err);
+      res.sendStatus(500);
+    })
 });
+
+router.put('/reinstate', (req, res) => {
+  console.log('in reinstate put', req.body)
+  query = `UPDATE "user" SET "is_active" = 'true'
+          WHERE "user".id = $1;`;
+  pool.query(query, [req.body.id])
+    .then(result => {
+      res.sendStatus(200);
+    }).catch(err => {
+      console.log('reinstate user query error', err);
+      res.sendStatus(500);
+    })
+})
 
 module.exports = router;
