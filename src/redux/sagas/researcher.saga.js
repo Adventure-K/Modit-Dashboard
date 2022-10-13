@@ -8,7 +8,7 @@ function* fetchClinicians() {
         console.log('get clinicians for researcher view:', clinicians.data);
         yield put({ type: 'SET_CLINICIANS', payload: clinicians.data });
     } catch {
-        console.log('fetch researcher clinician list saga', err);
+        console.log('RESEARCHER SAGA: error in fetching clinicians');
     }
 }
 
@@ -61,7 +61,7 @@ function* fetchTeamData() {
     // get aggregate data for research team from the DB and stores in patient reducer redux state
     try {
         const teamData = yield axios.get('/api/researcher/teamData');
-        console.log('get aggregate data for researcher view:', teamData.data[0]);
+        // console.log('get aggregate data for researcher view:', teamData.data[0]);
         yield put({ type: 'SET_AGGREGATE_DATA', payload: teamData.data });
     } catch (err) {
         console.log('fetch researcher team data saga', err);
