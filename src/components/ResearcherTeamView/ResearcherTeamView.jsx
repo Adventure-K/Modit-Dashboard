@@ -10,7 +10,6 @@ import PieChart2 from '../PatientDetailCharts/PatientDetailAverageChart';
 
 function ResearcherTeamView() {
   const dispatch = useDispatch()
-  const history = useHistory()
 
   const params = useParams()
   const patients = useSelector((store) => store.patients)
@@ -28,6 +27,13 @@ function ResearcherTeamView() {
 
 
   const [patientId, setPatientId] = useState(' ')
+
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_TEAM_PATIENTS',
+      payload: params.id,
+    })
+  }, [])
 
   const dataToConvert = {
     data: [processedData],
@@ -66,12 +72,6 @@ function ResearcherTeamView() {
   }
 
 
-  useEffect(() => {
-    dispatch({
-      type: 'FETCH_TEAM_PATIENTS',
-      payload: params.id,
-    })
-  }, [])
 
   return (
     <div>
