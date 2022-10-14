@@ -9,7 +9,7 @@ const router = express.Router();
 // This route governs requests by research heads to manage their users. 
 router.get('/', rejectUnauthenticated, rejectUnauthorized2, (req, res) => {
   console.log('in getUsers', req.user.id);
-  const query = `SELECT * FROM "user" WHERE inst_id = $1;`;
+  const query = `SELECT * FROM "user" WHERE inst_id = $1 ORDER BY first_name ASC;`;
   pool.query(query, [req.user.inst_id])
     .then(result => {
       console.log(result.rows);

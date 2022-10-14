@@ -18,6 +18,7 @@ function InstitutionManageAccountsPageAdmin() {
   const users = useSelector((store) => store.usersToManage);
 
 
+
   // On page load, "GET_USERS" triggers the getUsers() function in the manage_users.saga file. It ultimately stores all users attached to the institution of the logged in user in the "users" variable (above)
   // Admins may view this page for any institution, so the inst_id is retrieved from the URL instead of the logged in user's inst_id as with a research head.
   if (loggedInUser.user_level >= 3) {
