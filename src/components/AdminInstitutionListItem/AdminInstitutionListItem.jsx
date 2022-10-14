@@ -24,15 +24,15 @@ function AdminInstitutionListItem({ i }) {
         className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650"
       >
         <td
-        className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+        className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap"
         >{i.name}</td>
         <td
-        className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+        className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap"
         >
           {i.street_address}, {i.city}, {i.state} {i.zip}
         </td>
         <td
-        className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+        className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap"
         >
           {i.first_name} {i.last_name}
         </td>
