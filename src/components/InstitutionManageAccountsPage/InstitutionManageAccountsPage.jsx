@@ -223,7 +223,7 @@ function InstitutionManageAccountsPage() {
                               onClick={() =>
                                 promoteUser(user.id, user.user_level)
                               }
-                              className="ml-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                              className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                             >
                               Promote
                             </button>
@@ -256,8 +256,9 @@ function InstitutionManageAccountsPage() {
           </>
         )}
       </div>
-      <h3 className="text-center">Reinstate User</h3>
-      <div className="flex flex-col items-center">
+      
+      <div className="flex flex-col items-center mt-10">
+        {/* <h3 className="text-center">Reinstate User</h3> */}
         <select
           onChange={(event) => setClinicianToReinstate(event.target.value)}
           name="clinician"
@@ -266,7 +267,7 @@ function InstitutionManageAccountsPage() {
         >
           <option value="initial"
             className="w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
-            >Select A Clinician</option>
+            >Reinstate User</option>
           {users &&
             users.map((clinician) => {
               if (clinician.is_active === false) {
@@ -278,7 +279,7 @@ function InstitutionManageAccountsPage() {
               }
             })}
         </select>
-        <button className="mt-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5" 
+        <button className="mt-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5" 
         onClick={reinstateClinician}>
           Reinstate
         </button>
