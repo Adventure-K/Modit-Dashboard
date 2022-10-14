@@ -41,23 +41,25 @@ function InstitutionManageAccountsPageAdmin() {
     console.log("in deleteRequest", id)
     dispatch({
       type: 'DELETE_REQUEST_ADMIN',
-      payload: { 
+      payload: {
         uid: id,
         iid: i.id
-    }})
+      }
+    })
     // window.location.reload();
   }
 
   //when the user clicks the "Approve" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the approved clinician or researcher to the approveRequest function in the approve_users.saga file.
   const approveRequest = (id) => {
-    const pkg = { 
+    const pkg = {
       uid: id,
       iid: i.id
     }
     console.log("in approveRequestAdmin", pkg)
     dispatch({
       type: 'APPROVE_REQUEST_ADMIN',
-      payload: pkg })
+      payload: pkg
+    })
     // window.location.reload();
   }
 
@@ -105,7 +107,7 @@ function InstitutionManageAccountsPageAdmin() {
                   <p><span><button onClick={() => (deleteRequest(user.id))}>Delete</button></span><span><button onClick={() => (approveRequest(user.id))}>Approve</button></span>{user.first_name} {user.last_name}</p>
                 </div>
               )
-              }
+            }
           })}
 
 
@@ -117,7 +119,7 @@ function InstitutionManageAccountsPageAdmin() {
             <div className="researchersDiv">
               <h3>Researchers</h3>
               {users.map(user => {
-                if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
+                if (user.is_active === true && user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
                   return (
 
                     <div key={user.id}>
@@ -140,7 +142,7 @@ function InstitutionManageAccountsPageAdmin() {
               <h3>Clinicians</h3>
               {
                 users.map(user => {
-                  if (user.is_approved === true && user.user_level === 0) {
+                  if (user.is_active === true && user.is_approved === true && user.user_level === 0) {
                     return (
                       <div key={user.id} onClick={() => (toUserDetails(user.id))}>
                         <p>{user.first_name} {user.last_name}</p>
@@ -157,7 +159,7 @@ function InstitutionManageAccountsPageAdmin() {
               <div className="researchersDiv">
                 <h3>Researchers</h3>
                 {users.map(user => {
-                  if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
+                  if (user.is_active === true && user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
                     return (
 
                       <div key={user.id}>
@@ -180,7 +182,7 @@ function InstitutionManageAccountsPageAdmin() {
                 <h3>Clinicians</h3>
                 {
                   users.map(user => {
-                    if (user.is_approved === true && user.user_level === 0) {
+                    if (user.is_active === true && user.is_approved === true && user.user_level === 0) {
                       return (
                         <div key={user.id} onClick={() => (toUserDetails(user.id))}>
                           <p>{user.first_name} {user.last_name}</p>
