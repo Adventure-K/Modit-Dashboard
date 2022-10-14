@@ -18,6 +18,7 @@ function InstitutionManageAccountsPageAdmin() {
   const users = useSelector((store) => store.usersToManage);
 
 
+
   // On page load, "GET_USERS" triggers the getUsers() function in the manage_users.saga file. It ultimately stores all users attached to the institution of the logged in user in the "users" variable (above)
   // Admins may view this page for any institution, so the inst_id is retrieved from the URL instead of the logged in user's inst_id as with a research head.
   if (loggedInUser.user_level >= 3) {
@@ -125,7 +126,9 @@ function InstitutionManageAccountsPageAdmin() {
                     <div key={user.id}>
                       <p>
                         <span onClick={() => (toUserDetails(user.id))}>
-                          {user.first_name} {user.last_name}
+                         {user.user_level == 2 && loggedInUser.user_level == 3 ?
+                        <div className='kingOfResearchers'> <p className='kingOfResearchers'>👑&nbsp;</p> {user.first_name} {user.last_name}&nbsp;</div> 
+                        : <div>{user.first_name} {user.last_name}&nbsp;</div>} 
                         </span>
                         <span>
                           {user.user_level == 2 && loggedInUser.user_level == 3 ? <button onClick={() => promoteUser(user.id, user.user_level, user.inst_id)}>Demote</button> : <></>}
@@ -165,7 +168,7 @@ function InstitutionManageAccountsPageAdmin() {
                       <div key={user.id}>
                         <p>
                           <span onClick={() => (toUserDetails(user.id))}>
-                            {user.first_name} {user.last_name}
+                            {user.first_name} {user.last_name}&nbsp;
                           </span>
                           <span>
                             {user.user_level == 1 && loggedInUser.user_level == 3 ? <button onClick={() => promoteUser(user.id, user.user_level, user.inst_id)}>Promote</button> : <></>}

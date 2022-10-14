@@ -6,7 +6,6 @@ const router = express.Router();
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     // console.log(req.params);
     let patientModitId = Number(req.params.id)
-    // console.log('yh', patientId);
 
     const queryText = `
     SELECT * FROM "session"
@@ -32,7 +31,9 @@ router.get('/avgData/:id', rejectUnauthenticated, (req, res) => {
     console.log(patientModitId);
 
     const queryText = `
-    SELECT AVG("proportionOfGazeTimeOnDrugs") AS "drugs", AVG("proportionOfGazeTimeOnNonDrugs") AS "noDrugs", AVG("proportionOfGazeTimeOnBack") AS "back"
+    SELECT CAST(AVG("proportionOfGazeTimeOnDrugs") AS DECIMAL(3,2)) AS "drugs",
+    CAST(AVG("proportionOfGazeTimeOnNonDrugs") AS DECIMAL(3,2)) AS "noDrugs",
+    CAST(AVG("proportionOfGazeTimeOnBack") AS DECIMAL(3,2)) AS "back"
     FROM "session" WHERE "modit_id" = $1;
     `;
 
