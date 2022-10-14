@@ -44,32 +44,39 @@ function AdminNewInstitutionForm() {
       <h2 className="heading" onClick={() => fillFields()}>Institution Registration</h2>
       <br />
 
-      <form onSubmit={handleAddInstitution}>
-        <div className="displayContainer">
+      <form className="flex items-center max-h-lg"
+      onSubmit={handleAddInstitution}>
+        <div className="flex flex-col items-center block p-6 mt-10 rounded-lg shadow-lg bg-gray-100 h-1/3 w-1/4 max-w-lg"
+        >
           <div></div>
           <div className="inputsContainer">
             <div className="inputsLeft">
-              <input className="adminInput" type="text" value={newInstitution.name} placeholder="Institution Name" onChange={(event) => handleValUpdate(event, 'name')} />
-              <input className="adminInput" type="text" value={newInstitution.street_address} placeholder="Street Address" onChange={(event) => handleValUpdate(event, 'street_address')} />
-              <input className="adminInput" type="text" value={newInstitution.city} placeholder="City" onChange={(event) => handleValUpdate(event, 'city')} />
+              <input className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500" 
+              type="text" value={newInstitution.name} placeholder="Institution Name" onChange={(event) => handleValUpdate(event, 'name')} />
+              <input className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500" 
+              type="text" value={newInstitution.street_address} placeholder="Street Address" onChange={(event) => handleValUpdate(event, 'street_address')} />
+              <input className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500" 
+              type="text" value={newInstitution.city} placeholder="City" onChange={(event) => handleValUpdate(event, 'city')} />
             </div>
             <div className="inputsRight">
-              <input className="adminInput" type="text" value={newInstitution.state} placeholder="State" onChange={(event) => handleValUpdate(event, 'state')} />
-              <input className="adminInput" type="text" value={newInstitution.zip} placeholder="Zip" onChange={(event) => handleValUpdate(event, 'zip')} />
+              <input className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500" 
+              type="text" value={newInstitution.state} placeholder="State" onChange={(event) => handleValUpdate(event, 'state')} />
+              <input className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500" 
+              type="text" value={newInstitution.zip} placeholder="Zip" onChange={(event) => handleValUpdate(event, 'zip')} />
             </div>
           </div>
           <div></div>
         </div>
-        <div className="btnDiv">
-          <div></div>
+        {/* <div className="btnDiv">
+          <div></div> */}
           <button type="submit">Register</button>
-          <div></div>
-        </div>
-        <div className="noteDiv">
-          <div></div>
+          {/* <div></div>
+        </div> */}
+        {/* <div className="noteDiv">
+          <div></div> */}
           <p className="newInstNote">Note: Add an institution to the app before adding users for that institution. <br/> A research head may be assigned after the user is created.</p>
-          <div></div>
-        </div>
+          {/* <div></div>
+        </div> */}
 
 
       </form>

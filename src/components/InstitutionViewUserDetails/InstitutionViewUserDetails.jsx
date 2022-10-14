@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
-import './InstitutionViewUserDetails.css';
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams, useHistory } from 'react-router-dom'
+import './InstitutionViewUserDetails.css'
 
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
@@ -9,41 +9,41 @@ import './InstitutionViewUserDetails.css';
 function InstitutionViewUserDetails(props) {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
-  const [heading, setHeading] = useState('Manage User');
+  const [heading, setHeading] = useState('Manage User')
 
-  const dispatch = useDispatch();
-  const userId = useParams();
-  const history = useHistory();
+  const dispatch = useDispatch()
+  const userId = useParams()
+  const history = useHistory()
 
   useEffect(() => {
     console.log('Fetching User ID using Params', userId)
     dispatch({ type: 'GET_SELECTED_USER', payload: userId.id })
   }, [])
 
-  const loggedInUser = useSelector(store => store.user.userReducer)
-  const selectedUser = useSelector((store) => store.selectedUser);
-  console.log('Selected user:', selectedUser);
-  console.log('Selected user inst ID:', selectedUser.inst_id);
+  const loggedInUser = useSelector((store) => store.user.userReducer)
+  const selectedUser = useSelector((store) => store.selectedUser)
+  console.log('Selected user:', selectedUser)
+  console.log('Selected user inst ID:', selectedUser.inst_id)
 
-  const [editMode, setEditMode] = useState(false);
-  const [newPass, setNewPass] = useState('');
+  const [editMode, setEditMode] = useState(false)
+  const [newPass, setNewPass] = useState('')
 
   const handleChangeView = () => {
     if (selectedUser.user_level == 0) {
-      history.push(`/researcherTeamView/${selectedUser.id}`);
+      history.push(`/researcherTeamView/${selectedUser.id}`)
     } else if (loggedInUser.user_level == 3) {
       console.log('you must be an admin!')
-      history.push(`/researcherViewDashboard/${selectedUser.inst_id}`);
+      history.push(`/researcherViewDashboard/${selectedUser.inst_id}`)
     } else {
-      history.push(`/researcherViewDashboard`);
+      history.push(`/researcherViewDashboard`)
     }
   }
 
   const handleRetireUser = () => {
-    if (confirm('This will disable the user\'s account. Proceed?')) {
+    if (confirm("This will disable the user's account. Proceed?")) {
       dispatch({
         type: 'RETIRE_USER',
-        payload: selectedUser.id
+        payload: selectedUser.id,
       })
       // window.location.reload();
       setTimeout(() => {
@@ -52,29 +52,28 @@ function InstitutionViewUserDetails(props) {
         } else {
           history.push(`/manageAccountsAdmin/${selectedUser.inst_id}`)
         }
-        console.log("Delayed for 1 second.");
-      }, "300")
-
+        console.log('Delayed for 1 second.')
+      }, '300')
     } else {
-      return;
+      return
     }
   }
 
   const handleReinstateUser = () => {
-    if (confirm('This will re-enable the user\'s account. Proceed?')) {
+    if (confirm("This will re-enable the user's account. Proceed?")) {
       dispatch({
         type: 'REINSTATE_USER',
-        payload: selectedUser.id
+        payload: selectedUser.id,
       })
-      window.location.reload();
+      window.location.reload()
     } else {
-      return;
+      return
     }
   }
 
   const handleEditMode = (event) => {
-    event.preventDefault();
-    setEditMode(!editMode);
+    event.preventDefault()
+    setEditMode(!editMode)
   }
 
   const handlePassChange = (event) => {
@@ -84,63 +83,92 @@ function InstitutionViewUserDetails(props) {
   const handleSubmit = () => {
     const pkg = {
       id: userId.id,
-      pass: newPass
+      pass: newPass,
     }
     dispatch({
       type: 'UPDATE_PASSWORD',
-      payload: pkg
+      payload: pkg,
     })
-    setEditMode(!editMode);
+    setEditMode(!editMode)
   }
 
   return (
-    <div>
-      <h2>{heading}</h2>
-      {editMode ? // Render for Edit Mode
-        <div className="editModeContainer">
-          <div></div>
-          <div className="detailsCard">
-            <p>{selectedUser.first_name} {selectedUser.last_name}</p>
-            <p>{selectedUser.username}</p>
-            <div className="resetForm">
-              <input type="password" onChange={(event) => handlePassChange(event)} placeholder="New Password" />
-              <div>
-                <button onClick={handleSubmit}>Submit</button>
-                <button onClick={handleEditMode}>Cancel</button>
+    <>
+      <h2 className="text-3xl font-bold">{heading}</h2>
+      <div className="flex justify-center max-h-lg">
+        {editMode ? ( // Render for Edit Mode
+          <div className="flex flex-col items-center block p-6 mt-10 rounded-lg shadow-lg bg-gray-100 h-1/3 w-1/4 max-w-lg">
+            <div></div>
+            <div className="detailsCard">
+              <p>
+                {selectedUser.first_name} {selectedUser.last_name}
+              </p>
+              <p>{selectedUser.username}</p>
+              <div className="resetForm">
+                <input
+                  className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+                  type="password"
+                  onChange={(event) => handlePassChange(event)}
+                  placeholder="New Password"
+                />
+                <div>
+                  <button 
+                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mr-1 mt-2"
+                  onClick={handleSubmit}>Submit</button>
+                  <button 
+                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto ml-1 mt-2"
+                  onClick={handleEditMode}>Cancel</button>
+                </div>
               </div>
             </div>
+            <div></div>
           </div>
-          <div></div>
-        </div>
-        : // Render for Not Edit Mode
+        ) : (
+          // Render for Not Edit Mode
 
-        <div className="notEditModeContainer">
-          <div></div>
-          <div className="detailsCard">
-            <p>{selectedUser.first_name} {selectedUser.last_name}</p>
-            <p>{selectedUser.username}</p>
-            <div className="cardBtnContainer">
-              <div></div>
-              <div className="cardBtns">
-                <button className="cardBtn" onClick={handleChangeView}>View Data</button>
-                <button className="cardBtn" onClick={handleEditMode}>Change Password</button>
-                {selectedUser.is_active ?
-                  <button className="cardBtn" onClick={handleRetireUser}>Retire User</button>
-                  :
-                  <button className="cardBtn" onClick={handleReinstateUser}>Reinstate User</button>
-                }
-
+          <div className="flex flex-col items-center block p-6 mt-10 rounded-lg shadow-lg bg-gray-100 w-1/4 max-w-lg">
+            <div></div>
+            <div className="detailsCard">
+              <p>
+                {selectedUser.first_name} {selectedUser.last_name}
+              </p>
+              <p>{selectedUser.username}</p>
+              <div className="cardBtnContainer">
+                <div></div>
+                <div className="cardBtns">
+                  <button 
+                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
+                  onClick={handleChangeView}>
+                    View Data
+                  </button>
+                  <button 
+                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
+                  onClick={handleEditMode}>
+                    Change Password
+                  </button>
+                  {selectedUser.is_active ? (
+                    <button 
+                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
+                    onClick={handleRetireUser}>
+                      Retire User
+                    </button>
+                  ) : (
+                    <button 
+                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
+                    onClick={handleReinstateUser}>
+                      Reinstate User
+                    </button>
+                  )}
+                </div>
+                <div></div>
               </div>
-              <div></div>
             </div>
+            <div></div>
           </div>
-          <div></div>
-        </div>
-
-
-      }
-    </div>
-  );
+        )}
+      </div>
+    </>
+  )
 }
 
-export default InstitutionViewUserDetails;
+export default InstitutionViewUserDetails
