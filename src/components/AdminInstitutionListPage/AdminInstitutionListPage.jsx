@@ -24,20 +24,20 @@ function AdminInstitutionListPage(props) {
       <h2>{heading}</h2>
       <button
         onClick={() => history.push('/adminNewInstitutionForm')}
-        className="rounded-lg bg-cyan-750 text-white leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out w-36 h-9"
+        className="rounded-lg bg-gray-500 text-white leading-normal uppercase shadow-md hover:bg-yellow-650 hover:shadow-lg focus:bg-yellow-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-550 active:shadow-lg transition duration-150 ease-in-out w-36 h-9"
       >
         Add Institution
       </button>
       <table className="min-w-full mt-2">
         <thead className="bg-white border-b ">
           <tr>
-            <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+            <th className="text-lg font-bold text-gray-900 px-6 py-4 text-left">
               Name
             </th>
-            <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+            <th className="text-lg font-bold text-gray-900 px-6 py-4 text-left">
               Address
             </th>
-            <th className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+            <th className="text-lg font-bold text-gray-900 px-6 py-4 text-left">
               Research Head
             </th>
           </tr>
