@@ -1,13 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 html,
 body,
 #react-root {
-  height: 100%;
+  position: relative;
+  min-height: 100vh;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  background-color: #DEDEDE;
+  background-color: #dedede;
 }
 
 img {
@@ -81,7 +87,7 @@ Button
 Alert
 -------------------------------------------------------------------------------- */
 
-.alert {
+/* .alert {
   box-sizing: border-box;
   padding: 15px 10px;
   margin: 15px 0;
@@ -90,7 +96,7 @@ Alert
   border-radius: 3px;
   color: #e01616;
   font-size: 0.8rem;
-}
+} */
 
 /* --------------------------------------------------------------------------------
 Form Treatment

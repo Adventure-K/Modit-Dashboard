@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 // import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector, useDispatch } from 'react-redux';
 
+
 function Nav() {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const user = useSelector((store) => store.user.userReducer);
 

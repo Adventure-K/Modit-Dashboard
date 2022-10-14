@@ -7,6 +7,7 @@
     "node": "16.x"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "chart.js": "^3.9.1",
@@ -37,7 +38,10 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "autoprefixer": "^10.4.12",
+    "nodemon": "^2.0.4",
+    "postcss": "^8.4.17",
+    "tailwindcss": "^3.1.8"
   },
   "browserslist": [
     ">0.2%",
