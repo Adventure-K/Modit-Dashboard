@@ -95,7 +95,7 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/login">
+          <Route exact path="/home">
             {user.id && user.user_level === 3 ? (
               // If the user is already logged in,
               // redirect to the /user page
