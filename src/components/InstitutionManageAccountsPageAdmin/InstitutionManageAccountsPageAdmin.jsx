@@ -132,7 +132,7 @@ function InstitutionManageAccountsPageAdmin() {
                         <span>
                           {user.user_level == 2 && loggedInUser.user_level == 3 ? 
                           <button onClick={() => promoteUser(user.id, user.user_level, user.inst_id)}
-                          className="ml-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                          className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                           >Demote</button> : <></>}
                         </span>
                       </p>
@@ -144,13 +144,15 @@ function InstitutionManageAccountsPageAdmin() {
               }
             </div>
             <div className="basis-1/3 mr-5 mt-2 text-center">
-              <h3 className="text-xl mb-3 bg-white border-b">Clinicians</h3>
+              <h3 className="text-xl bg-white border-b">Clinicians</h3>
               {
                 users.map(user => {
                   if (user.is_approved === true && user.user_level === 0) {
                     return (
-                      <div key={user.id} onClick={() => (toUserDetails(user.id))}>
-                        <p>{user.first_name} {user.last_name}</p>
+                      <div className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650"
+                      key={user.id} onClick={() => (toUserDetails(user.id))}>
+                        <p className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                        >{user.first_name} {user.last_name}</p>
                       </div>
                     )
                   }
