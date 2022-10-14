@@ -18,6 +18,7 @@ function InstitutionManageAccountsPageAdmin() {
   const users = useSelector((store) => store.usersToManage);
 
 
+
   // On page load, "GET_USERS" triggers the getUsers() function in the manage_users.saga file. It ultimately stores all users attached to the institution of the logged in user in the "users" variable (above)
   // Admins may view this page for any institution, so the inst_id is retrieved from the URL instead of the logged in user's inst_id as with a research head.
   if (loggedInUser.user_level >= 3) {
@@ -41,23 +42,25 @@ function InstitutionManageAccountsPageAdmin() {
     console.log("in deleteRequest", id)
     dispatch({
       type: 'DELETE_REQUEST_ADMIN',
-      payload: { 
+      payload: {
         uid: id,
         iid: i.id
-    }})
+      }
+    })
     // window.location.reload();
   }
 
   //when the user clicks the "Approve" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the approved clinician or researcher to the approveRequest function in the approve_users.saga file.
   const approveRequest = (id) => {
-    const pkg = { 
+    const pkg = {
       uid: id,
       iid: i.id
     }
     console.log("in approveRequestAdmin", pkg)
     dispatch({
       type: 'APPROVE_REQUEST_ADMIN',
-      payload: pkg })
+      payload: pkg
+    })
     // window.location.reload();
   }
 
@@ -109,7 +112,7 @@ function InstitutionManageAccountsPageAdmin() {
         >Approve</button></span></p>
                 </div>
               )
-              }
+            }
           })}
 
 
@@ -121,13 +124,15 @@ function InstitutionManageAccountsPageAdmin() {
             <div className="basis-1/3 mt-2 text-center">
               <h3 className="text-xl bg-white border-b">Researchers</h3>
               {users.map(user => {
-                if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
+                if (user.is_active === true && user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
                   return (
 
                     <div className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650" key={user.id}>
                       <p className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <span onClick={() => (toUserDetails(user.id))}>
-                          {user.first_name} {user.last_name}
+                         {user.user_level == 2 && loggedInUser.user_level == 3 ?
+                        <div className='kingOfResearchers'> <p className='kingOfResearchers'>👑&nbsp;</p> {user.first_name} {user.last_name}&nbsp;</div> 
+                        : <div>{user.first_name} {user.last_name}&nbsp;</div>} 
                         </span>
                         <span>
                           {user.user_level == 2 && loggedInUser.user_level == 3 ? 
@@ -147,7 +152,7 @@ function InstitutionManageAccountsPageAdmin() {
               <h3 className="text-xl bg-white border-b">Clinicians</h3>
               {
                 users.map(user => {
-                  if (user.is_approved === true && user.user_level === 0) {
+                  if (user.is_active === true && user.is_approved === true && user.user_level === 0) {
                     return (
                       <div className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650"
                       key={user.id} onClick={() => (toUserDetails(user.id))}>
@@ -166,14 +171,14 @@ function InstitutionManageAccountsPageAdmin() {
               <div className="basis-1/3 mt-2 text-center">
               <h3 className="text-xl bg-white border-b">Researchers</h3>
                 {users.map(user => {
-                  if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
+                  if (user.is_active === true && user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
                     return (
 
                       <div key={user.id}
                       className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650">
                         <p className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                           <span onClick={() => (toUserDetails(user.id))}>
-                            {user.first_name} {user.last_name}
+                            {user.first_name} {user.last_name}&nbsp;
                           </span>
                           <span>
                             {user.user_level == 1 && loggedInUser.user_level == 3 ? 
@@ -193,7 +198,7 @@ function InstitutionManageAccountsPageAdmin() {
               <h3 className="text-xl bg-white border-b">Clinicians</h3>
                 {
                   users.map(user => {
-                    if (user.is_approved === true && user.user_level === 0) {
+                    if (user.is_active === true && user.is_approved === true && user.user_level === 0) {
                       return (
                         <div key={user.id} onClick={() => (toUserDetails(user.id))}
                         className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650">

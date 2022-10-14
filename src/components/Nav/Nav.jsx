@@ -25,11 +25,11 @@ function Nav() {
     navClassByULevelLink = 'adminLink'
   };
 
-  const logOut = () => {    
-    dispatch({ 
+  const logOut = () => {
+    dispatch({
       type: 'LOGOUT',
       callback: () => history.push('/login')
-    })    
+    })
   }
 
   return (
@@ -40,7 +40,7 @@ function Nav() {
 
       </Link>
       {/* logged-in user display */}
-      {user.id && <p><span>{user.id} - {user.username} | level: {user.user_level} | inst: {user.inst_id}</span></p>}
+      {/* {user.id && <p><span>{user.id} - {user.username} | level: {user.user_level} | inst: {user.inst_id}</span></p>} */}
       <div>
         {/* If no user is logged in, show these links */}
         {!user.id && (
@@ -57,7 +57,7 @@ function Nav() {
               Home
             </Link>
 
-            <Link className={[navClassByULevelLink, "navLink"].join(' ')} to="/login" onClick={() => logOut() }>
+            <Link className={[navClassByULevelLink, "navLink"].join(' ')} to="/login" onClick={() => logOut()}>
               Logout
             </Link>
           </>

@@ -11,6 +11,15 @@ function AdminNewInstitutionForm() {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const fillFields = () => {
+    setNewInstitution({...newInstitution, name:'Alliance Clinic'})
+    setNewInstitution({...newInstitution, street_address:'3329 University Ave SE,'})
+    setNewInstitution({...newInstitution, city:'Minneapolis'})
+    setNewInstitution({...newInstitution, state:'MN'})
+    setNewInstitution({...newInstitution, zip:'55414'})
+    // setPlant({...newPlant, name: event.target.value})
+  }
+
   const handleAddInstitution = () => {
     event.preventDefault();
     if (!newInstitution.name || !newInstitution.street_address || !newInstitution.city || !newInstitution.state || !newInstitution.zip) {
@@ -32,7 +41,7 @@ function AdminNewInstitutionForm() {
 
     // <div className="displayContainer">
     <>
-      <h2 className="heading">Institution Registration</h2>
+      <h2 className="heading" onClick={() => fillFields()}>Institution Registration</h2>
       <br />
 
       <form onSubmit={handleAddInstitution}>
@@ -40,13 +49,13 @@ function AdminNewInstitutionForm() {
           <div></div>
           <div className="inputsContainer">
             <div className="inputsLeft">
-              <input className="adminInput" type="text" placeholder="Institution Name" onChange={(event) => handleValUpdate(event, 'name')} />
-              <input className="adminInput" type="text" placeholder="Street Address" onChange={(event) => handleValUpdate(event, 'street_address')} />
-              <input className="adminInput" type="text" placeholder="City" onChange={(event) => handleValUpdate(event, 'city')} />
+              <input className="adminInput" type="text" value={newInstitution.name} placeholder="Institution Name" onChange={(event) => handleValUpdate(event, 'name')} />
+              <input className="adminInput" type="text" value={newInstitution.street_address} placeholder="Street Address" onChange={(event) => handleValUpdate(event, 'street_address')} />
+              <input className="adminInput" type="text" value={newInstitution.city} placeholder="City" onChange={(event) => handleValUpdate(event, 'city')} />
             </div>
             <div className="inputsRight">
-              <input className="adminInput" type="text" placeholder="State" onChange={(event) => handleValUpdate(event, 'state')} />
-              <input className="adminInput" type="text" placeholder="Zip" onChange={(event) => handleValUpdate(event, 'zip')} />
+              <input className="adminInput" type="text" value={newInstitution.state} placeholder="State" onChange={(event) => handleValUpdate(event, 'state')} />
+              <input className="adminInput" type="text" value={newInstitution.zip} placeholder="Zip" onChange={(event) => handleValUpdate(event, 'zip')} />
             </div>
           </div>
           <div></div>

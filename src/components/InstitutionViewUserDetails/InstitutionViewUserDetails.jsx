@@ -45,7 +45,16 @@ function InstitutionViewUserDetails(props) {
         type: 'RETIRE_USER',
         payload: selectedUser.id
       })
-      window.location.reload();
+      // window.location.reload();
+      setTimeout(() => {
+        if (loggedInUser.user_level == 2) {
+          history.push('/manageAccounts')
+        } else {
+          history.push(`/manageAccountsAdmin/${selectedUser.inst_id}`)
+        }
+        console.log("Delayed for 1 second.");
+      }, "300")
+
     } else {
       return;
     }
