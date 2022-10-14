@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import './InstitutionManageAccounts.css';
 
 
@@ -8,8 +8,9 @@ function InstitutionManageAccountsPageAdmin() {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const i = useParams();
 
-  const i = useSelector((store) => store.activeInstitution);
+  // const i = useSelector((store) => store.activeInstitution);
 
   //this variable contains an array of all users within the organization of the logged-in user
   const loggedInUser = useSelector((store) => store.user.userReducer);
@@ -39,18 +40,25 @@ function InstitutionManageAccountsPageAdmin() {
   const deleteRequest = (id) => {
     console.log("in deleteRequest", id)
     dispatch({
-      type: 'DELETE_REQUEST',
-      payload: id
-    })
+      type: 'DELETE_REQUEST_ADMIN',
+      payload: { 
+        uid: id,
+        iid: i.id
+    }})
+    // window.location.reload();
   }
 
   //when the user clicks the "Approve" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the approved clinician or researcher to the approveRequest function in the approve_users.saga file.
   const approveRequest = (id) => {
-    console.log("in approveRequest", id)
+    const pkg = { 
+      uid: id,
+      iid: i.id
+    }
+    console.log("in approveRequestAdmin", pkg)
     dispatch({
-      type: 'APPROVE_REQUEST',
-      payload: id
-    })
+      type: 'APPROVE_REQUEST_ADMIN',
+      payload: pkg })
+    // window.location.reload();
   }
 
   let headResearcher = false;
@@ -94,21 +102,14 @@ function InstitutionManageAccountsPageAdmin() {
             if (user.is_approved === false && loggedInUser.user_level == 3) {
               return (
                 <div className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650">
-                  <p className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap"><span><button onClick={() => (deleteRequest(user.id))}
-        className="mr-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                  <p className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">{user.first_name} {user.last_name}<span><button onClick={() => (deleteRequest(user.id))}
+        className="ml-2 mr-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
         >Delete</button></span><span><button onClick={() => (approveRequest(user.id))}
         className="mr-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
-        >Approve</button></span>{user.first_name} {user.last_name}</p>
+        >Approve</button></span></p>
                 </div>
               )
-            } else if (user.is_approved === false && loggedInUser.user_level == 3) {
-              return (
-                <div>
-                  <p>{user.first_name} {user.last_name}</p>
-                </div>
-
-              )
-            }
+              }
           })}
 
 
@@ -131,7 +132,7 @@ function InstitutionManageAccountsPageAdmin() {
                         <span>
                           {user.user_level == 2 && loggedInUser.user_level == 3 ? 
                           <button onClick={() => promoteUser(user.id, user.user_level, user.inst_id)}
-                          className="mr-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                          className="ml-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                           >Demote</button> : <></>}
                         </span>
                       </p>
@@ -160,21 +161,22 @@ function InstitutionManageAccountsPageAdmin() {
           </> :
             // if there is no research head, this block of code runs
             <>
-              <div className="researchersDiv">
-                <h3>Researchers</h3>
+              <div className="basis-1/3 mt-2 text-center">
+              <h3 className="text-xl bg-white border-b">Researchers</h3>
                 {users.map(user => {
                   if (user.is_approved === true && (user.user_level === 1 || user.user_level === 2)) {
                     return (
 
-                      <div key={user.id}>
-                        <p>
+                      <div key={user.id}
+                      className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650">
+                        <p className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                           <span onClick={() => (toUserDetails(user.id))}>
                             {user.first_name} {user.last_name}
                           </span>
                           <span>
                             {user.user_level == 1 && loggedInUser.user_level == 3 ? 
                             <button onClick={() => promoteUser(user.id, user.user_level, user.inst_id)}
-                            className="mr-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-8"
+                            className="ml-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                             >Promote</button> : <></>}
                           </span>
                         </p>
@@ -185,14 +187,16 @@ function InstitutionManageAccountsPageAdmin() {
                 })
                 }
               </div>
-              <div className="cliniciansDiv">
-                <h3>Clinicians</h3>
+              <div className="basis-1/3 mt-2 text-center">
+              <h3 className="text-xl bg-white border-b">Clinicians</h3>
                 {
                   users.map(user => {
                     if (user.is_approved === true && user.user_level === 0) {
                       return (
-                        <div key={user.id} onClick={() => (toUserDetails(user.id))}>
-                          <p>{user.first_name} {user.last_name}</p>
+                        <div key={user.id} onClick={() => (toUserDetails(user.id))}
+                        className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650">
+                          <p className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                          >{user.first_name} {user.last_name}</p>
                         </div>
                       )
                     }

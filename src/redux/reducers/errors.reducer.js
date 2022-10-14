@@ -14,6 +14,8 @@ const loginMessage = (state = '', action) => {
       return 'Oops! Something went wrong! Is the server running?';
     case 'LOGIN_FAILED_USER_NOT_APPROVED':
       return 'User is not approved! Please wait for approval.'
+    case 'INACTIVE_USER':
+      return 'Login failed. User is not an active user.'
     default:
       return state;
   }

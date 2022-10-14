@@ -19,6 +19,10 @@ function* fetchUser() {
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
+    if(response.data.is_active === false) {
+      yield put({type: 'LOGOUT'})
+      yield put({type: 'INACTIVE_USER'})
+    }
   } catch (error) {
     console.log('User get request failed', error);
   }
