@@ -20,24 +20,24 @@ function AdminInstitutionListPage(props) {
   console.log('Institutions from store:', institutions)
 
   return (
-    <div>
+    <div className="ml-5 mr-5">
       <h2>{heading}</h2>
       <button
         onClick={() => history.push('/adminNewInstitutionForm')}
-        className="rounded-lg bg-gray-500 text-white leading-normal uppercase shadow-md hover:bg-yellow-650 hover:shadow-lg focus:bg-yellow-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-550 active:shadow-lg transition duration-150 ease-in-out w-36 h-9"
+        className="ml-1 rounded-lg bg-gray-500 text-white leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-9"
       >
         Add Institution
       </button>
       <table className="min-w-full mt-2">
         <thead className="bg-white border-b ">
           <tr>
-            <th className="text-lg font-bold text-gray-900 px-6 py-4 text-left">
+            <th className="text-2xl font-bold text-gray-900 px-6 py-4 text-left">
               Name
             </th>
-            <th className="text-lg font-bold text-gray-900 px-6 py-4 text-left">
+            <th className="text-2xl font-bold text-gray-900 px-6 py-4 text-left">
               Address
             </th>
-            <th className="text-lg font-bold text-gray-900 px-6 py-4 text-left">
+            <th className="text-2xl font-bold text-gray-900 px-6 py-4 text-left">
               Research Head
             </th>
           </tr>

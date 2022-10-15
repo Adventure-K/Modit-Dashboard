@@ -7,7 +7,12 @@ import './Footer.css';
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 function Footer() {
-  return <footer>&copy; Neurotype Inc.</footer>;
+  return (
+    <>
+    
+    <footer className="flex flex-col items-center "><img className="object-scale-down h-12" src="./neurotype_logo2021.svg" alt="" />&copy; Neurotype Inc.</footer>
+    </>
+    )
 }
 
 export default Footer;

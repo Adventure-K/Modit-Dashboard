@@ -108,7 +108,7 @@ function InstitutionManageAccountsPage() {
                     <span>
                       <button
                         onClick={() => deleteRequest(user.id)}
-                        className="ml-2 mr-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                        className="ml-2 mr-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                       >
                         Delete
                       </button>
@@ -116,7 +116,7 @@ function InstitutionManageAccountsPage() {
                     <span>
                       <button
                         onClick={() => approveRequest(user.id)}
-                        className="mr-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                        className="mr-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                       >
                         Approve
                       </button>
@@ -163,7 +163,7 @@ function InstitutionManageAccountsPage() {
                               onClick={() =>
                                 promoteUser(user.id, user.user_level)
                               }
-                              className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                              className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                             >
                               Demote
                             </button>
@@ -186,9 +186,10 @@ function InstitutionManageAccountsPage() {
                   user.user_level == 0
                 ) {
                   return (
-                    <div 
-                    className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650"
-                    onClick={() => toUserDetails(user.id)}>
+                    <div
+                      className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650"
+                      onClick={() => toUserDetails(user.id)}
+                    >
                       <p className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {user.first_name} {user.last_name}
                       </p>
@@ -209,9 +210,7 @@ function InstitutionManageAccountsPage() {
                   (user.user_level === 1 || user.user_level === 2)
                 ) {
                   return (
-                    <div 
-                    className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650"
-                    >
+                    <div className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650">
                       <p className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <span onClick={() => toUserDetails(user.id)}>
                           {user.first_name} {user.last_name}
@@ -223,7 +222,7 @@ function InstitutionManageAccountsPage() {
                               onClick={() =>
                                 promoteUser(user.id, user.user_level)
                               }
-                              className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                              className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                             >
                               Promote
                             </button>
@@ -242,8 +241,9 @@ function InstitutionManageAccountsPage() {
               {users.map((user) => {
                 if (user.is_approved === true && user.user_level == 0) {
                   return (
-                    <div onClick={() => toUserDetails(user.id)}
-                    className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650"
+                    <div
+                      onClick={() => toUserDetails(user.id)}
+                      className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650"
                     >
                       <p className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {user.first_name} {user.last_name}
@@ -256,7 +256,7 @@ function InstitutionManageAccountsPage() {
           </>
         )}
       </div>
-      
+
       <div className="flex flex-col items-center mt-10">
         {/* <h3 className="text-center">Reinstate User</h3> */}
         <select
@@ -265,9 +265,12 @@ function InstitutionManageAccountsPage() {
           id="reinstateClinicianSelect"
           className="w-1/2 text-center border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
         >
-          <option value="initial"
+          <option
+            value="initial"
             className="w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
-            >Reinstate User</option>
+          >
+            Reinstate User
+          </option>
           {users &&
             users.map((clinician) => {
               if (clinician.is_active === false) {
@@ -279,8 +282,10 @@ function InstitutionManageAccountsPage() {
               }
             })}
         </select>
-        <button className="mt-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5" 
-        onClick={reinstateClinician}>
+        <button
+          className="mt-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+          onClick={reinstateClinician}
+        >
           Reinstate
         </button>
       </div>

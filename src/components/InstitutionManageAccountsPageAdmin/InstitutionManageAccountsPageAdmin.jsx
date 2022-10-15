@@ -94,7 +94,7 @@ function InstitutionManageAccountsPageAdmin() {
     <>
       <div className="flex flex-row">
         <div className="basis-1/3 ml-5 mt-2 text-center">
-          <h3 className="text-xl font-bold bg-white border-b">Waiting for Approval</h3>
+          <h3 className="text-2xl font-bold bg-white border-b">Waiting for Approval</h3>
           {users.map((user) => {
             if (user.is_approved === false && loggedInUser.user_level == 3) {
               return (
@@ -128,7 +128,7 @@ function InstitutionManageAccountsPageAdmin() {
         {headResearcher ? (
           <>
             <div className="basis-1/3 mt-2 text-center">
-              <h3 className="text-xl font-bold bg-white border-b">Researchers</h3>
+              <h3 className="text-2xl font-bold bg-white border-b">Researchers</h3>
               {users.map((user) => {
                 if (
                   user.is_active === true &&
@@ -181,7 +181,7 @@ function InstitutionManageAccountsPageAdmin() {
               })}
             </div>
             <div className="basis-1/3 mr-5 mt-2 text-center">
-              <h3 className="text-xl font-bold bg-white border-b">Clinicians</h3>
+              <h3 className="text-2xl font-bold bg-white border-b">Clinicians</h3>
               {users.map((user) => {
                 if (
                   user.is_active === true &&
@@ -207,7 +207,7 @@ function InstitutionManageAccountsPageAdmin() {
           // if there is no research head, this block of code runs
           <>
             <div className="basis-1/3 mt-2 text-center">
-              <h3 className="text-xl font-bold bg-white border-b">Researchers</h3>
+              <h3 className="text-2xl font-bold bg-white border-b">Researchers</h3>
               {users.map((user) => {
                 if (
                   user.is_active === true &&
@@ -249,7 +249,7 @@ function InstitutionManageAccountsPageAdmin() {
               })}
             </div>
             <div className="basis-1/3 mr-5 mt-2 text-center">
-              <h3 className="text-xl font-bold bg-white border-b">Clinicians</h3>
+              <h3 className="text-2xl font-bold bg-white border-b">Clinicians</h3>
               {users.map((user) => {
                 if (
                   user.is_active === true &&

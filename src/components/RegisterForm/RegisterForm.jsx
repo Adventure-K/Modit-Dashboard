@@ -86,7 +86,7 @@ function RegisterForm() {
       </div>
       <div className="flex flex-col items-center">
         <input
-          className="rounded-lg bg-cyan-500 text-white leading-normal uppercase shadow-md hover:bg-cyan-700 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out w-20 h-9"
+          className="rounded-lg bg-cyan-650 text-white leading-normal uppercase shadow-md hover:bg-cyan-750 hover:shadow-lg focus:bg-cyan-750 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out w-20 h-9"
           type="submit"
           name="submit"
           value="Register"

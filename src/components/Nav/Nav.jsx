@@ -33,10 +33,10 @@ function Nav() {
   }
 
   return (
-    <div className={[navClassByULevel, "nav"].join(' ')}>
+    <div className={[navClassByULevel, "nav relative w-full flex flex-wrap items-center justify-between text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-xl"].join(' ')}>
       <Link to="/home">
-
-        <h2 className="nav-title">Neurotype Inc.</h2>
+      <img className="object-scale-down h-12" src="./neurotype_logo2021.svg" alt="" />
+        {/* <h2 className="nav-title">Neurotype Inc.</h2> */}
 
       </Link>
       {/* logged-in user display */}

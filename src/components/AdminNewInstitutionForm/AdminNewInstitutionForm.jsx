@@ -109,7 +109,7 @@ function AdminNewInstitutionForm() {
           {/* </div> */}
           {/* <div></div> */}
           <button
-            className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-3 w-auto h-auto mr-1 mt-2"
+            className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-3 w-auto h-auto mt-2"
             type="submit"
           >
             Register
