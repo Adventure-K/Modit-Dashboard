@@ -82,6 +82,7 @@ function ResearcherTeamView() {
             onChange={(event) => setPatientId(event.target.value)}
             name="patient"
             id="patientSelect"
+            className="text-center w-auto border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
           >
             <option value="initial">Select A Patient</option>
 
