@@ -77,7 +77,9 @@ function ResearcherView(props) {
         </div>
         <div className="chartDiv">
           {/* {JSON.stringify(teamData)} */}
-          <button onClick={() => exportJsonData()}>Export</button>
+          <button 
+          className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
+          onClick={() => exportJsonData()}>Export</button>
           <div className='chartWrapper'>
             {averageAggregateData && <PieChart />}
           </div>

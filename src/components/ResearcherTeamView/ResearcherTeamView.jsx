@@ -96,17 +96,23 @@ function ResearcherTeamView() {
               }
             })}
           </select>
-          <button className="getDataBtn" onClick={getPatientData}>Get Data</button>
+          <button 
+          className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
+          onClick={getPatientData}>Get Data</button>
         </div>
 
         <div className="patientDetailBtns">
           {/* <button className="patientDetailBtns" onClick={toAddPatientForm}>New Patient</button> */}
-          <button className="deletePatientBtn" onClick={deletePatient}>Delete Patient</button>
+          <button 
+          className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
+          onClick={deletePatient}>Delete Patient</button>
         </div>
       </div>
 
       <div className="exportBtnDiv">
-        <button onClick={() => exportJsonData()}>Export</button>
+        <button 
+        className="mr-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
+        onClick={() => exportJsonData()}>Export</button>
       </div>
 
 

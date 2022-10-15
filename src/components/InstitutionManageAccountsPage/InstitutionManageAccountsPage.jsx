@@ -263,7 +263,7 @@ function InstitutionManageAccountsPage() {
           onChange={(event) => setClinicianToReinstate(event.target.value)}
           name="clinician"
           id="reinstateClinicianSelect"
-          className="w-1/2 text-center border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+          className="w-1/3 text-center border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
         >
           <option
             value="initial"
@@ -283,7 +283,7 @@ function InstitutionManageAccountsPage() {
             })}
         </select>
         <button
-          className="mt-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+          className="mt-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
           onClick={reinstateClinician}
         >
           Reinstate

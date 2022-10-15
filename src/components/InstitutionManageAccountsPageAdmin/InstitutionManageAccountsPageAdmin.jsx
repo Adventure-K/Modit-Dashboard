@@ -104,7 +104,7 @@ function InstitutionManageAccountsPageAdmin() {
                     <span>
                       <button
                         onClick={() => deleteRequest(user.id)}
-                        className="ml-2 mr-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                        className="ml-2 mr-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                       >
                         Delete
                       </button>
@@ -112,7 +112,7 @@ function InstitutionManageAccountsPageAdmin() {
                     <span>
                       <button
                         onClick={() => approveRequest(user.id)}
-                        className="mr-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                        className="mr-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                       >
                         Approve
                       </button>
@@ -166,7 +166,7 @@ function InstitutionManageAccountsPageAdmin() {
                                   user.inst_id,
                                 )
                               }
-                              className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                              className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                             >
                               Demote
                             </button>
@@ -234,7 +234,7 @@ function InstitutionManageAccountsPageAdmin() {
                                   user.inst_id,
                                 )
                               }
-                              className="ml-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                              className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                             >
                               Promote
                             </button>
