@@ -29,6 +29,7 @@ function ResearcherTeamView() {
   const [patientId, setPatientId] = useState(' ')
 
   useEffect(() => {
+    
     dispatch({
       type: 'FETCH_TEAM_PATIENTS',
       payload: params.id,
