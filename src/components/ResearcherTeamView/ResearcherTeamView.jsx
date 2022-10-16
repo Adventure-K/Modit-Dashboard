@@ -129,9 +129,9 @@ function ResearcherTeamView() {
         <div className="m-8 block rounded-lg shadow-lg bg-gray-100 w-auto">
           {processedData && processedData.is_active === true && <PieChart1 />}
         </div>
-        </div>
-        {/* <div className="filler"></div> */}
-        <div className=" basis-1/2">
+      </div>
+      {/* <div className="filler"></div> */}
+      <div className=" basis-1/2">
         <div className="m-8 block rounded-lg shadow-lg bg-gray-100 w-auto">
           {processedData && processedData.is_active === true && <PieChart2 />}
         </div>
