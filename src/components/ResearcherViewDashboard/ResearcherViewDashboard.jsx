@@ -19,6 +19,8 @@ function ResearcherView(props) {
   const teamData = useSelector((store) => store.patientData)
   let averageAggregateData = useSelector((store) => store.researcher.aggregateResearcherData[0])
   const loggedInUser = useSelector((store) => store.user.userReducer)
+  const allInstitutionPatientData = useSelector((store) => store.researcher.allInstitutionPatientData)
+  console.log(allInstitutionPatientData);
 
   const [heading, setHeading] = useState('Researcher Dashboard')
   const dispatch = useDispatch()
@@ -26,7 +28,10 @@ function ResearcherView(props) {
   const selectedUserInst = useParams()
 
   for (let prop in averageAggregateData) {
-    prop = Number(`${averageAggregateData[prop]}`)
+    prop = Number(`${averageAggregateData[prop]}`) * 100
+    console.log(prop);
+    averageAggregateData.prop = prop
+
   }
 
   useEffect(() => {
@@ -49,11 +54,27 @@ function ResearcherView(props) {
     data: [averageAggregateData],
     filename: 'patient_aggregate_data',
     delimiter: ',',
-    headers: ['% time on drugs', '% time on controlled', '% time on neither'],
+    headers: ['% time on drugs',
+    '% time on controlled',
+    '% time on neither'],
+  }
+
+  const dataToConvert2 = {
+    data: allInstitutionPatientData,
+    filename: 'All Session Data',
+    delimiter: ',',
+    headers: [
+      'Session ID',
+      'Modit ID',
+      '% time on drugs',
+      '% time on controlled',
+      '% time on neither',
+    ]
   }
 
   const exportJsonData = () => {
     csvDownload(dataToConvert)
+    csvDownload(dataToConvert2)
   }
 
   const clinicianDetails = (clinician) => {
