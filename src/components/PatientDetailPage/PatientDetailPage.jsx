@@ -142,7 +142,7 @@ function PatientDetail() {
       </div>
       <div className=" basis-1/2">
         {/* <div className="filler"></div> */}
-        <div className="m-8 flex flex-col items-center rounded-lg shadow-lg bg-gray-100 w-auto">
+        <div className="m-8 flex flex-col items-center block rounded-lg shadow-lg bg-gray-100 w-auto">
           {processedData && processedData.is_active === true && <PieChart2 />}
         </div>
         {/* <div></div> */}
