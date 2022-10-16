@@ -94,7 +94,7 @@ function InstitutionManageAccountsPageAdmin() {
     <>
       <div className="flex flex-row">
         <div className="basis-1/3 ml-5 mt-2 text-center">
-          <h3 className="text-xl font-bold bg-white border-b">Waiting for Approval</h3>
+          <h3 className="text-2xl font-bold bg-white border-b">Waiting for Approval</h3>
           {users.map((user) => {
             if (user.is_approved === false && loggedInUser.user_level == 3) {
               return (
@@ -104,7 +104,7 @@ function InstitutionManageAccountsPageAdmin() {
                     <span>
                       <button
                         onClick={() => deleteRequest(user.id)}
-                        className="ml-2 mr-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                        className="ml-2 mr-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                       >
                         Delete
                       </button>
@@ -112,7 +112,7 @@ function InstitutionManageAccountsPageAdmin() {
                     <span>
                       <button
                         onClick={() => approveRequest(user.id)}
-                        className="mr-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                        className="mr-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                       >
                         Approve
                       </button>
@@ -128,7 +128,7 @@ function InstitutionManageAccountsPageAdmin() {
         {headResearcher ? (
           <>
             <div className="basis-1/3 mt-2 text-center">
-              <h3 className="text-xl font-bold bg-white border-b">Researchers</h3>
+              <h3 className="text-2xl font-bold bg-white border-b">Researchers</h3>
               {users.map((user) => {
                 if (
                   user.is_active === true &&
@@ -166,7 +166,7 @@ function InstitutionManageAccountsPageAdmin() {
                                   user.inst_id,
                                 )
                               }
-                              className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                              className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                             >
                               Demote
                             </button>
@@ -181,7 +181,7 @@ function InstitutionManageAccountsPageAdmin() {
               })}
             </div>
             <div className="basis-1/3 mr-5 mt-2 text-center">
-              <h3 className="text-xl font-bold bg-white border-b">Clinicians</h3>
+              <h3 className="text-2xl font-bold bg-white border-b">Clinicians</h3>
               {users.map((user) => {
                 if (
                   user.is_active === true &&
@@ -207,7 +207,7 @@ function InstitutionManageAccountsPageAdmin() {
           // if there is no research head, this block of code runs
           <>
             <div className="basis-1/3 mt-2 text-center">
-              <h3 className="text-xl font-bold bg-white border-b">Researchers</h3>
+              <h3 className="text-2xl font-bold bg-white border-b">Researchers</h3>
               {users.map((user) => {
                 if (
                   user.is_active === true &&
@@ -234,7 +234,7 @@ function InstitutionManageAccountsPageAdmin() {
                                   user.inst_id,
                                 )
                               }
-                              className="ml-2 rounded-lg bg-cyan-750 text-white text-xs leading-normal uppercase shadow-md hover:bg-cyan-650 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-850 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
+                              className="ml-2 rounded-lg bg-gray-500 text-white text-xs leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out px-2 w-max h-5"
                             >
                               Promote
                             </button>
@@ -249,7 +249,7 @@ function InstitutionManageAccountsPageAdmin() {
               })}
             </div>
             <div className="basis-1/3 mr-5 mt-2 text-center">
-              <h3 className="text-xl font-bold bg-white border-b">Clinicians</h3>
+              <h3 className="text-2xl font-bold bg-white border-b">Clinicians</h3>
               {users.map((user) => {
                 if (
                   user.is_active === true &&

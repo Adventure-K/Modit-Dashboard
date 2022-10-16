@@ -1,9 +1,9 @@
 .clinician {
-  background-color: #008592;
+  background-color: #8d8d8d;
 }
 
 .clinicianLink:hover {
-  background-color: #4bc4d4;
+  background-color: #dedede;
 }
 
 .researcher {
@@ -15,11 +15,11 @@
 }
 
 .admin {
-  background-color: #e2b269;
+  background-color: #3f3f3f;
 }
 
 .adminLink:hover {
-  background-color: #f1ddc0;
+  background-color: #8d8d8d;
 }
 
 .nav {
