@@ -105,7 +105,7 @@ function PatientDetail() {
             })}
         </select>
         <button
-          className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
+          className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
           onClick={getPatientData}
         >
           Get Data
@@ -136,13 +136,13 @@ function PatientDetail() {
       {/* <div className="filler"></div> */}
       <div className=" basis-1/2">
         {/* <div></div> */}
-        <div className="m-8 block rounded-lg shadow-lg bg-gray-100 w-auto">
+        <div className="m-8 flex flex-col items-center block rounded-lg shadow-lg bg-gray-100 w-auto">
           {processedData && processedData.is_active === true && <PieChart1 />}
         </div>
       </div>
       <div className=" basis-1/2">
         {/* <div className="filler"></div> */}
-        <div className="m-8 block rounded-lg shadow-lg bg-gray-100 w-auto">
+        <div className="m-8 flex flex-col items-center rounded-lg shadow-lg bg-gray-100 w-auto">
           {processedData && processedData.is_active === true && <PieChart2 />}
         </div>
         {/* <div></div> */}
