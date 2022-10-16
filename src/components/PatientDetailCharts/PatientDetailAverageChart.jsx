@@ -34,11 +34,9 @@ const PieChart = () => {
     const dispatch = useDispatch()
     // const patientDetails = useSelector((store) => store.patientData.patientData)
     const averageProcessedData = useSelector((store) => store.patientData.averagePatientProcessedData)
-    console.log(averageProcessedData);
     let num1 = (averageProcessedData.drugs) * 100
     let num2 = (averageProcessedData.noDrugs) * 100
     let num3 = (averageProcessedData.back) * 100 
-    console.log(averageProcessedData.drugs);
 
 
 

@@ -11,30 +11,79 @@ function PatientDetail() {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  // contains array of patients displayed in dropdown menu
-  const patients = useSelector((store) => store.patients)
-  const patientData = useSelector((store) => store.patientData.patientData)
-  const processedData = useSelector(
-    (store) => store.patientData.recentProcessedData,
-  )
-  console.log(processedData)
-  // console.log(patients);
-
   // //contains the id of the patient selected in the dropdown menu
   const [patientId, setPatientId] = useState(' ')
+
+  // contains array of patients displayed in dropdown menu
+  let recentSessionData;
+  let averageSessionData;
+  const patients = useSelector((store) => store.patients)
+  const processedData = useSelector((store) => store.patientData.recentProcessedData)
+  const averagePatientData = useSelector((store) => store.patientData.averagePatientProcessedData)
+  const patientAllSessionData = useSelector((store) => store.patientData.allPatientSessions)
+  console.log(patientAllSessionData);
+  // const patientData = useSelector((store) => store.patientData.patientData)
+
+  if (patientAllSessionData) {
+    for (let session of patientAllSessionData) {
+      session = {
+        id: session.session_id,
+        modit_id: session.modit_id,
+        drugs: session.proportionOfGazeTimeOnDrugs,
+        noDrugs: session.proportionOfGazeTimeOnNonDrugs,
+        back: session.proportionOfGazeTimeOnBack
+      }
+      // console.log(session);
+      patientAllSessionData.session = session
+    }
+    // console.log(patientAllSessionData); 
+  }
+
+
+  if (processedData) {//if statement to set create the object recentSessionData once processed data exists 
+    recentSessionData = {
+      id: processedData.session_id,
+      modit_id: processedData.modit_id,
+      drugs: processedData.proportionOfGazeTimeOnDrugs * 100,
+      nonDugs: processedData.proportionOfGazeTimeOnNonDrugs * 100,
+      back: processedData.proportionOfGazeTimeOnBack * 100
+    }
+  }
+
+  if (averagePatientData && processedData) {
+    averageSessionData = {
+      id: processedData.modit_id,
+      drugs: averagePatientData.drugs * 100,
+      noDrugs: Math.round(averagePatientData.noDrugs * 100),
+      back: averagePatientData.back * 100
+    }
+    console.log(averageSessionData);
+  }
+
   const dataToConvert = {
-    data: [processedData],
-    filename: 'processed_data',
+    data: patientAllSessionData,
+    filename: 'Patient sessions',
     delimiter: ',',
     headers: [
-      'ID',
       'Session ID',
+      'Modit ID',
       '% time on drugs',
       '% time on controlled',
       '% time on neither',
-      '% time on drugs no back',
-      '% time non drugs no back',
+
     ],
+  }
+
+  const dataToConvert2 = {
+    data: [averageSessionData],
+    filename: 'Patient average data',
+    delimiter: ',',
+    headers: [
+      'Modit ID',
+      '% time on drugs',
+      '% time on controlled',
+      '% time on neither',
+    ]
   }
 
   // this function dispatches the id of the patient selected in the dropdown menu to the getPatientData() function in the patient.saga file
@@ -46,7 +95,6 @@ function PatientDetail() {
       type: 'FETCH_PATIENT_ALL_DATA',
       payload: patientId,
     })
-    // dispatch({ type: 'FETCH_PROCESSED_DATA', payload: patientId })
   }
 
   //this function is called when a user clicks the "Add Patient" button. It directs the user to the AddPatientFormPage.
@@ -73,6 +121,7 @@ function PatientDetail() {
 
   const exportJsonData = () => {
     csvDownload(dataToConvert)
+    csvDownload(dataToConvert2)
   }
 
   //on page load, FETCH_PATIENTS is dispatched to get patients to populate dropdown menu
