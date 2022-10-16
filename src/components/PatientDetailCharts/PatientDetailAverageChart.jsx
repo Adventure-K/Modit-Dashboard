@@ -90,6 +90,8 @@ const PieChart = () => {
                     display: true,
                     text: "Data Averages"
                 },
+                tooltip: {enabled: false},
+                hover: {mode: null},
                 subtitle: {
                     display: true,
                     text: 'CATEGORY'
