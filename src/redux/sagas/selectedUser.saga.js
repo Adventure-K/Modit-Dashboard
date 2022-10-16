@@ -4,6 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* getSelectedUser(action) {
     console.log('selectedUser saga get payload:', action.payload)
     try {
+        yield put({type: 'CLEAR_PROCESSED_DATA_REDUCERS'})
         const selectedUser = yield axios.get(`/api/selectedUser/${action.payload}`)
         yield put({ type: 'SET_SELECTED_USER', payload: selectedUser.data })
     } catch (err) {

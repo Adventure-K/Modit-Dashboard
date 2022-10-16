@@ -49,6 +49,7 @@ function* logoutUser(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
+    yield put({type: 'CLEAR_PROCESSED_DATA_REDUCERS'})
 
     // the config includes credentials which
     // allow the server session to recognize the user
