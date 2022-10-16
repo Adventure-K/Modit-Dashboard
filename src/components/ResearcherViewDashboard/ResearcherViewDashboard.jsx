@@ -70,44 +70,45 @@ function ResearcherView(props) {
     <>
       <h1 className="mt-2 text-center">{heading}</h1>
       <div className="flex flex-row justify-center">
-        <div className="basis-1/3 text-center">
+        <div className="basis-1/2 text-center">
           <h3 className="ml-5 w-auto h-auto text-xl text-center bg-white border-b-0">
             Institution:{' '}
             <span className="institutionName">{institution.name}</span>
           </h3>
           {/* <div className="basis-1/4 text-center"> */}
-            <h4 className="ml-5 text-lg w-auto h-auto px-4 py-2 bg-white border-b">Clinicians</h4>
-            {clinicians.map((clinician) => {
-              return (
-                <div className="ml-5 bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650">
-                  <p
-                    key={clinician.id}
-                    onClick={() => clinicianDetails(clinician)}
-                    className="text-md text-gray-900 font-light px-4 py-2 whitespace-nowrap"
-                  >
-                    {clinician.first_name} {clinician.last_name}
-                  </p>
-                </div>
-              )
-            })}
+          <h4 className="ml-5 text-lg w-auto h-auto px-4 py-2 bg-white border-b">
+            Clinicians
+          </h4>
+          {clinicians.map((clinician) => {
+            return (
+              <div className="ml-5 bg-white border-b transition duration-300 ease-in-out hover:bg-gray-650">
+                <p
+                  key={clinician.id}
+                  onClick={() => clinicianDetails(clinician)}
+                  className="text-md text-gray-900 font-light px-4 py-2 whitespace-nowrap"
+                >
+                  {clinician.first_name} {clinician.last_name}
+                </p>
+              </div>
+            )
+          })}
           {/* </div> */}
         </div>
 
-        <div className="basis-1/3 ml-3 mr-5">
+        <div className="basis-1/2 ml-3 mr-5">
           {/* {JSON.stringify(teamData)} */}
-          
-          <div className="flex flex-col items-center block rounded-lg shadow-lg bg-gray-100 w-auto">
-            <p className='chartDiv'>
+
+          <div className="flex flex-col items-center block rounded-lg shadow-lg bg-gray-100 w-auto h-auto">
             {averageAggregateData && <PieChart />}
-            </p>
-            <button
-            className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
-            onClick={() => exportJsonData()}
-          >
-            Export
-          </button>
           </div>
-          
+          <div>
+            <button
+              className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
+              onClick={() => exportJsonData()}
+            >
+              Export
+            </button>
+          </div>
         </div>
       </div>
     </>

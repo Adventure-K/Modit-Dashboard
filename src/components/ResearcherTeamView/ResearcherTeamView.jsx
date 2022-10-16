@@ -82,12 +82,12 @@ function ResearcherTeamView() {
     <div className="flex flex-wrap justify-center">
       {/* <h2>{heading}</h2> */}
       {/* <div className=""> */}
-      <div className="basis-1/2 items-center">
+      <div className="basis-1/2 flex justify-center">
         <select
           onChange={(event) => setPatientId(event.target.value)}
           name="patient"
           id="patientSelect"
-          className="text-center w-auto border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
+          className="text-center w-auto h-auto m-2 border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
         >
           <option value="initial">Select A Patient</option>
 
@@ -103,14 +103,14 @@ function ResearcherTeamView() {
           })}
         </select>
         <button
-          className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
+          className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
           onClick={getPatientData}
         >
           Get Data
         </button>
       </div>
 
-      <div className="basis-1/2">
+      <div className="basis-1/2 flex justify-center">
         {/* <button className="patientDetailBtns" onClick={toAddPatientForm}>New Patient</button> */}
         <button
           className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
@@ -126,19 +126,19 @@ function ResearcherTeamView() {
       {/* <div className="filler"></div> */}
       <div className=" basis-1/2">
         {/* <div></div> */}
-        <div className="m-8 flex flex-col items-center block rounded-lg shadow-lg bg-gray-100 w-auto">
+        <div className="m-8 block rounded-lg shadow-lg bg-gray-100 w-auto">
           {processedData && processedData.is_active === true && <PieChart1 />}
         </div>
         </div>
         {/* <div className="filler"></div> */}
         <div className=" basis-1/2">
-        <div className="m-8 flex flex-col items-center block rounded-lg shadow-lg bg-gray-100 w-auto">
+        <div className="m-8 block rounded-lg shadow-lg bg-gray-100 w-auto">
           {processedData && processedData.is_active === true && <PieChart2 />}
         </div>
         {/* <div></div> */}
       </div>
       {/* <div className="filler"></div> */}
-      <div className="">
+      <div>
         <button
           className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
           onClick={() => exportJsonData()}
