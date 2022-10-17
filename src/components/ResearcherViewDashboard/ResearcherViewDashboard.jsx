@@ -15,25 +15,24 @@ function ResearcherView(props) {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
   const clinicians = useSelector((store) => store.researcher.researcherReducer)
-  const institution = useSelector(
-    (store) => store.researcher.researcherInstReducer,
-  )
+  const institution = useSelector((store) => store.researcher.researcherInstReducer)
   const teamData = useSelector((store) => store.patientData)
-  let averageAggregateData = useSelector(
-    (store) => store.researcher.aggregateResearcherData[0],
-  )
+  let averageAggregateData = useSelector((store) => store.researcher.aggregateResearcherData[0])
   const loggedInUser = useSelector((store) => store.user.userReducer)
+  const allInstitutionPatientData = useSelector((store) => store.researcher.allInstitutionPatientData)
+  console.log(allInstitutionPatientData);
 
   const [heading, setHeading] = useState('Researcher Dashboard')
   const dispatch = useDispatch()
   const history = useHistory()
   const selectedUserInst = useParams()
-  // console.log(averageAggregateData);
 
   for (let prop in averageAggregateData) {
-    prop = Number(`${averageAggregateData[prop]}`)
+    prop = Number(`${averageAggregateData[prop]}`) * 100
+    console.log(prop);
+    averageAggregateData.prop = prop
+
   }
-  console.log(averageAggregateData)
 
   useEffect(() => {
     dispatch({ type: 'CLEAR_PROCESSED_DATA_REDUCERS' })
@@ -55,11 +54,27 @@ function ResearcherView(props) {
     data: [averageAggregateData],
     filename: 'patient_aggregate_data',
     delimiter: ',',
-    headers: ['% time on drugs', '% time on controlled', '% time on neither'],
+    headers: ['% time on drugs',
+    '% time on controlled',
+    '% time on neither'],
+  }
+
+  const dataToConvert2 = {
+    data: allInstitutionPatientData,
+    filename: 'All Session Data',
+    delimiter: ',',
+    headers: [
+      'Session ID',
+      'Modit ID',
+      '% time on drugs',
+      '% time on controlled',
+      '% time on neither',
+    ]
   }
 
   const exportJsonData = () => {
     csvDownload(dataToConvert)
+    csvDownload(dataToConvert2)
   }
 
   const clinicianDetails = (clinician) => {

@@ -12,22 +12,50 @@ function ResearcherTeamView() {
   const params = useParams()
   const patients = useSelector((store) => store.patients)
   const patientData = useSelector((store) => store.patientData.patientData)
-
-  const jsonData = useSelector((store) => store.patientData.processedData)
-  console.log(jsonData)
-  console.log(patientData)
-
-  const processedData = useSelector(
-    (store) => store.patientData.recentProcessedData,
-  )
-
-  // console.log(jsonData);
-  // console.log(patientData);
+  const processedData = useSelector((store) => store.patientData.recentProcessedData)
+  let recentSessionData;
+  let averageSessionData;
+  const averagePatientData = useSelector((store) => store.patientData.averagePatientProcessedData)
+  const patientAllSessionData = useSelector((store) => store.patientData.allPatientSessions)
 
   const [patientId, setPatientId] = useState(' ')
 
+  if (patientAllSessionData) {
+    for (let session of patientAllSessionData) {
+      session = {
+        id: session.session_id,
+        modit_id: session.modit_id,
+        drugs: session.proportionOfGazeTimeOnDrugs,
+        noDrugs: session.proportionOfGazeTimeOnNonDrugs,
+        back: session.proportionOfGazeTimeOnBack
+      }
+      // console.log(session);
+      patientAllSessionData.session = session
+    }
+    // console.log(patientAllSessionData); 
+  }
+
+  if (processedData) {//if statement to set create the object recentSessionData once processed data exists 
+    recentSessionData = {
+      id: processedData.session_id,
+      modit_id: processedData.modit_id,
+      drugs: processedData.proportionOfGazeTimeOnDrugs * 100,
+      nonDugs: processedData.proportionOfGazeTimeOnNonDrugs * 100,
+      back: processedData.proportionOfGazeTimeOnBack * 100
+    }
+  }
+
+  if (averagePatientData && processedData) {
+    averageSessionData = {
+      id: processedData.modit_id,
+      drugs: averagePatientData.drugs * 100,
+      noDrugs: Math.round(averagePatientData.noDrugs * 100),
+      back: averagePatientData.back * 100
+    }
+    console.log(averageSessionData);
+  }
+
   useEffect(() => {
-    
     dispatch({
       type: 'FETCH_TEAM_PATIENTS',
       payload: params.id,
@@ -35,18 +63,29 @@ function ResearcherTeamView() {
   }, [])
 
   const dataToConvert = {
-    data: [processedData],
-    filename: 'processed_data',
+    data: patientAllSessionData,
+    filename: 'Patient sessions',
     delimiter: ',',
     headers: [
-      'ID',
       'Session ID',
+      'Modit ID',
       '% time on drugs',
       '% time on controlled',
       '% time on neither',
-      '% time on drugs no back',
-      '% time non drugs no back',
+
     ],
+  }
+
+  const dataToConvert2 = {
+    data: [averageSessionData],
+    filename: 'Patient average data',
+    delimiter: ',',
+    headers: [
+      'Modit ID',
+      '% time on drugs',
+      '% time on controlled',
+      '% time on neither',
+    ]
   }
 
   const getPatientData = () => {
@@ -77,6 +116,7 @@ function ResearcherTeamView() {
 
   const exportJsonData = () => {
     csvDownload(dataToConvert)
+    csvDownload(dataToConvert2)
   }
 
   return (
