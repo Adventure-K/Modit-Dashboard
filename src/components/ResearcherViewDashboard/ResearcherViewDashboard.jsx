@@ -71,12 +71,12 @@ function ResearcherView(props) {
       <h1 className="mt-2 text-center">{heading}</h1>
       <div className="flex flex-row justify-center">
         <div className="basis-1/2 text-center">
-          <h3 className="ml-5 w-auto h-auto text-xl text-center bg-white border-b-0">
+          <h3 className="ml-5 w-auto h-auto text-xl font-bold text-center bg-white border-b-0">
             Institution:{' '}
             <span className="institutionName">{institution.name}</span>
           </h3>
           {/* <div className="basis-1/4 text-center"> */}
-          <h4 className="ml-5 text-lg w-auto h-auto px-4 py-2 bg-white border-b">
+          <h4 className="ml-5 text-xl font-extrabold w-auto h-auto px-4 py-2 bg-white border-b">
             Clinicians
           </h4>
           {clinicians.map((clinician) => {
@@ -103,7 +103,7 @@ function ResearcherView(props) {
           </div>
           <div>
             <button
-              className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
+              className="mt-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
               onClick={() => exportJsonData()}
             >
               Export
