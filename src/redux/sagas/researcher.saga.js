@@ -61,7 +61,9 @@ function* fetchTeamData() {
     // get aggregate data for research team from the DB and stores in patient reducer redux state
     try {
         const teamData = yield axios.get('/api/researcher/teamData');
-        yield put({ type: 'SET_AGGREGATE_DATA', payload: teamData.data });
+        const allPatientSessions = yield axios.get('/api/researcher/allSessionData')
+        yield put({type: 'SET_ALL_INSTITUTION_PATIENT_SESSIONS', payload: allPatientSessions.data})
+        yield put({type: 'SET_AGGREGATE_DATA', payload: teamData.data });
     } catch (err) {
         console.log('fetch researcher team data saga', err);
     }

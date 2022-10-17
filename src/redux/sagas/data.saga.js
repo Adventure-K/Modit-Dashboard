@@ -22,6 +22,7 @@ function* fetchPatientAllData(action) {
         // console.log(result.data);
         yield put({type: 'STORE_AVERAGE_PROCESSED_DATA', payload: result.data[0]})// for average data chart display
         yield put({type: 'STORE_RECENT_PROCESSED_DATA', payload: response.data[response.data.length - 1]})// for most recent data chart display
+        yield put({type: 'STORE_ALL_PATIENT_SESSIONS', payload: response.data})
 
     }
     catch {

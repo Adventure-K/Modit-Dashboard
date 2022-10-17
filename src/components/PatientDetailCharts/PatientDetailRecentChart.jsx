@@ -88,6 +88,8 @@ const PieChart = () => {
                         display: true,
                         text: "Most Recent Entry"
                     },
+                    tooltip: {enabled: false},
+                    hover: {mode: null},
                     subtitle: {
                         display: true,
                         text: 'CATEGORY'
