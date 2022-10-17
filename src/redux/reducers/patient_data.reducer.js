@@ -8,7 +8,7 @@ const patientData = (state = {}, action) => {
     }
 }
 
-const recentProcessedData = (state = {}, action) => {
+const recentProcessedData = (state = {}, action) => {//patient's most recent session
     switch (action.type) {
         case 'STORE_RECENT_PROCESSED_DATA':
             return action.payload;
@@ -19,7 +19,7 @@ const recentProcessedData = (state = {}, action) => {
     }
 }
 
-const averagePatientProcessedData = (state = {}, action) => {
+const averagePatientProcessedData = (state = {}, action) => {//patient's average session data
     switch (action.type) {
         case 'STORE_AVERAGE_PROCESSED_DATA':
             return action.payload;
@@ -30,8 +30,18 @@ const averagePatientProcessedData = (state = {}, action) => {
     }
 }
 
+const allPatientSessions = (state = [], action) => {
+    switch (action.type) {
+        case 'STORE_ALL_PATIENT_SESSIONS':
+            return action.payload
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     patientData,
     recentProcessedData,
-    averagePatientProcessedData
+    averagePatientProcessedData,
+    allPatientSessions
 });

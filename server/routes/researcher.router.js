@@ -131,6 +131,29 @@ router.get('/researchInst', rejectUnauthenticated, (req, res) => {
       })
   });
 
+  router.get('/allSessionData', rejectUnauthenticated, (req, res) => {
+    const query = `
+    SELECT "session_id", session."modit_id",
+    "proportionOfGazeTimeOnDrugs",
+    "proportionOfGazeTimeOnNonDrugs",
+    "proportionOfGazeTimeOnBack" FROM "session"
+    JOIN "patient"
+      ON "patient".modit_id = "session".modit_id
+      JOIN "user"
+      ON "user".id = "patient".clinician_id
+      WHERE "user".inst_id = $1;
+    ;`;
+    pool.query(query, [req.user.inst_id])
+    .then(response => {
+      // console.log(response.rows);
+      res.send(response.rows)
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500)
+    })
+
+  })
 
 
 
