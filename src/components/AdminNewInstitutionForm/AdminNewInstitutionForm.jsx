@@ -18,14 +18,14 @@ function AdminNewInstitutionForm() {
   const dispatch = useDispatch()
 
   const fillFields = () => {
-    setNewInstitution({ ...newInstitution, name: 'Alliance Clinic' })
-    setNewInstitution({
-      ...newInstitution,
-      street_address: '3329 University Ave SE,',
-    })
-    setNewInstitution({ ...newInstitution, city: 'Minneapolis' })
-    setNewInstitution({ ...newInstitution, state: 'MN' })
-    setNewInstitution({ ...newInstitution, zip: '55414' })
+    setNewInstitution({ name: 'Alliance Clinic', street_address: '3329 University Ave SE', city: 'Minneapolis', state: 'MN', zip: '55414' })
+    // setNewInstitution({
+    //   ...newInstitution,
+    //   street_address: '3329 University Ave SE,',
+    // })
+    // setNewInstitution({ ...newInstitution, city: 'Minneapolis' })
+    // setNewInstitution({ ...newInstitution, state: 'MN' })
+    // setNewInstitution({ ...newInstitution, zip: '55414' })
     // setPlant({...newPlant, name: event.target.value})
   }
 
