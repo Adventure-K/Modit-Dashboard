@@ -15,6 +15,7 @@ function InstitutionManageAccountsPage() {
   //this variable contains an array of all users within the organization of the logged-in user
   const loggedInUser = useSelector((store) => store.user.userReducer)
 
+  //this variable contains all users within the logged-in users institution
   const users = useSelector((store) => store.usersToManage)
 
   // On page load, "GET_USERS" triggers the getUsers() function in the manage_users.saga file. It ultimately stores all users attached to the institution of the logged in user in the "users" variable (above)
@@ -72,8 +73,8 @@ function InstitutionManageAccountsPage() {
     history.push(`/userDetails/${id}`)
   }
 
+  //when the "promote" button is clicked, this dispatch is sent to the manage_users.saga file where changeHeadResearcher() runs
   const promoteUser = (id, userLevel) => {
-
     dispatch({
       type: 'SET/REMOVE_HEAD_RESEARCHER',
       payload: {
@@ -83,8 +84,8 @@ function InstitutionManageAccountsPage() {
     })
   }
 
+  //when the user selects a deactivated account and clicks the "reinstate" button, this function dispatches to the manage_users.saga file where reinstateClinicians() runs
   const reinstateClinician = () => {
-
     dispatch({
       type: 'REINSTATE_CLINICIAN',
       payload: {

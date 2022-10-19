@@ -82,6 +82,7 @@ router.put('/', rejectUnauthenticated, rejectUnauthorized3, async (req, res) => 
   }
 });
 
+//this query reactivates the account of a clinician or researcher by changing the is_active column in the "user" table to "true".
 router.put('/reinstate', (req, res) => {
 
   query = `UPDATE "user" SET "is_active" = 'true'
