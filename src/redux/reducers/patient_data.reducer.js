@@ -30,7 +30,7 @@ const averagePatientProcessedData = (state = {}, action) => {//patient's average
     }
 }
 
-const allPatientSessions = (state = [], action) => {
+const allPatientSessions = (state = [], action) => {// all sessions for a specific patient
     switch (action.type) {
         case 'STORE_ALL_PATIENT_SESSIONS':
             return action.payload
