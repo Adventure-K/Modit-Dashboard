@@ -2,10 +2,8 @@ import { put, take, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchPatientData(action) {
-    try {
-
+    try {// old saga, not being used anymore
         let response = yield axios.get(`/api/data/${action.payload}`)
-
         yield put({ type: 'STORE_PROCESSED_DATA', payload: response.data })
     }
     catch {
@@ -16,11 +14,11 @@ function* fetchPatientData(action) {
 function* fetchPatientAllData(action) {
     try {
         yield put({ type: 'RESET_PROCESSED_DATA' })// resets the store for the patient recent data
-        let response = yield axios.get(`/api/data/${action.payload}`)
-        let result = yield axios.get(`/api/data/avgData/${action.payload}`)
+        let response = yield axios.get(`/api/data/${action.payload}`)// gets patients sessions
+        let result = yield axios.get(`/api/data/avgData/${action.payload}`)// gets patients average session data
         yield put({ type: 'STORE_AVERAGE_PROCESSED_DATA', payload: result.data[0] })// for average data chart display
         yield put({ type: 'STORE_RECENT_PROCESSED_DATA', payload: response.data[response.data.length - 1] })// for most recent data chart display
-        yield put({ type: 'STORE_ALL_PATIENT_SESSIONS', payload: response.data })
+        yield put({ type: 'STORE_ALL_PATIENT_SESSIONS', payload: response.data })// stores all patients sessions
 
     }
     catch {
@@ -29,6 +27,7 @@ function* fetchPatientAllData(action) {
 }
 
 function* clearDataReducers() {
+    // this saga clears the reducers with patient data
     try {
         yield put({ type: 'RESET_PROCESSED_DATA' })
         yield put({ type: 'RESET_AVERAGE_DATA' })

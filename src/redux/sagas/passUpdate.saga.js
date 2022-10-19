@@ -2,7 +2,7 @@ import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* updatePassword(action) {
-
+// saga that takes requests to update user passwords
     try {
         yield axios.put(`/api/user/updatePass/`, action.payload);
     } catch (err) {
