@@ -3,10 +3,10 @@ import axios from 'axios';
 
 function* fetchPatientData(action) {
     try {
-        // console.log('test');
+
         let response = yield axios.get(`/api/data/${action.payload}`)
-        // console.log(response.data);
-        yield put({type: 'STORE_PROCESSED_DATA', payload: response.data})
+
+        yield put({ type: 'STORE_PROCESSED_DATA', payload: response.data })
     }
     catch {
         console.log('DATA SAGA: error in retrieving patient data');
@@ -15,14 +15,12 @@ function* fetchPatientData(action) {
 
 function* fetchPatientAllData(action) {
     try {
-        yield put({type: 'RESET_PROCESSED_DATA'})// resets the store for the patient recent data
+        yield put({ type: 'RESET_PROCESSED_DATA' })// resets the store for the patient recent data
         let response = yield axios.get(`/api/data/${action.payload}`)
         let result = yield axios.get(`/api/data/avgData/${action.payload}`)
-        // console.log(response.data);
-        // console.log(result.data);
-        yield put({type: 'STORE_AVERAGE_PROCESSED_DATA', payload: result.data[0]})// for average data chart display
-        yield put({type: 'STORE_RECENT_PROCESSED_DATA', payload: response.data[response.data.length - 1]})// for most recent data chart display
-        yield put({type: 'STORE_ALL_PATIENT_SESSIONS', payload: response.data})
+        yield put({ type: 'STORE_AVERAGE_PROCESSED_DATA', payload: result.data[0] })// for average data chart display
+        yield put({ type: 'STORE_RECENT_PROCESSED_DATA', payload: response.data[response.data.length - 1] })// for most recent data chart display
+        yield put({ type: 'STORE_ALL_PATIENT_SESSIONS', payload: response.data })
 
     }
     catch {
@@ -32,8 +30,8 @@ function* fetchPatientAllData(action) {
 
 function* clearDataReducers() {
     try {
-        yield put({type: 'RESET_PROCESSED_DATA'})
-        yield put({type: 'RESET_AVERAGE_DATA'})
+        yield put({ type: 'RESET_PROCESSED_DATA' })
+        yield put({ type: 'RESET_AVERAGE_DATA' })
     }
     catch {
         console.log('DATA SAGA: error in clearing data reducers');

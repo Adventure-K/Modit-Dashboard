@@ -89,7 +89,6 @@ function PatientDetail() {
   // this function dispatches the id of the patient selected in the dropdown menu to the getPatientData() function in the patient.saga file
   const getPatientData = () => {
     event.preventDefault()
-    console.log('getPatientData', patientId)
 
     dispatch({
       type: 'FETCH_PATIENT_ALL_DATA',
@@ -131,7 +130,7 @@ function PatientDetail() {
 
   return (
     <div className="flex flex-wrap justify-center">
-      {/* <div className="btnRowDiv"> */}
+
       <div className="basis-1/3 flex justify-center">
         <select
           onChange={(event) => setPatientId(event.target.value)}
@@ -177,27 +176,21 @@ function PatientDetail() {
           Delete Patient
         </button>
       </div>
-      {/* </div> */}
-      {/* <br /> */}
 
-      {/* {processedData && processedData.is_active === true && JSON.stringify(processedData)} */}
-      {/* <div className="tester"> */}
-      {/* <div className="filler"></div> */}
       <div className=" basis-1/2">
-        {/* <div></div> */}
+
         <div className="m-8 flex flex-col items-center block rounded-lg shadow-lg bg-gray-100 w-auto">
           {processedData && processedData.is_active === true && <PieChart1 />}
         </div>
       </div>
       <div className=" basis-1/2">
-        {/* <div className="filler"></div> */}
+
         <div className="m-8 flex flex-col items-center block rounded-lg shadow-lg bg-gray-100 w-auto">
           {processedData && processedData.is_active === true && <PieChart2 />}
         </div>
-        {/* <div></div> */}
+
       </div>
-      {/* <div className="filler"></div> */}
-      {/* </div> */}
+
       <div>
         <button
           className="mr-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"

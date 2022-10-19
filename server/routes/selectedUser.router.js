@@ -6,7 +6,6 @@ const router = express.Router();
 
 
 router.get('/:id', rejectUnauthenticated, rejectUnauthorized2, (req, res) => {
-    console.log(req.params);
 
     const query = `
         SELECT * FROM "user" WHERE id = $1;`;

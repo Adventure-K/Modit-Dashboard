@@ -16,14 +16,12 @@ function InstitutionViewUserDetails(props) {
   const history = useHistory()
 
   useEffect(() => {
-    console.log('Fetching User ID using Params', userId)
     dispatch({ type: 'GET_SELECTED_USER', payload: userId.id })
   }, [])
 
   const loggedInUser = useSelector((store) => store.user.userReducer)
   const selectedUser = useSelector((store) => store.selectedUser)
-  console.log('Selected user:', selectedUser)
-  console.log('Selected user inst ID:', selectedUser.inst_id)
+
 
   const [editMode, setEditMode] = useState(false)
   const [newPass, setNewPass] = useState('')
@@ -32,7 +30,7 @@ function InstitutionViewUserDetails(props) {
     if (selectedUser.user_level == 0) {
       history.push(`/researcherTeamView/${selectedUser.id}`)
     } else if (loggedInUser.user_level == 3) {
-      console.log('you must be an admin!')
+
       history.push(`/researcherViewDashboard/${selectedUser.inst_id}`)
     } else {
       history.push(`/researcherViewDashboard`)
@@ -112,12 +110,12 @@ function InstitutionViewUserDetails(props) {
                   placeholder="New Password"
                 />
                 <div>
-                  <button 
-                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mr-1 mt-2"
-                  onClick={handleSubmit}>Submit</button>
-                  <button 
-                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto ml-1 mt-2"
-                  onClick={handleEditMode}>Cancel</button>
+                  <button
+                    className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mr-1 mt-2"
+                    onClick={handleSubmit}>Submit</button>
+                  <button
+                    className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto ml-1 mt-2"
+                    onClick={handleEditMode}>Cancel</button>
                 </div>
               </div>
             </div>
@@ -136,26 +134,26 @@ function InstitutionViewUserDetails(props) {
               <div className="cardBtnContainer">
                 <div></div>
                 <div className="cardBtns">
-                  <button 
-                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
-                  onClick={handleChangeView}>
+                  <button
+                    className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
+                    onClick={handleChangeView}>
                     View Data
                   </button>
-                  <button 
-                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
-                  onClick={handleEditMode}>
+                  <button
+                    className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
+                    onClick={handleEditMode}>
                     Change Password
                   </button>
                   {selectedUser.is_active ? (
-                    <button 
-                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
-                    onClick={handleRetireUser}>
+                    <button
+                      className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
+                      onClick={handleRetireUser}>
                       Retire User
                     </button>
                   ) : (
-                    <button 
-                  className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
-                    onClick={handleReinstateUser}>
+                    <button
+                      className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out w-36 h-auto mt-2"
+                      onClick={handleReinstateUser}>
                       Reinstate User
                     </button>
                   )}

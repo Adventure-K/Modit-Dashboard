@@ -12,7 +12,7 @@ function AdminNewInstitutionForm() {
     state: '',
     zip: '',
   })
-  // const [heading, setHeading] = useState('Institution Registration');
+
 
   const history = useHistory()
   const dispatch = useDispatch()
