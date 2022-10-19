@@ -7,6 +7,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
+//this query gets all institutions to display on the AdminInstitutionListPage
 router.get('/', rejectUnauthenticated, rejectUnauthorized3, (req, res) => { // Get all institutions for the admin list
 
     const query = `
