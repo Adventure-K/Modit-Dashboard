@@ -8,11 +8,11 @@ const router = express.Router();
 // receives request to get all users from manage_users.saga. Queries the db to get all users with the same institution id (inst_id) as the one attached to the user who made the request (req.user.id)
 // This route governs requests by research heads to manage their users. 
 router.get('/', rejectUnauthenticated, rejectUnauthorized2, (req, res) => {
-  console.log('in getUsers', req.user.id);
+
   const query = `SELECT * FROM "user" WHERE inst_id = $1 ORDER BY first_name ASC;`;
   pool.query(query, [req.user.inst_id])
     .then(result => {
-      console.log(result.rows);
+
       res.send(result.rows);
     }).catch(err => {
       console.log(err);
@@ -22,11 +22,11 @@ router.get('/', rejectUnauthenticated, rejectUnauthorized2, (req, res) => {
 
 // This route is similar to the one above but governs requests by admins to manage all users.
 router.get('/admin/:id', rejectUnauthenticated, rejectUnauthorized3, (req, res) => {
-  // console.log('in getUsers for inst', req.params.id);
+
   const query = `SELECT * FROM "user" WHERE inst_id = $1;`;
   pool.query(query, [req.params.id])
     .then(result => {
-      // console.log(result.rows);
+
       res.send(result.rows);
     }).catch(err => {
       console.log(err);
