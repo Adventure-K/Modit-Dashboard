@@ -17,7 +17,6 @@ function AdminInstitutionListPage(props) {
 
   const institutions = useSelector((store) => store.institutions)
   const [heading, setHeading] = useState('Research Institutions')
-  console.log('Institutions from store:', institutions)
 
   return (
     <div className="ml-5 mr-5">

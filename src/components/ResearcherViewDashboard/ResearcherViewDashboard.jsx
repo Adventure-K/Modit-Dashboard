@@ -55,8 +55,8 @@ function ResearcherView(props) {
     filename: 'patient_aggregate_data',
     delimiter: ',',
     headers: ['% time on drugs',
-    '% time on controlled',
-    '% time on neither'],
+      '% time on controlled',
+      '% time on neither'],
   }
 
   const dataToConvert2 = {
@@ -78,7 +78,6 @@ function ResearcherView(props) {
   }
 
   const clinicianDetails = (clinician) => {
-    console.log('clicking on clinician for details', clinician.id)
     history.push(`/researcherTeamView/${clinician.id}`)
   }
   return (
@@ -90,7 +89,7 @@ function ResearcherView(props) {
             Institution:{' '}
             <span className="institutionName">{institution.name}</span>
           </h3>
-          {/* <div className="basis-1/4 text-center"> */}
+
           <h4 className="ml-5 text-xl font-extrabold w-auto h-auto px-4 py-2 bg-white border-b">
             Clinicians
           </h4>

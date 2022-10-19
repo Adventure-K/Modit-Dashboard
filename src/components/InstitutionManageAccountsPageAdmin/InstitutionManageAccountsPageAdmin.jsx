@@ -34,7 +34,7 @@ function InstitutionManageAccountsPageAdmin() {
 
   //when the user clicks the "Delete" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the deleted clinician or researcher to the deleteRequest function in the approve_users.saga file.
   const deleteRequest = (id) => {
-    console.log('in deleteRequest', id)
+
     dispatch({
       type: 'DELETE_REQUEST_ADMIN',
       payload: {
@@ -51,7 +51,7 @@ function InstitutionManageAccountsPageAdmin() {
       uid: id,
       iid: i.id,
     }
-    console.log('in approveRequestAdmin', pkg)
+
     dispatch({
       type: 'APPROVE_REQUEST_ADMIN',
       payload: pkg,
@@ -79,7 +79,7 @@ function InstitutionManageAccountsPageAdmin() {
   }
 
   const promoteUser = (id, userLevel, inst_id) => {
-    console.log('in promoteUser', id, userLevel, inst_id)
+
     dispatch({
       type: 'SET/REMOVE_HEAD_RESEARCHER',
       payload: {
@@ -143,7 +143,7 @@ function InstitutionManageAccountsPageAdmin() {
                       <p className="text-md text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <span onClick={() => toUserDetails(user.id)}>
                           {user.user_level == 2 &&
-                          loggedInUser.user_level == 3 ? (
+                            loggedInUser.user_level == 3 ? (
                             <div className="kingOfResearchers">
                               {' '}
                               <p className="kingOfResearchers">⭐️&nbsp;</p>{' '}
@@ -157,7 +157,7 @@ function InstitutionManageAccountsPageAdmin() {
                         </span>
                         <span>
                           {user.user_level == 2 &&
-                          loggedInUser.user_level == 3 ? (
+                            loggedInUser.user_level == 3 ? (
                             <button
                               onClick={() =>
                                 promoteUser(
@@ -225,7 +225,7 @@ function InstitutionManageAccountsPageAdmin() {
                         </span>
                         <span>
                           {user.user_level == 1 &&
-                          loggedInUser.user_level == 3 ? (
+                            loggedInUser.user_level == 3 ? (
                             <button
                               onClick={() =>
                                 promoteUser(
