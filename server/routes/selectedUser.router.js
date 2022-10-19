@@ -4,6 +4,7 @@ const { rejectUnauthorized2 } = require('../modules/authorization2-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// This route governs requests by research heads to view selected users. 
 
 router.get('/:id', rejectUnauthenticated, rejectUnauthorized2, (req, res) => {
 
