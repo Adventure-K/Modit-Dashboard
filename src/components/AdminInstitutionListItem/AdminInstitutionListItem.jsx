@@ -2,14 +2,14 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-function AdminInstitutionListItem({ i }) {
+function AdminInstitutionListItem({ i }) { //Gets each institution from the reducer, from AdminInstitutionListPage via props
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const goDetail = () => {
+  const goDetail = () => { // On click of any row, set that institution as the active one (in its own reducer)
     history.push(`/institutionViewDashboard/${i.id}`)
     dispatch({
-      type: 'ACTIVE_INSTITUTION',
+      type: 'ACTIVE_INSTITUTION', 
       payload: i,
     })
   }

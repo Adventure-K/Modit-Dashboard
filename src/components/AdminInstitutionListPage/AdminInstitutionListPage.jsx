@@ -4,20 +4,17 @@ import { useHistory } from 'react-router-dom'
 
 import AdminInstitutionListItem from '../AdminInstitutionListItem/AdminInstitutionListItem.jsx'
 
-function AdminInstitutionListPage(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
+function AdminInstitutionListPage() { // This page displays on login of an admin account. Displays the list of institutions registered in the app.
 
   const dispatch = useDispatch()
   const history = useHistory()
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_INSTITUTIONS' })
+    dispatch({ type: 'FETCH_INSTITUTIONS' }) // Retrieve all institutions from the DB and place in the store
   }, [])
 
   const institutions = useSelector((store) => store.institutions)
   const [heading, setHeading] = useState('Research Institutions')
-  console.log('Institutions from store:', institutions)
 
   return (
     <div className="ml-5 mr-5">
@@ -44,7 +41,7 @@ function AdminInstitutionListPage(props) {
         </thead>
         <tbody>
           {institutions.map((i) => {
-            return <AdminInstitutionListItem key={i.id} i={i} />
+            return <AdminInstitutionListItem key={i.id} i={i} /> // Individual list items are rendered via this component
           })}
         </tbody>
       </table>

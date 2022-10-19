@@ -2,7 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* deleteRequest(action) {
-    console.log('in deleteRequest', action.payload)
+
     try {
         yield axios.delete(`/api/approveUsers/${action.payload}`);
         yield put({ type: 'GET_USERS' });
@@ -21,7 +21,7 @@ function* approveRequest(action) {
 }
 
 function* deleteRequestAdmin(action) {
-    console.log('in deleteRequest', action.payload)
+
     try {
         yield axios.delete(`/api/approveUsers/admin/${action.payload.uid}`);
         yield put({ type: 'GET_USERS_ADMIN' });
@@ -31,7 +31,7 @@ function* deleteRequestAdmin(action) {
 }
 
 function* approveRequestAdmin(action) {
-    console.log('in approveRequestAdmin. uid:', action.payload.uid)
+
     try {
         yield axios.put(`/api/approveUsers/admin/${action.payload.uid}`);
         yield put({ type: 'GET_USERS_ADMIN', payload: action.payload.iid });

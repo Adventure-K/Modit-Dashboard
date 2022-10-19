@@ -28,7 +28,7 @@ const researcherReducer = (state = [], action) => {
     }
   }
 
-  const allInstitutionPatientData = (state = [], action) => {
+  const allInstitutionPatientData = (state = [], action) => {// reducer for all sessions of patients within a specific institution
     switch (action.type) {
       case 'SET_ALL_INSTITUTION_PATIENT_SESSIONS':
         return action.payload;
@@ -37,8 +37,7 @@ const researcherReducer = (state = [], action) => {
     }
   }
   
-  // user will be on the redux state at:
-  // state.user
+
   export default combineReducers({
     researcherReducer,
     researcherInstReducer,

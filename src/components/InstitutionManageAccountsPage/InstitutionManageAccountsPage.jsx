@@ -15,6 +15,7 @@ function InstitutionManageAccountsPage() {
   //this variable contains an array of all users within the organization of the logged-in user
   const loggedInUser = useSelector((store) => store.user.userReducer)
 
+  //this variable contains all users within the logged-in users institution
   const users = useSelector((store) => store.usersToManage)
 
   // On page load, "GET_USERS" triggers the getUsers() function in the manage_users.saga file. It ultimately stores all users attached to the institution of the logged in user in the "users" variable (above)
@@ -36,7 +37,7 @@ function InstitutionManageAccountsPage() {
 
   //when the user clicks the "Delete" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the deleted clinician or researcher to the deleteRequest function in the approve_users.saga file.
   const deleteRequest = (id) => {
-    console.log('in deleteRequest', id)
+
     dispatch({
       type: 'DELETE_REQUEST',
       payload: id,
@@ -45,7 +46,7 @@ function InstitutionManageAccountsPage() {
 
   //when the user clicks the "Approve" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the approved clinician or researcher to the approveRequest function in the approve_users.saga file.
   const approveRequest = (id) => {
-    console.log('in approveRequest', id)
+
     dispatch({
       type: 'APPROVE_REQUEST',
       payload: id,
@@ -72,8 +73,8 @@ function InstitutionManageAccountsPage() {
     history.push(`/userDetails/${id}`)
   }
 
+  //when the "promote" button is clicked, this dispatch is sent to the manage_users.saga file where changeHeadResearcher() runs
   const promoteUser = (id, userLevel) => {
-    console.log('in promoteUser', id, userLevel)
     dispatch({
       type: 'SET/REMOVE_HEAD_RESEARCHER',
       payload: {
@@ -83,8 +84,8 @@ function InstitutionManageAccountsPage() {
     })
   }
 
+  //when the user selects a deactivated account and clicks the "reinstate" button, this function dispatches to the manage_users.saga file where reinstateClinicians() runs
   const reinstateClinician = () => {
-    console.log('in reinstate', clinicianId)
     dispatch({
       type: 'REINSTATE_CLINICIAN',
       payload: {
@@ -158,7 +159,7 @@ function InstitutionManageAccountsPage() {
                         </span>
                         <span>
                           {user.user_level == 2 &&
-                          loggedInUser.user_level == 3 ? (
+                            loggedInUser.user_level == 3 ? (
                             <button
                               onClick={() =>
                                 promoteUser(user.id, user.user_level)
@@ -217,7 +218,7 @@ function InstitutionManageAccountsPage() {
                         </span>
                         <span>
                           {user.user_level == 1 &&
-                          loggedInUser.user_level == 3 ? (
+                            loggedInUser.user_level == 3 ? (
                             <button
                               onClick={() =>
                                 promoteUser(user.id, user.user_level)

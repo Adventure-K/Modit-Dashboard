@@ -7,8 +7,8 @@ const router = express.Router();
 
 // this GET route is to get all clinicians associated with a researcher and institution
 
-router.get('/clinicians', rejectUnauthenticated, rejectUnauthorized1,(req, res) => {
-  console.log('in get clinicians', req.user)
+router.get('/clinicians', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
+
   const query = `SELECT * FROM "user"
   WHERE inst_id = $1 AND user_level = 0 AND is_approved = TRUE
   ORDER BY first_name ASC;`;
@@ -23,8 +23,8 @@ router.get('/clinicians', rejectUnauthenticated, rejectUnauthorized1,(req, res) 
     })
 });
 
-router.get('/cliniciansAdmin/:id', rejectUnauthenticated, rejectUnauthorized3,(req, res) => {
-  console.log('in get clinicians for admin. Inst:', req.params.id)
+router.get('/cliniciansAdmin/:id', rejectUnauthenticated, rejectUnauthorized3, (req, res) => {
+
   const query = `SELECT * FROM "user"
   WHERE inst_id = $1 AND user_level = 0 AND is_approved = TRUE
   ORDER BY first_name ASC;`;
@@ -40,7 +40,7 @@ router.get('/cliniciansAdmin/:id', rejectUnauthenticated, rejectUnauthorized3,(r
 });
 
 // this GET route is to get all clinicians associated with a researcher and institution
-router.get('/teamData', rejectUnauthenticated, rejectUnauthorized1,(req, res) => {
+router.get('/teamData', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
   const query = `
     SELECT CAST(AVG("proportionOfGazeTimeOnDrugs") AS DECIMAL(3,2))AS "drugs", CAST(AVG("proportionOfGazeTimeOnNonDrugs") AS DECIMAL(3,2)) AS "noDrugs", CAST(AVG("proportionOfGazeTimeOnBack") AS DECIMAL(3,2)) AS "back" FROM "session"
     JOIN "patient"
@@ -48,40 +48,40 @@ router.get('/teamData', rejectUnauthenticated, rejectUnauthorized1,(req, res) =>
     JOIN "user"
     ON "user".id = "patient".clinician_id
     WHERE "user".inst_id = $1;`;
-    pool.query(query, [req.user.inst_id])
-      .then(result => {
-        console.log(result.rows[0]);
-        
-        res.send(result.rows);
-      })
-      .catch(err => {
-        console.log('Error in getting team data for researcher', err);
-        res.sendStatus(500)
-      })
-  });
+  pool.query(query, [req.user.inst_id])
+    .then(result => {
+      console.log(result.rows[0]);
 
-  router.get('/teamDataAdmin/:id', rejectUnauthenticated, rejectUnauthorized3,(req, res) => {
-    console.log('in team data admin GET')
-    const query = `
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('Error in getting team data for researcher', err);
+      res.sendStatus(500)
+    })
+});
+
+router.get('/teamDataAdmin/:id', rejectUnauthenticated, rejectUnauthorized3, (req, res) => {
+
+  const query = `
       SELECT AVG("proportionOfGazeTimeOnDrugs") AS "drugs", AVG("proportionOfGazeTimeOnNonDrugs") AS "noDrugs", AVG("proportionOfGazeTimeOnBack") AS "back" FROM "session"
       JOIN "patient"
       ON "patient".modit_id = "session".modit_id
       JOIN "user"
       ON "user".id = "patient".clinician_id
       WHERE "user".inst_id = $1;`;
-      pool.query(query, [req.params.id])
-        .then(result => {
-          res.send(result.rows);
-        })
-        .catch(err => {
-          console.log('Error in getting team data (admin) for researcher', err);
-          res.sendStatus(500)
-        })
-    });
+  pool.query(query, [req.params.id])
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('Error in getting team data (admin) for researcher', err);
+      res.sendStatus(500)
+    })
+});
 
 //GET route for researcher clinicians
 router.get('/researcherTeam/:id', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
- 
+
   const query = `SELECT * FROM "patient" WHERE clinician_id = $1;`;
 
   pool.query(query, [req.params.id])
@@ -96,43 +96,43 @@ router.get('/researcherTeam/:id', rejectUnauthenticated, rejectUnauthorized1, (r
 
 // to get the institution related to the logged in researcher
 router.get('/researchInst', rejectUnauthenticated, (req, res) => {
-    console.log('the user who is logged in is', req.user.id);
-    const query = `
+  console.log('the user who is logged in is', req.user.id);
+  const query = `
     SELECT "institution".name FROM "institution"
     JOIN "user"
     ON "institution".id = "user".inst_id
     WHERE "user".id = $1;
     `;
-    pool.query(query,[req.user.id])
-      .then(result => {
-        res.send(result.rows);
-      })
-      .catch(err => {
-        console.log('Error in getting institution for researcher', err);
-        res.sendStatus(500)
-      })
-  });
+  pool.query(query, [req.user.id])
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('Error in getting institution for researcher', err);
+      res.sendStatus(500)
+    })
+});
 
-  router.get('/researchInstAdmin/:id', rejectUnauthenticated, (req, res) => {
-    console.log('institution queried:', req.params.id);
-    const query = `
+router.get('/researchInstAdmin/:id', rejectUnauthenticated, (req, res) => {
+  console.log('institution queried:', req.params.id);
+  const query = `
     SELECT "institution".name FROM "institution"
     JOIN "user"
     ON "institution".id = "user".inst_id
     WHERE "user".id = $1;
     `;
-    pool.query(query,[req.params.id])
-      .then(result => {
-        res.send(result.rows);
-      })
-      .catch(err => {
-        console.log('Error in getting institution for researcher', err);
-        res.sendStatus(500)
-      })
-  });
+  pool.query(query, [req.params.id])
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(err => {
+      console.log('Error in getting institution for researcher', err);
+      res.sendStatus(500)
+    })
+});
 
-  router.get('/allSessionData', rejectUnauthenticated, (req, res) => {
-    const query = `
+router.get('/allSessionData', rejectUnauthenticated, (req, res) => {
+  const query = `
     SELECT "session_id", session."modit_id",
     "proportionOfGazeTimeOnDrugs",
     "proportionOfGazeTimeOnNonDrugs",
@@ -143,7 +143,7 @@ router.get('/researchInst', rejectUnauthenticated, (req, res) => {
       ON "user".id = "patient".clinician_id
       WHERE "user".inst_id = $1;
     ;`;
-    pool.query(query, [req.user.inst_id])
+  pool.query(query, [req.user.inst_id])
     .then(response => {
       // console.log(response.rows);
       res.send(response.rows)
@@ -153,7 +153,7 @@ router.get('/researchInst', rejectUnauthenticated, (req, res) => {
       res.sendStatus(500)
     })
 
-  })
+})
 
 
 

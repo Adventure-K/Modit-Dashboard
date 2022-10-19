@@ -1,3 +1,5 @@
+//this reducer 
+
 const activeInstitutionReducer = (state = {}, action) => {
     switch (action.type) {
         case 'ACTIVE_INSTITUTION':

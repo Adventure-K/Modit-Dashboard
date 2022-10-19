@@ -10,13 +10,17 @@ function ResearcherTeamView() {
   const dispatch = useDispatch()
 
   const params = useParams()
+  // for use of ID's in the url
   const patients = useSelector((store) => store.patients)
-  const patientData = useSelector((store) => store.patientData.patientData)
+  // all patients for a certain clinician 
   const processedData = useSelector((store) => store.patientData.recentProcessedData)
+  // patients most recent session data
   let recentSessionData;
   let averageSessionData;
   const averagePatientData = useSelector((store) => store.patientData.averagePatientProcessedData)
+  // patient average data
   const patientAllSessionData = useSelector((store) => store.patientData.allPatientSessions)
+  // all this patients sessions
 
   const [patientId, setPatientId] = useState(' ')
 
@@ -29,11 +33,12 @@ function ResearcherTeamView() {
         noDrugs: session.proportionOfGazeTimeOnNonDrugs,
         back: session.proportionOfGazeTimeOnBack
       }
-      // console.log(session);
       patientAllSessionData.session = session
     }
-    // console.log(patientAllSessionData); 
   }
+  // this if statement runs when patientAllSessionData exists in this component
+  // it was meant to change the key: values of each object in this array, but I couldn't get it to work
+  // its strictly for the export of the patient data, to make it more clean
 
   if (processedData) {//if statement to set create the object recentSessionData once processed data exists 
     recentSessionData = {
@@ -46,13 +51,14 @@ function ResearcherTeamView() {
   }
 
   if (averagePatientData && processedData) {
+       // if averagePatientData and processedData exist in this component, averageSessionData object is created
+    // this is purely for export 
     averageSessionData = {
       id: processedData.modit_id,
       drugs: averagePatientData.drugs * 100,
       noDrugs: Math.round(averagePatientData.noDrugs * 100),
       back: averagePatientData.back * 100
     }
-    console.log(averageSessionData);
   }
 
   useEffect(() => {
@@ -75,6 +81,7 @@ function ResearcherTeamView() {
 
     ],
   }
+  //export for recent session data
 
   const dataToConvert2 = {
     data: [averageSessionData],
@@ -87,10 +94,10 @@ function ResearcherTeamView() {
       '% time on neither',
     ]
   }
+  //export for average session data
 
   const getPatientData = () => {
     event.preventDefault()
-    console.log('getPatientData', patientId)
     dispatch({
       type: 'FETCH_PATIENT_ALL_DATA',
       payload: patientId,
@@ -118,11 +125,10 @@ function ResearcherTeamView() {
     csvDownload(dataToConvert)
     csvDownload(dataToConvert2)
   }
+  // the function that exports the data. imported at the top of this component
 
   return (
     <div className="flex flex-wrap justify-center">
-      {/* <h2>{heading}</h2> */}
-      {/* <div className=""> */}
       <div className="basis-1/2 flex justify-center">
         <select
           onChange={(event) => setPatientId(event.target.value)}
@@ -152,7 +158,6 @@ function ResearcherTeamView() {
       </div>
 
       <div className="basis-1/2 flex justify-center">
-        {/* <button className="patientDetailBtns" onClick={toAddPatientForm}>New Patient</button> */}
         <button
           className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
           onClick={deletePatient}
@@ -160,25 +165,18 @@ function ResearcherTeamView() {
           Delete Patient
         </button>
       </div>
-      {/* </div> */}
-
-      {/* <div className="tester"> */}
-      {/* {patientData.is_active === true && JSON.stringify(patientData)} */}
-      {/* <div className="filler"></div> */}
       <div className=" basis-1/2">
-        {/* <div></div> */}
         <div className="m-8 flex flex-col items-center block rounded-lg shadow-lg bg-gray-100 w-auto">
           {processedData && processedData.is_active === true && <PieChart1 />}
         </div>
       </div>
-      {/* <div className="filler"></div> */}
+
       <div className=" basis-1/2">
         <div className="m-8 flex flex-col items-center block rounded-lg shadow-lg bg-gray-100 w-auto">
           {processedData && processedData.is_active === true && <PieChart2 />}
         </div>
-        {/* <div></div> */}
+
       </div>
-      {/* <div className="filler"></div> */}
       <div>
         <button
           className="m-2 rounded-lg bg-gray-500 text-white text-md leading-normal uppercase shadow-md hover:bg-gray-550 hover:shadow-lg focus:bg-gray-550 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-2 w-auto h-auto"
@@ -187,7 +185,7 @@ function ResearcherTeamView() {
           Export
         </button>
       </div>
-      {/* </div> */}
+
     </div>
   )
 }

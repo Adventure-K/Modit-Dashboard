@@ -8,10 +8,7 @@ import Footer from '../Footer/Footer'
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
-import AboutPage from '../AboutPage/AboutPage'
-import UserPage from '../UserPage/UserPage'
 import InfoPage from '../InfoPage/InfoPage'
-import LandingPage from '../LandingPage/LandingPage'
 import LoginPage from '../LoginPage/LoginPage'
 import RegisterPage from '../RegisterPage/RegisterPage'
 
@@ -48,13 +45,13 @@ function App() {
           <Redirect exact from="/" to="/login" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
-          <Route
+          {/* <Route
             // shows AboutPage at all times (logged in or not)
             exact
             path="/about"
           >
             <AboutPage />
-          </Route>
+          </Route> */}
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -108,7 +105,7 @@ function App() {
               <Redirect to="/patientDetail" />
             ) : (
               // Otherwise, show the Landing page
-              <LandingPage />
+              <Redirect to="/login" />
             )}
           </Route>
 
@@ -126,7 +123,7 @@ function App() {
             ) : user.user_level === 0 ? (
               <PatientDetailPage />
             ) : (
-              <LandingPage />
+              <Redirect to="/login" />
             )}
           </ProtectedRoute>
 
@@ -168,7 +165,7 @@ function App() {
             ) : user.user_level === 0 ? (
               <PatientDetailPage />
             ) : (
-              <LandingPage />
+              <Redirect to="/login" />
             )}
           </ProtectedRoute>
 
@@ -188,7 +185,7 @@ function App() {
             ) : user.user_level === 0 ? (
               <PatientDetailPage />
             ) : (
-              <LandingPage />
+              <Redirect to="/login" />
             )}
           </ProtectedRoute>
 
@@ -206,7 +203,7 @@ function App() {
             ) : user.user_level === 0 ? (
               <PatientDetailPage />
             ) : (
-              <LandingPage />
+              <Redirect to="/login" />
             )}
           </ProtectedRoute>
 
@@ -224,7 +221,7 @@ function App() {
             ) : user.user_level === 0 ? (
               <PatientDetailPage />
             ) : (
-              <LandingPage />
+              <Redirect to="/login" />
             )}
           </ProtectedRoute>
 
@@ -243,7 +240,7 @@ function App() {
             ) : user.user_level === 0 ? (
               <PatientDetailPage />
             ) : (
-              <LandingPage />
+              <Redirect to="/login" />
             )}
           </ProtectedRoute>
 
@@ -261,7 +258,7 @@ function App() {
             ) : user.user_level === 0 ? (
               <PatientDetailPage />
             ) : (
-              <LandingPage />
+              <Redirect to="/login" />
             )}
           </ProtectedRoute>
 
@@ -279,7 +276,7 @@ function App() {
             ) : user.user_level === 0 ? (
               <PatientDetailPage />
             ) : (
-              <LandingPage />
+              <Redirect to="/login" />
             )}
           </ProtectedRoute>
 
@@ -305,39 +302,13 @@ function App() {
             ) : user.user_level === 0 ? (
               <PatientDetailPage />
             ) : (
-              <LandingPage />
+              <Redirect to="/login" />
             )}
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. 
               Change url path to look less fresher*/}
-          {/* <Route exact path="/patientDetail">
-            <PatientDetailPage />
-          </Route>
-          <Route exact path="/addPatientForm">
-            <AddPatientFormPage />
-          </Route>
-          <Route exact path="/researcherViewDashboard">
-            <ResearcherViewDashboard />
-          </Route>
-          <Route exact path="/researcherTeamView/:id">
-            <ResearcherTeamView />
-          </Route>
-          <Route exact path="/institutionViewDashboard/:id">
-            <InstitutionViewDashboard />
-          </Route>
-          <Route exact path="/manageAccounts">
-            <InstitutionManageAccountsPage />
-          </Route>
-          <Route exact path="/userDetails/:id">
-            <InstitutionViewUserDetails />
-          </Route>
-          <Route exact path="/adminInstitutionList">
-            <AdminInstitutionListPage />
-          </Route>
-          <Route exact path="/adminNewInstitutionForm">
-            <AdminNewInstitutionForm />
-          </Route> */}
+          
           <Route exact path="/additionalInfoRegistration">
             {user.id ? <Redirect to="/user" /> : <AdditionalInfoRegistration />}
           </Route>
