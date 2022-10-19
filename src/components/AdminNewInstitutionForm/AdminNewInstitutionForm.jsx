@@ -17,7 +17,8 @@ function AdminNewInstitutionForm() {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const handleAddInstitution = () => { 
+  //this function dispatches the data input into the form to the institution.saga file
+  const handleAddInstitution = () => {
     event.preventDefault()
     if ( // Input verification
       !newInstitution.name ||

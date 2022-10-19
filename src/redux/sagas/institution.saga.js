@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 
+//this function gets triggered by the useEffect on the AdminInstitutionListPage. It sends it's GET request to the institutions.router file
 function* fetchInstitutions() { // Retrieve all institutions from DB
     try {
         const institutions = yield axios.get('/api/institutions');
@@ -10,6 +11,7 @@ function* fetchInstitutions() { // Retrieve all institutions from DB
     }
 }
 
+// this function is called when a user clicks the "register" button on the AdminNewInstitutionForm page. It sends the new institution data to the institutions.router file.
 function* addInstitution(action) {
     try {
         yield axios.post('/api/institutions', action.payload);
