@@ -29,6 +29,7 @@ function* fetchUser() {
 }
 
 function* retireUser(action) {
+  // saga that takes action types to retire clinicians and researchers
   try {
     yield axios.put(`/api/user/retire/${action.payload}`)
   } catch (err) {
@@ -37,6 +38,7 @@ function* retireUser(action) {
 }
 
 function* reinstateUser(action) {
+  // saga that takes action types to reinstate clinicians and researchers
   try {
     yield axios.put(`/api/user/reinstate/${action.payload}`)
   } catch (err) {
