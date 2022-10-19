@@ -1,6 +1,5 @@
 //This page is where the pie chart with user expense data is showed. 
 //Data is sourced in and the chart dynamically changes depending on data.
-
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -31,15 +30,12 @@ ChartJS.register(
 )
 const PieChart = () => {
 
-    const dispatch = useDispatch()
-    // const patientDetails = useSelector((store) => store.patientData.patientData)
     const averageAggregateData = useSelector((store) => store.researcher.aggregateResearcherData[0])
-    // console.log(averageAggregateData);
-
+    // this is the average session data from all patients within an institution
     let num1 = (averageAggregateData.drugs) * 100
     let num2 = (averageAggregateData.noDrugs) * 100
     let num3 = (averageAggregateData.back) * 100 
-    
+    // Multiplied by 100 to get a percentage number from 1-100 instead of a decimal
     const [chartData, setChartData] = useState({
         datasets: [],
     })
@@ -47,7 +43,6 @@ const PieChart = () => {
     const [chartOptions, setChartOptions] = useState({})
 
     useEffect(() => {
-
         setChartData({
             labels: ['gaze on trigger: ' + Math.round(num1) + '%', 'gaze on control: ' + Math.round(num2) + '%', 'gaze on back: ' + Math.round(num3) + '%'],
             datasets: [
@@ -57,15 +52,11 @@ const PieChart = () => {
                     backgroundColor: ['rgba(255, 116, 115, 0.2)',
                         'rgba(111, 239, 139, 0.2)',
                         'rgba(141, 141, 141, 0.2)',
-                        // 'rgba(75, 192, 192, 0.2)',
-                        // 'rgba(153, 102, 255, 0.2)'
                     ],
 
                     borderColor: ['rgba(255, 116, 115, 1)',
                         'rgba(111, 239, 139, 1)',
                         'rgba(141, 141, 141, 1)',
-                        // 'rgba(75, 192, 192, 1)',
-                        // 'rgba(153, 102, 255, 1)'
                     ],
                     borderWidth: 1,
                     outerHeight: 200,
@@ -102,12 +93,9 @@ const PieChart = () => {
 
     return (
         <><></>
-
             <div>
                 <Pie options={chartOptions} data={chartData} />
             </div>
-             
-
         </>
 
     )
