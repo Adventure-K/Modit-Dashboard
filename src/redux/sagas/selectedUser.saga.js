@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
+//this function receives a user id from the useEffect on the InstitutionViewDetailsPage, and sends in to the selectedUser.router file. It then dispatches the returned selectedUser.data to the selectedUser.reducer
 function* getSelectedUser(action) {
     try {
         yield put({ type: 'CLEAR_PROCESSED_DATA_REDUCERS' })

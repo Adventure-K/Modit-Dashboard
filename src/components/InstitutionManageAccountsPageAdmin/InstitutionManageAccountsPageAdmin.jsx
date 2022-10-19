@@ -51,7 +51,6 @@ function InstitutionManageAccountsPageAdmin() {
       uid: id,
       iid: i.id,
     }
-
     dispatch({
       type: 'APPROVE_REQUEST_ADMIN',
       payload: pkg,
@@ -59,6 +58,8 @@ function InstitutionManageAccountsPageAdmin() {
     // window.location.reload();
   }
 
+
+  //this function checks to see if a head researcher has been assigned to a given institution. The headResearcher variable is used in the ternary function in the return below.  
   let headResearcher = false
   const isHeadResearcher = () => {
     for (let user of users) {
@@ -68,18 +69,19 @@ function InstitutionManageAccountsPageAdmin() {
     }
   }
 
+  //if "users" is not null, run isHeadResearcher
   {
     users && isHeadResearcher()
   }
-  // console.log(headResearcher);
+
 
   //when the name of an approved clinician or researcher is clicked on, this function is called and it pushes the user that that user's detail page
   const toUserDetails = (id) => {
     history.push(`/userDetails/${id}`)
   }
 
+  //when the "promote" button is clicked, this dispatch is sent to the manage_users.saga file where changeHeadResearcher() runs
   const promoteUser = (id, userLevel, inst_id) => {
-
     dispatch({
       type: 'SET/REMOVE_HEAD_RESEARCHER',
       payload: {

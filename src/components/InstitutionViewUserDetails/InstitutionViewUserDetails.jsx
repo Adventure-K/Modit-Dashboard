@@ -3,18 +3,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 import './InstitutionViewUserDetails.css'
 
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
+
 function InstitutionViewUserDetails(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
+
   const [heading, setHeading] = useState('Manage User')
 
   const dispatch = useDispatch()
+
+  //this variable stores the clicked on user's id from the Manage Users page that is sent this page over parameters
   const userId = useParams()
   const history = useHistory()
 
+  //on page load, the logged in user's id is dispatched to the selectedUser.saga file
   useEffect(() => {
     dispatch({ type: 'GET_SELECTED_USER', payload: userId.id })
   }, [])

@@ -33,6 +33,7 @@ function* changeHeadResearcher(action) {
     }
 }
 
+// this function is triggered when a users clicks the "reinstate" button on the InstitutionManageAccountsPage. It sends the selected clinicians ID to the /reinstate put endpoint in the manage_accounts.router file
 function* reinstateClinician(action) {
     try {
         yield axios.put('/api/manageAccounts/reinstate', action.payload);

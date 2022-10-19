@@ -3,18 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
 function InstitutionViewDashboard(props) {
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
-  const i = useSelector((store) => store.activeInstitution);
-  const rh = (`${i.first_name} ${i.last_name}`)
-  const [heading, setHeading] = useState('Institution Detail');
 
+  // i is the institution
+  const i = useSelector((store) => store.activeInstitution);
+  // rh is the research head
+  const rh = (`${i.first_name} ${i.last_name}`)
 
   const history = useHistory();
   const dispatch = useDispatch();
 
+  //on page load, the institution info is sent to the activeInstitution.reducer
   useEffect(() => {
-
     dispatch({
       type: 'ACTIVE_INSTITUTION',
       payload: i
