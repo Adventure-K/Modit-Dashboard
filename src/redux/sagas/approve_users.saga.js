@@ -1,6 +1,10 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
+// This saga handles dispatches from the user management components either to approve or delete new users attempting to register.
+// Dispatches from researchers and admins are handled differently because the researcher dispatches are based on the user's institution ID.
+// Dispatches from admins are based on an institution ID passed through params.
+
 function* deleteRequest(action) {
 
     try {
