@@ -2,7 +2,7 @@ import { put, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
 function* fetchClinicians() {
-
+    // get clinicians associated with institute from the DB for research head user
     try {
         const clinicians = yield axios.get('/api/researcher/clinicians');
         yield put({ type: 'SET_CLINICIANS', payload: clinicians.data });
@@ -13,6 +13,7 @@ function* fetchClinicians() {
 
 
 function* fetchCliniciansAdmin(action) {
+    // get clinicians associated with institute from the DB for app admin user
     try {
         const clinicians = yield axios.get(`/api/researcher/cliniciansAdmin/${action.payload}`);
         yield put({ type: 'SET_CLINICIANS', payload: clinicians.data });
@@ -44,6 +45,7 @@ function* fetchResearcherInstAdmin(action) {
 }
 
 function* getTeamPatients(action) {
+    // get patients assigned to institute from DB and stores in patient reducer redux state
     try {
         const patients = yield axios.get(`/api/researcher/researcherTeam/${action.payload}`);
         yield put({ type: 'SET_PATIENTS', payload: patients.data })
