@@ -10,13 +10,17 @@ function ResearcherTeamView() {
   const dispatch = useDispatch()
 
   const params = useParams()
+  // for use of ID's in the url
   const patients = useSelector((store) => store.patients)
-  const patientData = useSelector((store) => store.patientData.patientData)
+  // all patients for a certain clinician 
   const processedData = useSelector((store) => store.patientData.recentProcessedData)
+  // patients most recent session data
   let recentSessionData;
   let averageSessionData;
   const averagePatientData = useSelector((store) => store.patientData.averagePatientProcessedData)
+  // patient average data
   const patientAllSessionData = useSelector((store) => store.patientData.allPatientSessions)
+  // all this patients sessions
 
   const [patientId, setPatientId] = useState(' ')
 
@@ -29,11 +33,12 @@ function ResearcherTeamView() {
         noDrugs: session.proportionOfGazeTimeOnNonDrugs,
         back: session.proportionOfGazeTimeOnBack
       }
-
       patientAllSessionData.session = session
     }
-
   }
+  // this if statement runs when patientAllSessionData exists in this component
+  // it was meant to change the key: values of each object in this array, but I couldn't get it to work
+  // its strictly for the export of the patient data, to make it more clean
 
   if (processedData) {//if statement to set create the object recentSessionData once processed data exists 
     recentSessionData = {
@@ -46,6 +51,8 @@ function ResearcherTeamView() {
   }
 
   if (averagePatientData && processedData) {
+       // if averagePatientData and processedData exist in this component, averageSessionData object is created
+    // this is purely for export 
     averageSessionData = {
       id: processedData.modit_id,
       drugs: averagePatientData.drugs * 100,
@@ -74,6 +81,7 @@ function ResearcherTeamView() {
 
     ],
   }
+  //export for recent session data
 
   const dataToConvert2 = {
     data: [averageSessionData],
@@ -86,6 +94,7 @@ function ResearcherTeamView() {
       '% time on neither',
     ]
   }
+  //export for average session data
 
   const getPatientData = () => {
     event.preventDefault()
@@ -116,6 +125,7 @@ function ResearcherTeamView() {
     csvDownload(dataToConvert)
     csvDownload(dataToConvert2)
   }
+  // the function that exports the data. imported at the top of this component
 
   return (
     <div className="flex flex-wrap justify-center">

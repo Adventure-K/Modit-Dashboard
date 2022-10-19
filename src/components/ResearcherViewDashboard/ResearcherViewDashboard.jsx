@@ -15,12 +15,14 @@ function ResearcherView(props) {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
   const clinicians = useSelector((store) => store.researcher.researcherReducer)
+  // all clinicians in specific institution
   const institution = useSelector((store) => store.researcher.researcherInstReducer)
-  const teamData = useSelector((store) => store.patientData)
+  // institution to be displayed at the top of the screen
   let averageAggregateData = useSelector((store) => store.researcher.aggregateResearcherData[0])
+  // average data from all patients in an institution 
   const loggedInUser = useSelector((store) => store.user.userReducer)
+  // user who is currently logged in 
   const allInstitutionPatientData = useSelector((store) => store.researcher.allInstitutionPatientData)
-  console.log(allInstitutionPatientData);
 
   const [heading, setHeading] = useState('Researcher Dashboard')
   const dispatch = useDispatch()
@@ -29,13 +31,13 @@ function ResearcherView(props) {
 
   for (let prop in averageAggregateData) {
     prop = Number(`${averageAggregateData[prop]}`) * 100
-    console.log(prop);
     averageAggregateData.prop = prop
-
   }
+  // went through average data object and multiplied all numbers by 100 for a percentage number instead of a decimal
 
   useEffect(() => {
     dispatch({ type: 'CLEAR_PROCESSED_DATA_REDUCERS' })
+    // clears data reducers on page load
     if (loggedInUser.user_level <= 2) {
       dispatch({ type: 'FETCH_RESEARCHER_INST' }) // calls the researcher saga to run through the GET for the researcher's institution
       dispatch({ type: 'FETCH_CLINICIANS' }) // calls the researcher saga to run through the GET for the clinicians in the same institution
@@ -49,6 +51,7 @@ function ResearcherView(props) {
       dispatch({ type: 'FETCH_TEAM_DATA_ADMIN', payload: selectedUserInst.id })
     }
   }, [])
+  // page load determines user level and fetches data accordingly
 
   const dataToConvert = {
     data: [averageAggregateData],
@@ -58,6 +61,7 @@ function ResearcherView(props) {
       '% time on controlled',
       '% time on neither'],
   }
+  //export for average patient data
 
   const dataToConvert2 = {
     data: allInstitutionPatientData,
@@ -71,11 +75,13 @@ function ResearcherView(props) {
       '% time on neither',
     ]
   }
+  // export for all patient sessions in an institution
 
   const exportJsonData = () => {
     csvDownload(dataToConvert)
     csvDownload(dataToConvert2)
   }
+  // function that does the exporting
 
   const clinicianDetails = (clinician) => {
     history.push(`/researcherTeamView/${clinician.id}`)
@@ -106,14 +112,13 @@ function ResearcherView(props) {
               </div>
             )
           })}
-          {/* </div> */}
         </div>
 
         <div className="basis-1/2 ml-3 mr-5">
-          {/* {JSON.stringify(teamData)} */}
 
           <div className="flex flex-col items-center block rounded-lg shadow-lg bg-gray-100 w-auto h-auto">
             {averageAggregateData && <PieChart />}
+            {/* Pie chart only shows up if averageAggregateData exists in this component */}
           </div>
           <div>
             <button
