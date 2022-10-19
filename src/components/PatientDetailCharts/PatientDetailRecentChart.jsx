@@ -32,9 +32,9 @@ const PieChart = () => {
 
 
     const processedData = useSelector((store) => store.patientData.recentProcessedData)// this is the patients most recent session data
-    let num1 = (processedData.proportionOfGazeTimeOnDrugs) * 100 
-    let num2 = (processedData.proportionOfGazeTimeOnNonDrugs) * 100 
-    let num3 = (processedData.proportionOfGazeTimeOnBack) * 100 
+    let num1 = (processedData.proportionOfGazeTimeOnDrugs) * 100
+    let num2 = (processedData.proportionOfGazeTimeOnNonDrugs) * 100
+    let num3 = (processedData.proportionOfGazeTimeOnBack) * 100
     // Multiplied by 100 to get a percentage number from 1-100 instead of a decimal
     const [chartData, setChartData] = useState({
         datasets: [],
@@ -44,50 +44,46 @@ const PieChart = () => {
 
     useEffect(() => {
 
-            setChartData({
-                labels: ['gaze on trigger: ' + Math.round(num1) + '%', 'gaze on control: ' + Math.round(num2) + '%', 'gaze on back: ' + Math.round(num3) + '%'],
-                datasets: [
-                    {
-                        label: "Test data",
-                        data: [num1, num2, num3], 
-                        backgroundColor: ['rgba(255, 116, 115, 0.2)',
-                            'rgba(111, 239, 139, 0.2)',
-                            'rgba(141, 141, 141, 0.2)',
+        setChartData({
+            labels: ['gaze on trigger: ' + Math.round(num1) + '%', 'gaze on control: ' + Math.round(num2) + '%', 'gaze on back: ' + Math.round(num3) + '%'],
+            datasets: [
+                {
+                    label: "Test data",
+                    data: [num1, num2, num3],
+                    backgroundColor: ['rgba(255, 116, 115, 0.2)',
+                        'rgba(111, 239, 139, 0.2)',
+                        'rgba(141, 141, 141, 0.2)',
+                    ],
+
+                    borderColor: ['rgba(255, 116, 115, 1)',
+                        'rgba(111, 239, 139, 1)',
+                        'rgba(141, 141, 141, 1)',
                     ],
                     borderWidth: 1,
                     outerHeight: 200,
                     outerWidth: 200
 
+                }
+            ]
+        })
+        setChartOptions({
+            responsive: true,
+            maintainAspectRatio: false,
 
-                        borderColor: ['rgba(255, 116, 115, 1)',
-                            'rgba(111, 239, 139, 1)',
-                            'rgba(141, 141, 141, 1)',
-                        ],
-                        borderWidth: 1,
-                        outerHeight: 200,
-                        outerWidth: 200
-
-                    }
-                ]
-            })
-            setChartOptions({ 
-                responsive: true,
-                maintainAspectRatio: false,
-
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    },
-                    title: {
-                        display: true,
-                        text: "Most Recent Entry"
-                    },
-                    tooltip: {enabled: false},
-                    hover: {mode: null},
-                    subtitle: {
-                        display: true,
-                        text: 'CATEGORY'
-                    }
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                title: {
+                    display: true,
+                    text: "Most Recent Entry"
+                },
+                tooltip: { enabled: false },
+                hover: { mode: null },
+                subtitle: {
+                    display: true,
+                    text: 'CATEGORY'
+                }
             }
         })
 
@@ -98,9 +94,9 @@ const PieChart = () => {
 
     return (
         <><></>
-                <div>
-                    <Pie options={chartOptions} data={chartData} />
-                </div>
+            <div>
+                <Pie options={chartOptions} data={chartData} />
+            </div>
         </>
     )
 }
