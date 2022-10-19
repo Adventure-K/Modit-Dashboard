@@ -17,9 +17,9 @@ function AdminNewInstitutionForm() {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const handleAddInstitution = () => {
+  const handleAddInstitution = () => { 
     event.preventDefault()
-    if (
+    if ( // Input verification
       !newInstitution.name ||
       !newInstitution.street_address ||
       !newInstitution.city ||
@@ -29,7 +29,7 @@ function AdminNewInstitutionForm() {
       alert('Please complete all fields.')
       return
     }
-    dispatch({ type: 'ADD_INSTITUTION', payload: newInstitution })
+    dispatch({ type: 'ADD_INSTITUTION', payload: newInstitution }) // Trigger POST in institutions.router.js via institution.saga.js
     history.push('/adminInstitutionList')
   }
 
@@ -41,7 +41,6 @@ function AdminNewInstitutionForm() {
   }
 
   return (
-    // <div className="displayContainer">
     <>
       <h2 className="heading">
         Institution Registration
@@ -53,9 +52,6 @@ function AdminNewInstitutionForm() {
         onSubmit={handleAddInstitution}
       >
         <div className="flex flex-col items-center block p-6 mt-10 rounded-lg shadow-lg bg-gray-100 h-1/3 w-1/4 max-w-lg">
-          {/* <div></div> */}
-          {/* <div className="inputsContainer"> */}
-          {/* <div className="inputsLeft"> */}
           <input
             className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
             type="text"
@@ -77,8 +73,6 @@ function AdminNewInstitutionForm() {
             placeholder="City"
             onChange={(event) => handleValUpdate(event, 'city')}
           />
-          {/* </div> */}
-          {/* <div className="inputsRight"> */}
           <input
             className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
             type="text"
@@ -93,9 +87,6 @@ function AdminNewInstitutionForm() {
             placeholder="Zip"
             onChange={(event) => handleValUpdate(event, 'zip')}
           />
-          {/* </div> */}
-          {/* </div> */}
-          {/* <div></div> */}
           <button
             className="rounded-lg bg-gray-500 text-white leading-normal shadow-md hover:bg-gray-550 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-650 active:shadow-lg transition duration-150 ease-in-out p-3 w-auto h-auto mt-2"
             type="submit"
@@ -103,13 +94,6 @@ function AdminNewInstitutionForm() {
             Register
           </button>
         </div>
-        {/* <div className="btnDiv">
-          <div></div> */}
-
-        {/* <div></div>
-        </div> */}
-        {/* <div className="noteDiv">
-          <div></div> */}
         <div className="flex flex-col items-center mt-5">
           <p className="text-center">
             Note: Add an institution to the app before adding users for that
@@ -117,11 +101,8 @@ function AdminNewInstitutionForm() {
             is created.
           </p>
         </div>
-        {/* <div></div>
-        </div> */}
       </form>
     </>
-    // </div>
   )
 }
 
