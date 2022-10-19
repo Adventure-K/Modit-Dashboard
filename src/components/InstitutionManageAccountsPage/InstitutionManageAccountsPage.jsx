@@ -36,7 +36,7 @@ function InstitutionManageAccountsPage() {
 
   //when the user clicks the "Delete" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the deleted clinician or researcher to the deleteRequest function in the approve_users.saga file.
   const deleteRequest = (id) => {
-    console.log('in deleteRequest', id)
+
     dispatch({
       type: 'DELETE_REQUEST',
       payload: id,
@@ -45,7 +45,7 @@ function InstitutionManageAccountsPage() {
 
   //when the user clicks the "Approve" button next to a clinician or researcher awaiting approval, this function is called. It dispatches the id of the approved clinician or researcher to the approveRequest function in the approve_users.saga file.
   const approveRequest = (id) => {
-    console.log('in approveRequest', id)
+
     dispatch({
       type: 'APPROVE_REQUEST',
       payload: id,
@@ -73,7 +73,7 @@ function InstitutionManageAccountsPage() {
   }
 
   const promoteUser = (id, userLevel) => {
-    console.log('in promoteUser', id, userLevel)
+
     dispatch({
       type: 'SET/REMOVE_HEAD_RESEARCHER',
       payload: {
@@ -84,7 +84,7 @@ function InstitutionManageAccountsPage() {
   }
 
   const reinstateClinician = () => {
-    console.log('in reinstate', clinicianId)
+
     dispatch({
       type: 'REINSTATE_CLINICIAN',
       payload: {
@@ -158,7 +158,7 @@ function InstitutionManageAccountsPage() {
                         </span>
                         <span>
                           {user.user_level == 2 &&
-                          loggedInUser.user_level == 3 ? (
+                            loggedInUser.user_level == 3 ? (
                             <button
                               onClick={() =>
                                 promoteUser(user.id, user.user_level)
@@ -217,7 +217,7 @@ function InstitutionManageAccountsPage() {
                         </span>
                         <span>
                           {user.user_level == 1 &&
-                          loggedInUser.user_level == 3 ? (
+                            loggedInUser.user_level == 3 ? (
                             <button
                               onClick={() =>
                                 promoteUser(user.id, user.user_level)

@@ -11,17 +11,15 @@ function* loginUser(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
-    console.log(action.payload);
     yield axios.post('/api/user/login', action.payload, config);
 
     // after the user has logged in
     // get the user information from the server
     yield put({ type: 'FETCH_USER' });
-    
+
   } catch (error) {
     console.log('Error with user login:', error);
     if (error.response.status === 401) {
@@ -29,10 +27,10 @@ function* loginUser(action) {
       // if user isn't in the database or
       // if the username and password don't match in the database
       yield put({ type: 'LOGIN_FAILED' });
-    } 
+    }
     else if (error.response.status === 500) {// I was able to get this error code from the server which is not a 401
       // so I'm using this as a way to display a different message
-      yield put({type: 'LOGIN_FAILED_USER_NOT_APPROVED'})
+      yield put({ type: 'LOGIN_FAILED_USER_NOT_APPROVED' })
     }
     else {
       // Got an error that wasn't a 401
@@ -49,7 +47,7 @@ function* logoutUser(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-    yield put({type: 'CLEAR_PROCESSED_DATA_REDUCERS'})
+    yield put({ type: 'CLEAR_PROCESSED_DATA_REDUCERS' })
 
     // the config includes credentials which
     // allow the server session to recognize the user
@@ -63,7 +61,7 @@ function* logoutUser(action) {
     yield put({ type: 'UNSET_USER' });
 
     //move them to a different page
-    if(action.callback) {
+    if (action.callback) {
       action.callback()
     }
 
