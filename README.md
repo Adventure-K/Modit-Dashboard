@@ -57,6 +57,8 @@ Once everything is installed and running it should open in your default browser 
 
 Video walkthrough of application usage: https://youtu.be/HhJHQm0KJKw
 
+NOTE: The endpoint (api) that you should use to connect the Modit Mobile app is found in `server/routes/modit.router.js`
+
 ## Deployment
 - Login Credentials for Heroku have been provided in the hand off document.
 - If you need make changes you wish to push to the deployed app, you must login, go into the warm-thicket-00133 (this is the generated name by Heroku) deployment, go to the deploy tab, and then follow instructions for logging in to Heroku through the terminal to be able to push to Heroku.
