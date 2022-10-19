@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import './LoginForm.css';
 
 function LoginForm() {
   const [username, setUsername] = useState('')
@@ -10,27 +9,6 @@ function LoginForm() {
   const errors = useSelector((store) => store.errors)
   const dispatch = useDispatch()
   const history = useHistory()
-  const [thisLogin, setThisLogin] = useState({
-    u: '',
-    p: ''
-  })
-
-  const fillC = () => {
-    console.log('fill C');
-    setThisLogin({ u: 'akane@hbff.org', p: '12345678!' })
-    setUsername('akane@hbff.org')
-    setPassword('12345678!')
-  }
-  const fillR = () => {
-    setThisLogin({ u: 'phagenson@hbff.org', p: '12345678!' })
-    setUsername('phagenson@hbff.org')
-    setPassword('12345678!')
-  }
-  const fillA = () => {
-    setThisLogin({ u: 'jsnyder@neurotype.org', p: '12345678!' })
-    setUsername('jsnyder@neurotype.org')
-    setPassword('12345678!')
-  }
 
   const login = (event) => {
     event.preventDefault()
@@ -64,7 +42,7 @@ function LoginForm() {
           <input
             type="text"
             name="username"
-            value={thisLogin.u}
+            value={username}
             required
             onChange={(event) => setUsername(event.target.value)}
             className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
@@ -75,7 +53,7 @@ function LoginForm() {
           <input
             type="password"
             name="password"
-            value={thisLogin.p}
+            value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
             className="placeholder-shown text-center w-full border-gray-900 rounded-lg shadow-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
@@ -91,17 +69,6 @@ function LoginForm() {
           />
         </div>
       </form>
-      <div className="flex flex-col items-center">
-        <div className="toTheLeft">
-          <br />
-          <button className="fillC" onClick={() => fillC()}></button>
-          <br />
-          <button className="fillR" onClick={() => fillR()}></button>
-          <br />
-          <button className="fillA" onClick={() => fillA()}></button>
-          <br />
-        </div>
-      </div>
     </>
   )
 }
