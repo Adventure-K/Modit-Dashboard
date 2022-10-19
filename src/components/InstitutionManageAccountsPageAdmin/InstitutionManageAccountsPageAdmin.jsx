@@ -146,7 +146,7 @@ function InstitutionManageAccountsPageAdmin() {
                           loggedInUser.user_level == 3 ? (
                             <div className="kingOfResearchers">
                               {' '}
-                              <p className="kingOfResearchers">👑&nbsp;</p>{' '}
+                              <p className="kingOfResearchers">⭐️&nbsp;</p>{' '}
                               {user.first_name} {user.last_name}&nbsp;
                             </div>
                           ) : (

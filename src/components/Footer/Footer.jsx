@@ -10,7 +10,7 @@ function Footer() {
   return (
     <>
     
-    <footer className="flex flex-col items-center "><img className="object-scale-down h-12" src="./neurotype_logo2021.svg" alt="" />&copy; Neurotype Inc.</footer>
+    <footer className="flex flex-col items-center ">&copy; Neurotype Inc.</footer>
     </>
     )
 }

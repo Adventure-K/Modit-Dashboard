@@ -17,19 +17,19 @@ function LoginForm() {
 
   const fillC = () => {
     console.log('fill C');
-    setThisLogin({ u: 'andrewK@hbff.org', p: 'hbffweb123' })
-    setUsername('andrewK@hbff.org')
-    setPassword('hbffweb123')
+    setThisLogin({ u: 'akane@hbff.org', p: '12345678!' })
+    setUsername('akane@hbff.org')
+    setPassword('12345678!')
   }
   const fillR = () => {
-    setThisLogin({ u: 'peterH@hbff.org', p: 'hbffweb123' })
-    setUsername('peterH@hbff.org')
-    setPassword('hbffweb123')
+    setThisLogin({ u: 'phagenson@hbff.org', p: '12345678!' })
+    setUsername('phagenson@hbff.org')
+    setPassword('12345678!')
   }
   const fillA = () => {
-    setThisLogin({ u: 'admin@neurotype.io', p: 'hethicc' })
-    setUsername('admin@neurotype.io')
-    setPassword('hethicc')
+    setThisLogin({ u: 'jsnyder@neurotype.org', p: '12345678!' })
+    setUsername('jsnyder@neurotype.org')
+    setPassword('12345678!')
   }
 
   const login = (event) => {
