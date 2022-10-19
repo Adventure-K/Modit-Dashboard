@@ -1,0 +1,26 @@
+.fillC {
+    width: 10vw;
+    height: 4em;
+    /* background-color: #cccccc; */
+    margin-top: 5vh;
+}
+
+.fillR {
+    width: 10vw;
+    height: 4em;
+    /* background-color: #cccccc; */
+    margin-top: 5vh;
+}
+
+.fillA {
+    width: 10vw;
+    height: 4em;
+    /* background-color: #cccccc; */
+    margin-top: 5vh;
+}
+
+.toTheLeft {
+    position: absolute;
+    left: 0;
+    top: 5vh;
+}
