@@ -5,8 +5,8 @@ const { rejectUnauthorized3 } = require('../modules/authorization3-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-// this GET route is to get all clinicians associated with a researcher and institution
-
+// Dispatch: FETCH_CLINICIANS // From researcher.saga.js function fetchClinicians
+// this GET route is to get all clinicians associated with the user's institution 
 router.get('/clinicians', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
 
   const query = `SELECT * FROM "user"
@@ -23,6 +23,8 @@ router.get('/clinicians', rejectUnauthenticated, rejectUnauthorized1, (req, res)
     })
 });
 
+// Dispatch: FETCH_CLINICIANS_ADMIN // From researcher.saga.js function fetchCliniciansAdmin
+// this GET route is to get all clinicians associated with the institution selected by an admin user
 router.get('/cliniciansAdmin/:id', rejectUnauthenticated, rejectUnauthorized3, (req, res) => {
 
   const query = `SELECT * FROM "user"
@@ -39,7 +41,8 @@ router.get('/cliniciansAdmin/:id', rejectUnauthenticated, rejectUnauthorized3, (
     })
 });
 
-// this GET route is to get all clinicians associated with a researcher and institution
+// Dispatch: FETCH_TEAM_DATA // From researcher.saga.js function fetchTeamData
+// this GET route is to get all clinicians associated with the user's institution
 router.get('/teamData', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
   const query = `
     SELECT CAST(AVG("proportionOfGazeTimeOnDrugs") AS DECIMAL(3,2))AS "drugs", CAST(AVG("proportionOfGazeTimeOnNonDrugs") AS DECIMAL(3,2)) AS "noDrugs", CAST(AVG("proportionOfGazeTimeOnBack") AS DECIMAL(3,2)) AS "back" FROM "session"
@@ -60,8 +63,9 @@ router.get('/teamData', rejectUnauthenticated, rejectUnauthorized1, (req, res) =
     })
 });
 
+// Dispatch: FETCH_TEAM_DATA_ADMIN // From researcher.saga.js function fetchTeamDataAdmin
+// this GET route is to get all clinicians associated with the institution selected by an admin user
 router.get('/teamDataAdmin/:id', rejectUnauthenticated, rejectUnauthorized3, (req, res) => {
-
   const query = `
       SELECT AVG("proportionOfGazeTimeOnDrugs") AS "drugs", AVG("proportionOfGazeTimeOnNonDrugs") AS "noDrugs", AVG("proportionOfGazeTimeOnBack") AS "back" FROM "session"
       JOIN "patient"
@@ -81,7 +85,6 @@ router.get('/teamDataAdmin/:id', rejectUnauthenticated, rejectUnauthorized3, (re
 
 //GET route for researcher clinicians
 router.get('/researcherTeam/:id', rejectUnauthenticated, rejectUnauthorized1, (req, res) => {
-
   const query = `SELECT * FROM "patient" WHERE clinician_id = $1;`;
 
   pool.query(query, [req.params.id])
@@ -94,6 +97,7 @@ router.get('/researcherTeam/:id', rejectUnauthenticated, rejectUnauthorized1, (r
     })
 });
 
+// Dispatch: FETCH_RESEARCHER_INST // From researcher.saga.js function fetchResearcherInst
 // to get the institution related to the logged in researcher
 router.get('/researchInst', rejectUnauthenticated, (req, res) => {
   console.log('the user who is logged in is', req.user.id);
@@ -113,6 +117,8 @@ router.get('/researchInst', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Dispatch: FETCH_RESEARCHER_INST_ADMIN // From researcher.saga.js function fetchResearcherInstAdmin
+// Retrieves institution info for selected researcher on admin request
 router.get('/researchInstAdmin/:id', rejectUnauthenticated, (req, res) => {
   console.log('institution queried:', req.params.id);
   const query = `
@@ -131,6 +137,8 @@ router.get('/researchInstAdmin/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// Dispatch: FETCH_TEAM_DATA // From researcher.saga.js function fetchTeamData
+// Retrieves all patient data for the given research team
 router.get('/allSessionData', rejectUnauthenticated, (req, res) => {
   const query = `
     SELECT "session_id", session."modit_id",
