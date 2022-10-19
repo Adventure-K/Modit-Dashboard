@@ -17,18 +17,6 @@ function AdminNewInstitutionForm() {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const fillFields = () => {
-    setNewInstitution({ ...newInstitution, name: 'Alliance Clinic' })
-    setNewInstitution({
-      ...newInstitution,
-      street_address: '3329 University Ave SE,',
-    })
-    setNewInstitution({ ...newInstitution, city: 'Minneapolis' })
-    setNewInstitution({ ...newInstitution, state: 'MN' })
-    setNewInstitution({ ...newInstitution, zip: '55414' })
-    // setPlant({...newPlant, name: event.target.value})
-  }
-
   const handleAddInstitution = () => {
     event.preventDefault()
     if (
@@ -55,7 +43,7 @@ function AdminNewInstitutionForm() {
   return (
     // <div className="displayContainer">
     <>
-      <h2 className="heading" onClick={() => fillFields()}>
+      <h2 className="heading">
         Institution Registration
       </h2>
       <br />
@@ -137,4 +125,4 @@ function AdminNewInstitutionForm() {
   )
 }
 
-export default AdminNewInstitutionForm
+export default AdminNewInstitutionForm;
