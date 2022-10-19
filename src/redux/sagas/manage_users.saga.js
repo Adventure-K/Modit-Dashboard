@@ -12,6 +12,7 @@ function* getUsers(action) {
     }
 }
 
+//this function gets all users associated with the institution that the logged-in-user belongs to. It is triggered by the useEffect on the InstitutionManageAccountsPageAdmin, and goes to the manage_accounts.router file
 function* getUsersAdmin(action) {
 
     try {
