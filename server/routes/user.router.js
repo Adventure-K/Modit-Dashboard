@@ -21,7 +21,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
 router.post('/register', (req, res, next) => {
-  // console.log(req.body);
   const newUsername = req.body.credentials.username;
   const password = encryptLib.encryptPassword(req.body.credentials.password);
   const role = Number(req.body.credentials.role)
@@ -29,20 +28,20 @@ router.post('/register', (req, res, next) => {
   const lastName = req.body.lastName
   const selectedInstitution = req.body.selectedInstitution
 
-      const secondQueryText = `
-  SELECT "id" FROM "institution"
-  WHERE "name" = $1;
-  `;
+      const queryText = `
+      SELECT "id" FROM "institution"
+      WHERE "name" = $1;
+      `;
 
-      pool.query(secondQueryText, [selectedInstitution])
+      pool.query(queryText, [selectedInstitution])
         .then(response => {
-          // console.log(response.rows[0]);
           let institutionId = response.rows[0].id
+          // after the institution is retrieved from DB, user is then deposited into the DB
 
-          const thirdQueryText = `
-    INSERT INTO "user" (username, password, first_name, last_name, inst_id, user_level)
-    VALUES($1, $2, $3, $4, $5, $6);
-    `;
+          const secondQueryText = `
+          INSERT INTO "user" (username, password, first_name, last_name, inst_id, user_level)
+          VALUES($1, $2, $3, $4, $5, $6);
+          `;
 
           let queryValues = [
             newUsername,
@@ -53,7 +52,7 @@ router.post('/register', (req, res, next) => {
             role
           ]
 
-          pool.query(thirdQueryText, queryValues)
+          pool.query(secondQueryText, queryValues)
             .then(response => {
               res.sendStatus(201);
             })
@@ -87,6 +86,7 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/institutions', (req, res) => {
+  // this route gets institutions from the DB to display for user registration
   let queryText = ` 
   SELECT "name" FROM "institution"
   ORDER BY "name" ASC;
@@ -94,7 +94,6 @@ router.get('/institutions', (req, res) => {
 
   pool.query(queryText)
     .then(response => {
-      // console.log(response.rows);
       res.send(response.rows)
     })
     .catch(err => {
@@ -104,8 +103,9 @@ router.get('/institutions', (req, res) => {
 })
 
 router.put('/updatePass', rejectUnauthenticated, rejectUnauthorized2, (req, res) => {
-  console.log('req.body:', req.body)
+  // route to update user password
   const p = encryptLib.encryptPassword(req.body.pass);
+  // encrypted password
   const id = req.body.id;
   const query = `
     UPDATE "user" SET password = $1
@@ -121,7 +121,7 @@ router.put('/updatePass', rejectUnauthenticated, rejectUnauthorized2, (req, res)
 })
 
 router.put('/retire/:id', (req, res) => {
-  console.log(req.params.id)
+  // route to retire clinicians and researchers
   const id = req.params.id
   const query = `
     UPDATE "user" SET "is_active" = false
@@ -136,7 +136,7 @@ router.put('/retire/:id', (req, res) => {
 })
 
 router.put('/reinstate/:id', (req, res) => {
-  console.log(req.params.id)
+  // route to reinstate clinicians and researchers
   const id = req.params.id
   const query = `
     UPDATE "user" SET "is_active" = true
